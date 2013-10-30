@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Provides controll logic for managing content
  *
@@ -44,7 +43,7 @@ class ContentsController extends ContentsAppController {
      */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow();
+        $this->Auth->allow('index');
         $this->Authorize->allow();
     }
 
@@ -71,17 +70,39 @@ class ContentsController extends ContentsAppController {
         $data = $this->paginate('Content');
         $this->set(compact('data'));
     }
+    
+    /**
+     * Displays an index of all content
+     * @return void
+     */
+    public function admin_index() {
 
+        $this->paginate = array(
+            'conditions' => array(),
+            'limit' => 30
+        );
+
+        $data = $this->paginate('Content');
+        $this->set(compact('data'));
+    }
+    
     /**
      * A method for creating a new content
      * @return void
      */
-    public function create() {
+    public function admin_create() {
         if(!empty($this->request->data)){
             if($this->Content->save($this->request->data)){
-                $this->Session->setFlash('Saved');
+                $this->Session->setFlash(
+                    __('Content saved.'), 
+                    'success'
+                );
+                $this->redirect("/admin/contents/contents/edit/{$this->Content->id}");
             }else{
-                $this->Session->setFlash('Failed');
+                $this->Session->setFlash(
+                    __('Please correct the errors below.'), 
+                    'error'
+                );
             }
         }
         
@@ -97,7 +118,7 @@ class ContentsController extends ContentsAppController {
      * @param string $token
      * @return void
      */
-    public function view($token) {
+    public function admin_view($token) {
         $content = $this->Content->find(
             'first',
             array(
@@ -121,7 +142,7 @@ class ContentsController extends ContentsAppController {
      * @param string $token
      * @return void
      */
-    public function edit($token) {
+    public function admin_edit($token) {
         $content = $this->Content->find(
             'first',
             array(
@@ -152,11 +173,11 @@ class ContentsController extends ContentsAppController {
      * @param $id string
      * @return void 
      */
-    public function delete($id){
+    public function admin_delete($id){
         
         if($this->Content->delete($id)){
             $this->Session->setFlash(__('The selected content has been deleted!'), 'error');
-            $this->redirect('/contents');
+            $this->redirect('/admin/contents');
         }
         
     }
