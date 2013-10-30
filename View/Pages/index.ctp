@@ -1,6 +1,6 @@
 <?php echo $this->element('Utilities.sidebar'); ?>
 <div class="view">
-    <h2>Contents</h2>
+    <h2>Pages</h2>
     <table>
         <caption>
             <?php
@@ -18,10 +18,10 @@
             <tr>
                 <td>
                     <strong>
-                    <?php
+                    <?php 
                         echo $this->Html->link(
                             $content['Content']['title'], 
-                            "/contents/{$content['Content']['content_type']}s/view/{$content['Content']['id']}"
+                            "/contents/pages/view/{$content['Content']['id']}"
                         );
                     ?>
                     </strong>

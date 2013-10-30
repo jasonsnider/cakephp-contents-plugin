@@ -12,7 +12,7 @@
  * @copyright Copyright 2013, Jason D Snider. (http://jasonsnider.com)
  * @link http://jasonsnider.com
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
- * @package	Users
+ * @package	Contents
  */
 App::uses('AppController', 'Controller');
 

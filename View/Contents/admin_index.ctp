@@ -1,6 +1,6 @@
-<?php echo $this->element('sidebar'); ?>
+<?php echo $this->element('Utilities.sidebar'); ?>
 <div class="view">
-    <h1>Contents</h1>
+    <h2>Contents</h2>
     <table>
         <caption>
             <?php

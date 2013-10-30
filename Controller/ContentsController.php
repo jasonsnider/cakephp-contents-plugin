@@ -19,7 +19,7 @@ App::uses('ContentsAppController', 'Contents.Controller');
 /**
  * Provides controll logic for managing content
  * @author Jason D Snider <jason@jasonsnider.com>
- * @package app/Users
+ * @package Contents
  */
 class ContentsController extends ContentsAppController {
 

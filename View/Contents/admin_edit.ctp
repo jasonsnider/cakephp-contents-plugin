@@ -1,6 +1,6 @@
-<?php echo $this->element('sidebar'); ?>
+<?php echo $this->element('Utilities.sidebar'); ?>
 <div class="view">
-    <h1><?php echo __d('contents', 'New Content'); ?></h1>
+    <h2><?php echo __d('contents', 'New Content'); ?></h2>
     <?php
     echo $this->Form->create('Content');
     echo $this->Form->input('id');
