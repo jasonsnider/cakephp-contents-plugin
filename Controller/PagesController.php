@@ -88,8 +88,8 @@ class PagesController extends ContentsAppController {
             array(
                 'conditions'=>array(
                     'or'=>array(
-                        'Content.id',
-                        'Content.slug'
+                        'Content.id'=>$token,
+                        'Content.slug'=>$token
                     )
                 ),
                 'contain'=>array()

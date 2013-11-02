@@ -92,6 +92,7 @@ class ContentsController extends ContentsAppController {
      */
     public function admin_create() {
         if(!empty($this->request->data)){
+
             if($this->Content->save($this->request->data)){
                 $this->Session->setFlash(
                     __('Content saved.'), 
@@ -124,8 +125,8 @@ class ContentsController extends ContentsAppController {
             array(
                 'conditions'=>array(
                     'or'=>array(
-                        'Content.id',
-                        'Content.slug'
+                        'Content.id'=>$token,
+                        'Content.slug'=>$token
                     )
                 ),
                 'contain'=>array()
@@ -155,15 +156,21 @@ class ContentsController extends ContentsAppController {
                 'contain'=>array()
             )
         );
-        
+
         if(!empty($this->request->data)){
-            
+            if($this->Content->save($this->request->data['Content'])){
+                $this->Session->setFlash('Update saved!', 'success');
+            }else{
+                $this->Session->setFlash('Please correct the errors below!', 'error');
+            }
         }else{
             $this->request->data = $content;
         }
         
+        $contentTypes = $this->Content->contentTypes();
         $this->set(compact(
-            'content'
+            'content',
+            'contentTypes'
         ));
         
     }

@@ -82,19 +82,37 @@ class PostsController extends ContentsAppController {
      * @return void
      */
     public function view($token) {
+        
+        if(!empty($this->request->data)){
+            if($this->Content->Discussion->save($this->request->data['Discussion'])){
+                $this->Content->Discussion->create();
+                $this->Session->setFlash(__('Your comment has been saved.'), 'success');   
+                //Since we are not reloading the page, clear out the request data on success
+                $this->request->data = array();
+            }else{
+                $this->Session->setFlash(__('Your comment could not be saved.'), 'error');
+            }
+        }
+        
         $content = $this->Content->find(
             'first',
             array(
                 'conditions'=>array(
                     'or'=>array(
-                        'Content.id',
-                        'Content.slug'
+                        'Content.id'=>$token,
+                        'Content.slug'=>$token
                     )
                 ),
-                'contain'=>array()
+                'contain'=>array(
+                    'CreatedUser'=>array(),
+                    'Discussion'=>array(
+                        'order'=>'Discussion.created DESC',
+                        'CreatedUser'=>array()
+                    )
+                )
             )
         );
-        
+
         $this->set(compact(
             'content'
         ));
