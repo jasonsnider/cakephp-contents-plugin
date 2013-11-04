@@ -183,7 +183,7 @@ class ContentsController extends ContentsAppController {
     public function admin_delete($id){
         
         if($this->Content->delete($id)){
-            $this->Session->setFlash(__('The selected content has been deleted!'), 'error');
+            $this->Session->setFlash(__('The selected content has been deleted!'), 'success');
             $this->redirect('/admin/contents');
         }
         

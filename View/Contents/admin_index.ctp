@@ -1,6 +1,11 @@
 <?php echo $this->element('Utilities.sidebar'); ?>
 <div class="view">
     <h2>Contents</h2>
+    <div class="menu">
+        <ul>
+            <li><?php echo $this->Html->link('Create', '/admin/contents/contents/create'); ?></li>
+        </ul>
+    </div>
     <table>
         <caption>
             <?php

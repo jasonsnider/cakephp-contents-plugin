@@ -12,7 +12,6 @@
         </caption>
         <tr>
             <th><?php echo $this->Paginator->sort('content_type', 'Content Type'); ?></th>
-            <th>Actions</th>
         </tr>
         <?php foreach ($data as $content): ?>
             <tr>
@@ -21,26 +20,11 @@
                     <?php 
                         echo $this->Html->link(
                             $content['Content']['title'], 
-                            "/contents/pages/view/{$content['Content']['id']}"
+                            "/contents/pages/view/{$content['Content']['slug']}"
                         );
                     ?>
                     </strong>
                     <div><?php echo $this->Text->truncate($content['Content']['body'], '300'); ?></div>
-                </td>
-                <td class="actions">
-                    <?php
-                    echo $this->Html->link(
-                            'view', "/admin/contents/contents/view/{$content['Content']['id']}"
-                    );
-
-                    echo $this->Html->link(
-                            'edit', "/admin/contents/contents/edit/{$content['Content']['id']}"
-                    );
-
-                    echo $this->Html->link(
-                            'delete', "/admin/contents/contents/delete/{$content['Content']['id']}"
-                    );
-                    ?> 
                 </td>
             </tr>
         <?php endforeach; ?>

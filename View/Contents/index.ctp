@@ -20,7 +20,7 @@
                     <?php
                         echo $this->Html->link(
                             $content['Content']['title'], 
-                            "/contents/{$content['Content']['content_type']}s/view/{$content['Content']['id']}"
+                            "/contents/{$content['Content']['content_type']}s/view/{$content['Content']['slug']}"
                         );
                     ?>
                     </strong>
