@@ -109,6 +109,8 @@ class ContentsController extends ContentsAppController {
         
         $contentTypes = $this->Content->contentTypes();
         
+        $this->request->hasEditor = true;
+        
         $this->set(compact(
             'contentTypes' 
         ));
@@ -168,6 +170,9 @@ class ContentsController extends ContentsAppController {
         }
         
         $contentTypes = $this->Content->contentTypes();
+        
+        $this->request->hasEditor = true;
+        
         $this->set(compact(
             'content',
             'contentTypes'
