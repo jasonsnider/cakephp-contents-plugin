@@ -1,4 +1,4 @@
-<?php echo $this->element('Utilities.sidebar'); ?>
+<?php echo $this->element('sidebar'); ?>
 <div class="view">
     
     <h2><?php echo $content['Content']['title']; ?></h2>
