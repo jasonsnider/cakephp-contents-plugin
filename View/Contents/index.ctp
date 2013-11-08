@@ -11,7 +11,7 @@
             ?>
         </caption>
         <tr>
-            <th><?php echo $this->Paginator->sort('content_type', 'Content Type'); ?></th>
+            <th>Content</th>
         </tr>
         <?php foreach ($data as $content): ?>
             <tr>
