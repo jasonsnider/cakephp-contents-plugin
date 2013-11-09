@@ -1,4 +1,3 @@
-<?php echo $this->element('sidebar'); ?>
 <div class="view">
     <h2>Contents</h2>
     <div class="menu">
