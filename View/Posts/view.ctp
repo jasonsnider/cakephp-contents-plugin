@@ -1,5 +1,5 @@
-<div class="view">
-    
+<div class="row">
+    <div class="col-md-12">
     <h2><?php echo $content['Content']['title']; ?></h2>
     
     <strong>By:</strong><?php echo $content['CreatedUser']['username']; ?>
@@ -26,5 +26,5 @@
             <hr>
         </div>
     <?php endforeach; ?>
-    
+    </div>
 </div>

@@ -1,53 +1,38 @@
-<div class="view">
-    <h2>Contents</h2>
-    <div class="menu">
-        <ul>
-            <li><?php echo $this->Html->link('Create', '/admin/contents/contents/create'); ?></li>
-        </ul>
-    </div>
-    <table>
-        <caption>
-            <?php
-            echo $this->Paginator->counter(array(
-                'format' => 'Page {:page} of {:pages}, showing {:current} records out of
-                         {:count} total, starting on record {:start}, ending on {:end}'
-            ));
-            ?>
-        </caption>
-        <tr>
-            <th>Content</th>
-            <th>Actions</th>
-        </tr>
-        <?php foreach ($data as $content): ?>
+<h2>Contents</h2>
+<ul class="nav nav-pills">
+    <li><?php echo $this->Html->link('Create', '/admin/contents/contents/create'); ?></li>
+</ul>
+
+<div class="row">
+    <div class="col-md-12">
+       <table class="table table-bordered table-condensed table-striped table-hover">
+            <caption>
+                <?php
+                echo $this->Paginator->counter(array(
+                    'format' => 'Page {:page} of {:pages}, showing {:current} records out of
+                             {:count} total, starting on record {:start}, ending on {:end}'
+                ));
+                ?>
+            </caption>
             <tr>
-                <td>
-                    <strong>
-                    <?php 
-                        echo $this->Html->link(
-                            $content['Content']['title'], 
-                            "/admin/contents/contents/view/{$content['Content']['id']}"
-                        );
-                    ?>
-                    </strong>
-                    <div><?php echo $this->Text->truncate($content['Content']['body'], '300'); ?></div>
-                </td>
-                <td class="actions">
-                    <?php
-                    echo $this->Html->link(
-                            'view', "/admin/contents/contents/view/{$content['Content']['id']}"
-                    );
-
-                    echo $this->Html->link(
-                            'edit', "/admin/contents/contents/edit/{$content['Content']['id']}"
-                    );
-
-                    echo $this->Html->link(
-                            'delete', "/admin/contents/contents/delete/{$content['Content']['id']}"
-                    );
-                    ?> 
-                </td>
+                <th>Content</th>
             </tr>
-        <?php endforeach; ?>
-    </table>
-    <?php echo $this->element('pager'); ?>
+            <?php foreach ($data as $content): ?>
+                <tr>
+                    <td>
+                        <strong>
+                        <?php 
+                            echo $this->Html->link(
+                                $content['Content']['title'], 
+                                "/admin/contents/contents/view/{$content['Content']['id']}"
+                            );
+                        ?>
+                        </strong>
+                        <div><?php echo $this->Text->truncate($content['Content']['body'], '300'); ?></div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php echo $this->element('pager'); ?>
+    </div>
 </div>
