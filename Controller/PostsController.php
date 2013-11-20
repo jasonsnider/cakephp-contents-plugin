@@ -49,7 +49,7 @@ class PostsController extends ContentsAppController {
         );
         $this->Authorize->allow();
     }
-
+    
     /**
      * The models used by the controller
      *
@@ -72,6 +72,7 @@ class PostsController extends ContentsAppController {
             'limit' => 30
         );
 
+        $this->request->checkForMeta = true;
         $data = $this->paginate('Content');
         $this->set(compact('data'));
     }

@@ -23,34 +23,6 @@ App::uses('AppController', 'Controller');
  * @package app
  */
 class ContentsAppController extends AppController {
-
-    /**
-     * Calls the application wide components
-     * @var array $components
-     */
-    public $components = array(
-        'Auth' => array(
-            //Force a central login (1 login per prefix by default).
-            'loginAction' => array(
-                'admin' => false,
-                'plugin' => 'users',
-                'controller' => 'users',
-                'action' => 'login'
-            ),
-            'authError' => 'You are not allowed to do that.',
-            'authenticate' => array(
-                'Form' => array(
-                    'fields' => array(
-                        'username' => 'username',
-                        'password' => 'hash'
-                    )
-                )
-            )
-        ),
-        'Users.Authorize',
-        'Security',
-        'Session'
-    );
     
     /**
      * Called before action
@@ -58,12 +30,52 @@ class ContentsAppController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
     }
-
+    
     /**
      * Called after the action
+     * Returns the any meta data that has been created for static pages
+     * @return void
      */
-    public function beforeRender() {
+    public function beforerender() {
         parent::beforeRender();
+        $this->metaData();
     }
+    
+    /**
+     * Retrives and set's the meta data for the current controller/action
+     * @return void
+     */
+    public function metaData(){
+        
+        // 1) If the action is requesting a check for meta data
+        if(isset($this->request->checkForMeta)){
+            
+            // 2) Try and find the meta data
+            $metaData = $this->Content->find(
+                'first',
+                array(
+                    'conditions'=>array(
+                        'Content.controller'=>$this->request->controller,
+                        'Content.action'=>$this->request->action
+                    ),
+                    'fields'=>array(
+                        'title',
+                        'description',
+                        'keywords'
+                    ),
+                    'contain'=>array()
+                )
+            );
+            
+            // 3) Then set the variable accordingly
+            if(!empty($metaData)){
+                $this->request->title = $metaData['Content']['title'];
+                $this->request->keywords  = $metaData['Content']['keywords'];
+                $this->request->description  = $metaData['Content']['description'];
+            }
+
+        }
+    }
+        
 
 }
