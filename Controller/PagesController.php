@@ -72,6 +72,7 @@ class PagesController extends ContentsAppController {
             'limit' => 30
         );
 
+        $this->request->checkForMeta = true;
         $data = $this->paginate('Content');
         $this->set(compact('data'));
     }
@@ -101,4 +102,15 @@ class PagesController extends ContentsAppController {
         ));
     }
     
+    /**
+     * Displays the home page
+     * @param string $token
+     * @return void
+     */
+    public function home() {
+        $this->request->checkForMeta = true;
+        $this->set(compact(
+            'content'
+        ));
+    }
 }
