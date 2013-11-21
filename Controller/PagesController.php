@@ -45,7 +45,8 @@ class PagesController extends ContentsAppController {
         parent::beforeFilter();
         $this->Auth->allow(
             'index',
-            'view'
+            'view',
+            'home'
         );
         $this->Authorize->allow();
     }
