@@ -69,6 +69,7 @@ class PostsController extends ContentsAppController {
             'conditions' => array(
                 'Content.content_type'=>'post'
             ),
+            'contain'=>array(),
             'limit' => 30
         );
 
@@ -113,9 +114,13 @@ class PostsController extends ContentsAppController {
                 )
             )
         );
-
+        
+        //Send the id back to the view
+        $id = $content['Content']['id'];
+        
         $this->set(compact(
-            'content'
+            'content',
+            'id'
         ));
     }
 

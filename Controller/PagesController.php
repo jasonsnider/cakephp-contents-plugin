@@ -70,6 +70,7 @@ class PagesController extends ContentsAppController {
             'conditions' => array(
                 'Content.content_type'=>'page'
             ),
+            'contain'=>array(),
             'limit' => 30
         );
 
@@ -98,8 +99,12 @@ class PagesController extends ContentsAppController {
             )
         );
         
+        //Send the id back to the view
+        $id = $content['Content']['id'];
+        
         $this->set(compact(
-            'content'
+            'content',
+            'id'
         ));
     }
     
