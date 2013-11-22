@@ -69,7 +69,13 @@ class PostsController extends ContentsAppController {
             'conditions' => array(
                 'Content.content_type'=>'post'
             ),
-            'contain'=>array(),
+            'contain'=>array(
+                'CreatedUser'=>array(),
+                'Discussion'=>array(
+                    'order'=>'Discussion.created DESC',
+                    'CreatedUser'=>array()
+                )
+            ),
             'limit' => 30
         );
 
