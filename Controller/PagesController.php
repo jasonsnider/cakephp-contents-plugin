@@ -119,4 +119,11 @@ class PagesController extends ContentsAppController {
             'content'
         ));
     }
+    
+    /**
+     * An entry point for the admin portal.
+     */
+    public function admin_admin(){
+        
+    }
 }
