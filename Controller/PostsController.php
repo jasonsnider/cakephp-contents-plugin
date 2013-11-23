@@ -73,7 +73,9 @@ class PostsController extends ContentsAppController {
                 'CreatedUser'=>array(),
                 'Discussion'=>array(
                     'order'=>'Discussion.created DESC',
-                    'CreatedUser'=>array()
+                    'CreatedUser'=>array(
+                        'UserProfile'=>array()
+                    ),
                 )
             ),
             'limit' => 30
@@ -116,10 +118,14 @@ class PostsController extends ContentsAppController {
                     )
                 ),
                 'contain'=>array(
-                    'CreatedUser'=>array(),
+                    'CreatedUser'=>array(
+                        'UserProfile'=>array()
+                    ),
                     'Discussion'=>array(
                         'order'=>'Discussion.created DESC',
-                        'CreatedUser'=>array()
+                        'CreatedUser'=>array(
+                            'UserProfile'=>array()
+                        ),
                     )
                 )
             )

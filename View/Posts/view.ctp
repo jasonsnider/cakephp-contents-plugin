@@ -2,10 +2,10 @@
     <div class="col-md-12">
         <h2><?php echo $content['Content']['title']; ?></h2>
 
-        <strong>By: </strong><?php echo $content['CreatedUser']['username']; ?>
-        <strong>On: </strong><?php echo date('m/d/y', strtotime($content['CreatedUser']['created'])); ?>
+        <strong>By: </strong><?php echo $content['CreatedUser']['UserProfile']['display_name']; ?>
+        <strong>On: </strong><?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>
 
-        <div><?php echo $content['Content']['body']; ?></div>
+        <div><?php echo $content['Content']['body']; debug($content); ?></div>
     
         <?php if(Configure::check('Parbake.Blog.comment_engine')): ?>
             <?php if(Configure::read('Parbake.Blog.comment_engine') === true): ?>
@@ -21,8 +21,8 @@
                     <div>
                         <?php echo $comment['body']; ?>
                         <div>
-                            <strong>By:</strong><?php echo $comment['CreatedUser']['username']; ?>
-                            <strong>On:</strong><?php echo $comment['CreatedUser']['created']; ?>
+                            <strong>By:</strong><?php echo $comment['CreatedUser']['UserProfile']['display_name']; ?>
+                            <strong>On:</strong><?php echo $comment['Content']['created']; ?>
                         </div>
                         <hr>
                     </div>
