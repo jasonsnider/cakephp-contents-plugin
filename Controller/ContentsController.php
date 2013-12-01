@@ -79,7 +79,9 @@ class ContentsController extends ContentsAppController {
 
         $this->paginate = array(
             'conditions' => array(),
-            'limit' => 30
+            'contain'=>array(),
+            'limit' => 30,
+            'order'=>'Content.created DESC'
         );
 
         $data = $this->paginate('Content');

@@ -78,6 +78,7 @@ class PostsController extends ContentsAppController {
                     ),
                 )
             ),
+            'order'=>'Content.created DESC',
             'limit' => 30
         );
 

@@ -71,6 +71,7 @@ class PagesController extends ContentsAppController {
                 'Content.content_type'=>'page'
             ),
             'contain'=>array(),
+            'order'=>'Content.created DESC',
             'limit' => 30
         );
 
