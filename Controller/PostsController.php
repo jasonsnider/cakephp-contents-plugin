@@ -135,6 +135,8 @@ class PostsController extends ContentsAppController {
         //Send the id back to the view
         $id = $content['Content']['id'];
         
+        $this->request->title = $content['Content']['title'];
+        
         $this->set(compact(
             'content',
             'id'
