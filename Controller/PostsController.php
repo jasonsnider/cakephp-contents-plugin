@@ -70,13 +70,9 @@ class PostsController extends ContentsAppController {
                 'Content.content_type'=>'post'
             ),
             'contain'=>array(
-                'CreatedUser'=>array(),
-                'Discussion'=>array(
-                    'order'=>'Discussion.created DESC',
-                    'CreatedUser'=>array(
-                        'UserProfile'=>array()
-                    ),
-                )
+                'CreatedUser'=>array(
+                    'UserProfile'=>array()
+                ),
             ),
             'order'=>'Content.created DESC',
             'limit' => 30
@@ -94,21 +90,6 @@ class PostsController extends ContentsAppController {
      */
     public function view($token) {
         
-        if(Configure::check('Parbake.Blog.comment_engine')):
-            if(Configure::read('Parbake.Blog.comment_engine') === true):
-                if(!empty($this->request->data)){
-                    if($this->Content->Discussion->save($this->request->data['Discussion'])){
-                        $this->Content->Discussion->create();
-                        $this->Session->setFlash(__('Your comment has been saved.'), 'success');   
-                        //Since we are not reloading the page, clear out the request data on success
-                        $this->request->data = array();
-                    }else{
-                        $this->Session->setFlash(__('Your comment could not be saved.'), 'error');
-                    }
-                }
-            endif; 
-        endif;
-        
         $content = $this->Content->find(
             'first',
             array(
@@ -121,13 +102,8 @@ class PostsController extends ContentsAppController {
                 'contain'=>array(
                     'CreatedUser'=>array(
                         'UserProfile'=>array()
-                    ),
-                    'Discussion'=>array(
-                        'order'=>'Discussion.created DESC',
-                        'CreatedUser'=>array(
-                            'UserProfile'=>array()
-                        ),
                     )
+                    
                 )
             )
         );

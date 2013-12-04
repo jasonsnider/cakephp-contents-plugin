@@ -78,13 +78,7 @@ class Content extends ContentsAppModel {
      * Defines has many relationships this model
      * @var array
      */
-    public $hasMany = array(
-        'Discussion' => array(
-            'className' => 'Contents.Discussion',
-            'foreignKey' => 'model_id',
-            'dependent' => true
-        )
-    );
+    public $hasMany = array();
     
     /**
      * Execute prior to validation

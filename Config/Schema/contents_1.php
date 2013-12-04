@@ -1,6 +1,8 @@
 <?php 
 class ContentSchema extends CakeSchema {
 
+	public $file = 'contents_1.php';
+
 	public function before($event = array()) {
 		return true;
 	}
