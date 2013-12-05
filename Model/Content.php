@@ -95,10 +95,13 @@ class Content extends ContentsAppModel {
 
     /**
      * Returns a list of content types
+     * - page
+     * - post
      * @return array()
      */
     public function contentTypes(){
         return array(
+            //'meta_data'=>'MetaData',
             'page'=>'Page',
             'post'=>'Post'
         );
@@ -106,7 +109,9 @@ class Content extends ContentsAppModel {
     
 
     /**
-     * Returns a list of content types
+     * Returns a list of content statuses
+     * - draft
+     * - published
      * @return array()
      */
     public function contentStatuses(){
