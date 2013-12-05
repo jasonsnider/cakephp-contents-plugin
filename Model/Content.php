@@ -104,6 +104,18 @@ class Content extends ContentsAppModel {
         );
     }
     
+
+    /**
+     * Returns a list of content types
+     * @return array()
+     */
+    public function contentStatuses(){
+        return array(
+            'draft'=>'Draft',
+            'published'=>'Published'
+        );
+    }
+    
     /**
      * A recursive function for creating unique slugs against user submited data (Content.title)
      * @param array $data

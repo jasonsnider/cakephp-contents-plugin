@@ -67,7 +67,8 @@ class PostsController extends ContentsAppController {
 
         $this->paginate = array(
             'conditions' => array(
-                'Content.content_type'=>'post'
+                'Content.content_type'=>'post',
+                'Content.content_status'=>'published',
             ),
             'contain'=>array(
                 'CreatedUser'=>array(

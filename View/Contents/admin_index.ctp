@@ -15,20 +15,21 @@
                 ?>
             </caption>
             <tr>
-                <th>Content</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Title</th>
             </tr>
             <?php foreach ($data as $content): ?>
                 <tr>
+                    <td><?php echo $content['Content']['content_type']; ?></td>
+                    <td><?php echo $content['Content']['content_status']; ?></td>
                     <td>
-                        <strong>
                         <?php 
                             echo $this->Html->link(
                                 $content['Content']['title'], 
                                 "/admin/contents/contents/view/{$content['Content']['id']}"
                             );
                         ?>
-                        </strong>
-                        <div><?php echo $this->Text->truncate($content['Content']['body'], '300'); ?></div>
                     </td>
                 </tr>
             <?php endforeach; ?>

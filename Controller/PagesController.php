@@ -68,7 +68,8 @@ class PagesController extends ContentsAppController {
 
         $this->paginate = array(
             'conditions' => array(
-                'Content.content_type'=>'page'
+                'Content.content_type'=>'page',
+                'Content.content_status'=>'published',
             ),
             'contain'=>array(),
             'order'=>'Content.created DESC',
