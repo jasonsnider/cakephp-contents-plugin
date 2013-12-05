@@ -1,6 +1,6 @@
 <h2><?php echo __d('contents', 'New Content'); ?></h2>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-9">
     <?php
     echo $this->Form->create(
         'Content', 

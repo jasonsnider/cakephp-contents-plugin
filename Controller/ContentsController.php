@@ -110,11 +110,13 @@ class ContentsController extends ContentsAppController {
         }
         
         $contentTypes = $this->Content->contentTypes();
+        $contentStatuses = $this->Content->contentStatuses();
         
         $this->request->hasEditor = true;
         
         $this->set(compact(
-            'contentTypes' 
+            'contentTypes',
+            'contentStatuses'
         ));
     }
 
@@ -172,12 +174,14 @@ class ContentsController extends ContentsAppController {
         }
         
         $contentTypes = $this->Content->contentTypes();
+        $contentStatuses = $this->Content->contentStatuses();
         
         $this->request->hasEditor = true;
         
         $this->set(compact(
             'content',
-            'contentTypes'
+            'contentTypes',
+            'contentStatuses'
         ));
         
     }

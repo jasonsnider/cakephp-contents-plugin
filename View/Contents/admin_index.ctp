@@ -27,7 +27,7 @@
                         <?php 
                             echo $this->Html->link(
                                 $content['Content']['title'], 
-                                "/admin/contents/contents/view/{$content['Content']['id']}"
+                                "/admin/contents/contents/edit/{$content['Content']['id']}"
                             );
                         ?>
                     </td>
