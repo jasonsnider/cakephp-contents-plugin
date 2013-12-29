@@ -101,9 +101,9 @@ class Content extends ContentsAppModel {
      */
     public function contentTypes(){
         return array(
-            //'meta_data'=>'MetaData',
+            'post'=>'Post',
             'page'=>'Page',
-            'post'=>'Post'
+            'meta_data'=>'MetaData'
         );
     }
     
