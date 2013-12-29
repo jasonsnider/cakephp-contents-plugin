@@ -20,14 +20,24 @@
     echo $this->Form->input('title');
     echo $this->Form->input('body', array('class'=>'editor'));
     ?>
+        
+    <div 
+        id="MetaDataFormFields" 
+        style="display:<?php echo $this->request->data['Content']['content_type']=='meta_data'?'block':'none';?>;">
+    <?php
+        echo $this->Form->input('controller');
+        echo $this->Form->input('action');
+    ?>
+    </div>
+
     </div>
     <div class="col-md-3">
-        <?php echo $this->Form->input('description', array('type'=>'textarea', 'rows'=>4)); ?>
+        <?php 
+        
+            echo $this->Form->input('description', array('type'=>'textarea', 'rows'=>4)); 
+            echo $this->Form->input('keywords', array('type'=>'textarea', 'rows'=>4)); 
+            echo $this->Form->input('content_type', array('onchange'=>'ContentForm.setDisplay()'));
 
-        <?php echo $this->Form->input('keywords', array('type'=>'textarea', 'rows'=>4)); ?>
-
-        <?php
-            echo $this->Form->input('content_type');
             echo $this->Form->input('content_status');
             echo $this->Form->submit(
                  __d('contents', 'Submit'), 
