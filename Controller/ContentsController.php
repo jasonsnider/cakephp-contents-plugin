@@ -68,7 +68,11 @@ class ContentsController extends ContentsAppController {
         );
 
         $data = $this->paginate('Content');
-        $this->set(compact('data'));
+        $title_for_layout = 'Site Map';
+        $this->set(compact(
+            'data',
+            'title_for_layout'
+        ));
     }
     
     /**
@@ -85,7 +89,11 @@ class ContentsController extends ContentsAppController {
         );
 
         $data = $this->paginate('Content');
-        $this->set(compact('data'));
+        $title_for_layout = 'Site Map :: CMS Admin Panel';
+        $this->set(compact(
+            'data',
+            'title_for_layout'
+        ));
     }
     
     /**
@@ -113,10 +121,11 @@ class ContentsController extends ContentsAppController {
         $contentStatuses = $this->Content->contentStatuses();
         
         $this->request->hasEditor = true;
-        
+        $title_for_layout = 'Create Content :: CMS Admin Panel';
         $this->set(compact(
             'contentTypes',
-            'contentStatuses'
+            'contentStatuses',
+            'title_for_layout'
         ));
     }
 
@@ -139,8 +148,10 @@ class ContentsController extends ContentsAppController {
             )
         );
         
+        $title_for_layout = "{$content['Content']['title']} :: CMS Admin Panel";
         $this->set(compact(
-            'content'
+            'content',
+            'title_for_layout'
         ));
     }
 
@@ -175,13 +186,15 @@ class ContentsController extends ContentsAppController {
         
         $contentTypes = $this->Content->contentTypes();
         $contentStatuses = $this->Content->contentStatuses();
+        $title_for_layout = "{$content['Content']['title']} :: CMS Admin Panel";
         
         $this->request->hasEditor = true;
         
         $this->set(compact(
             'content',
             'contentTypes',
-            'contentStatuses'
+            'contentStatuses',
+            'title_for_layout'
         ));
         
     }
