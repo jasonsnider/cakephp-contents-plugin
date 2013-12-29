@@ -1,4 +1,4 @@
-<h1><?php echo __d('contents', 'Create Meta Data'); ?></h1>
+<h1><?php echo __d('contents', 'Create Content'); ?></h1>
 <div class="row">
     <div class="col-md-9">
     <?php
