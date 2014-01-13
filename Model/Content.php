@@ -50,6 +50,8 @@ class Content extends ContentsAppModel {
                     'keyword',
                     'canonical',
                     'content_type',	
+                    'controller',
+                    'action',	
                     'model',
                     'model_id',	
                     'created_user_id',	
@@ -103,7 +105,8 @@ class Content extends ContentsAppModel {
         return array(
             'post'=>'Post',
             'page'=>'Page',
-            'meta_data'=>'MetaData'
+            'meta_data'=>'MetaData',
+            //'discussion'=>'Disscussion'
         );
     }
     
