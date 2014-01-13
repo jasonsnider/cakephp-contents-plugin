@@ -70,7 +70,6 @@ class DiscussionsController extends ContentsAppController {
             
             if($this->Content->save($this->request->data)){
                 $saved = true;
-                $ajaxMessage = __('SAved.');
             }else{
                 $ajaxMessage = __('Please correct the errors below.');
             }
