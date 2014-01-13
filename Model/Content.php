@@ -83,6 +83,18 @@ class Content extends ContentsAppModel {
     public $hasMany = array();
     
     /**
+     * Defines has one relationships this model
+     * @var array
+     */
+    public $hasOne = array(
+        'CreatedUser' => array(
+            'className' => 'Users.User',
+            'foreignKey' => 'created_user_id',
+            'dependent' => true
+        )
+    );
+    
+    /**
      * Execute prior to validation
      * - Creates a slug from a content title
      * @param array $options
