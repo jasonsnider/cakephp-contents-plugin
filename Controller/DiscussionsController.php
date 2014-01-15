@@ -45,7 +45,7 @@ class DiscussionsController extends ContentsAppController {
         parent::beforeFilter();
         $this->Auth->allow('__none');
         $this->Authorize->allow();
-        $this->Security->unlockedActions = array('ajax_create');
+        $this->Security->unlockedActions = array('ajax_create', 'ajax_index');
     }
     
     /**
@@ -85,6 +85,34 @@ class DiscussionsController extends ContentsAppController {
         
         //$this->request->hasEditor = true;
         $this->set(compact('modelId', 'saved', 'ajaxMessage'));
+    }
+    
+    /**
+     * Returns all comments created against a given  model_id
+     * @param string $modelId
+     * @return void
+     */
+    public function ajax_index($modelId){
+        
+        $this->layout = 'ajax';
+        
+        $comments = $this->Content->find(
+            'all',
+            array(
+                'conditions'=>array(
+                    'Content.model_id'=>$modelId
+                ),
+                'contain'=>array(
+                    'CreatedUser'=>array(
+                        'UserProfile'
+                    )
+                ),
+                
+                'order'=>'Content.created DESC'
+            )
+        );
+        
+        $this->set(compact('comments', 'modelId'));
     }
     
 }

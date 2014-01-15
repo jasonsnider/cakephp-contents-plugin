@@ -81,18 +81,7 @@ class Content extends ContentsAppModel {
      * @var array
      */
     public $hasMany = array();
-    
-    /**
-     * Defines has one relationships this model
-     * @var array
-     */
-    public $hasOne = array(
-        'CreatedUser' => array(
-            'className' => 'Users.User',
-            'foreignKey' => 'created_user_id',
-            'dependent' => true
-        )
-    );
+
     
     /**
      * Execute prior to validation
