@@ -60,9 +60,11 @@ class DiscussionsController extends ContentsAppController {
     /**
      * Allows a user to make a comment
      * @param string $modelId
+     * @param string $model
      * @return void
      */
-    public function ajax_create($modelId, $model='Evolution'){
+    public function ajax_create($modelId, $model){
+
         $saved = false;
         $this->layout = 'ajax';
 
@@ -90,9 +92,10 @@ class DiscussionsController extends ContentsAppController {
     /**
      * Returns all comments created against a given  model_id
      * @param string $modelId
+     * @param string $model
      * @return void
      */
-    public function ajax_index($modelId){
+    public function ajax_index($modelId, $model){
         
         $this->layout = 'ajax';
         
@@ -112,7 +115,7 @@ class DiscussionsController extends ContentsAppController {
             )
         );
         
-        $this->set(compact('comments', 'modelId'));
+        $this->set(compact('comments', 'modelId','model'));
     }
     
 }
