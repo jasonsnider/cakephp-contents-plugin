@@ -7,13 +7,15 @@ var Discussion = (function(){
     return {
         /**
          * Loads the form for creating a comment into a target element
+         * @param {string} target The id of the element into which we will inject the form
          * @param {string} modelId The id row of data to which we are attaching this comment
          * @param {string} model The model to which we are attaching this model
          * @returns {void}
          */
-        loadCreate: function(modelId, model){
+        loadCreate: function(target, modelId, model){
             
-            var $modelId = modelId,
+            var $target = target,
+                $modelId = modelId,
                 $model = model;
             
             $.ajax({
@@ -24,11 +26,11 @@ var Discussion = (function(){
                 type: 'POST',
 
                 beforeSend:function(){
-                    $('#NewComment' + $modelId).html('Loading...');
+                    $('#' + $target).html('Loading...');
                 },
 
                 success:function(html){
-                    $('#NewComment' + $modelId).html(html);
+                    $('#' + $target).html(html);
                 }
             });
         },
@@ -106,6 +108,23 @@ var Discussion = (function(){
                 $target = $this.attr('data-ajaxifiable-target');
                     
             Discussion.sendToCreate($target);
+        });
+    });
+}(jQuery));
+
+
+//
+(function ($){
+    "use strict"; /*jslint browser:true*/
+    $(function () {
+        $(document).on('click', '[data-load-comment-form]', function (event) {
+            event.preventDefault();
+
+            var $target = $(this).attr('data-target'),
+                $modelId = $('#LoadIndex').attr('data-model-id'),
+                $model = $('#LoadIndex').attr('data-model');
+
+            Discussion.loadCreate($target, $modelId, $model);
         });
     });
 }(jQuery));

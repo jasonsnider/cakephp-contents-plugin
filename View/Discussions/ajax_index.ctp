@@ -4,8 +4,12 @@
         'Leave a comment',
         "#NewComment{$modelId}",
         array(
-            'onclick'=>"Discussion.loadCreate('{$modelId}', '{$model}'); return false;",
-            'class'=>'btn btn-default btn-sm'
+            //'onclick'=>"Discussion.loadCreate('{$modelId}', '{$model}'); return false;",
+            'data-load-comment-form',
+            'data-model'=>$model,
+            'data-model-id'=>$modelId,
+            'data-target'=>"NewComment{$modelId}",
+            'class'=>'btn btn-default btn-sm',
         )  
     );
     ?>
