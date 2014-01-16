@@ -34,6 +34,7 @@ var Discussion = (function(){
                 }
             });
         },
+        
         /**
          * Sends an AJAX post request
          * @param {string} modelId The id row of data to which we are attaching this comment
@@ -66,6 +67,7 @@ var Discussion = (function(){
                 }
             });
         },
+        
         /**
          * Retrives an index of comments (a disucssion) against a target model_id
          * @param {string} modelId The id row of data to which we are attaching this comment
@@ -98,22 +100,7 @@ var Discussion = (function(){
     
 })();
 
-//Sends a new comment to the server
-(function ($){
-    "use strict"; /*jslint browser:true*/
-    $(function () {
-        $(document).on('click', '[data-ajaxifiable="true"]', function (event) {
-            event.preventDefault();
-            var $this = $(this),
-                $target = $this.attr('data-ajaxifiable-target');
-                    
-            Discussion.sendToCreate($target);
-        });
-    });
-}(jQuery));
-
-
-//
+//Listens for a request to load a comment form into a target div
 (function ($){
     "use strict"; /*jslint browser:true*/
     $(function () {
@@ -129,15 +116,28 @@ var Discussion = (function(){
     });
 }(jQuery));
 
+//Creates an AJAX POST request
+(function ($){
+    "use strict"; /*jslint browser:true*/
+    $(function () {
+        $(document).on('submit', '[data-ajax-form]', function (event) {
+            event.preventDefault();
+            var $this = $(this),
+                $target = $this.attr('data-target');
+                    
+            Discussion.sendToCreate($target);
+        });
+    });
+}(jQuery));
+
 //Loads an index of all comments created against a target modelId
 (function ($){
     "use strict"; /*jslint browser:true*/
     $(function () {
         var $modelId = $('#LoadIndex').attr('data-model-id'),
             $model = $('#LoadIndex').attr('data-model');
-
+            
         Discussion.fetchIndex($modelId, $model);
-        
     });
 }(jQuery));
 
