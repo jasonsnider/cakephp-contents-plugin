@@ -64,6 +64,7 @@ echo $this->Form->submit(
      array(
          'div'=>array(
             'class'=>'form-group',
+            'id'=>'NewCommentSubmitButton'
          ),
          'class'=>'btn btn-primary'
      )

@@ -82,6 +82,20 @@ class Content extends ContentsAppModel {
      */
     public $hasMany = array();
 
+    /**
+     * Defines the validation to be used by this model
+     * @var array
+     */
+    public $validate = array(
+        'body' => array(
+            'notEmpty' => array(
+                'rule' => 'notEmpty',
+                'message' => "Say something!",
+                'last' => true
+            )
+        ),
+    );
+    
     
     /**
      * Execute prior to validation
@@ -95,7 +109,7 @@ class Content extends ContentsAppModel {
         }
         return true;
     }
-
+    
     /**
      * Returns a list of content types
      * - page

@@ -71,11 +71,11 @@ class DiscussionsController extends ContentsAppController {
         if(!empty($this->request->data)){
             
             if($this->Content->save($this->request->data)){
-                $saved = true;
-            }else{
-                $ajaxMessage = __('Please correct the errors below.');
+                //On success we just want to reload the stream, no point in prepping a view
+                $this->autoRender = false;
+                echo 'success';
             }
-            
+            //By doing nothing on fail it acts like a traditional form error.
         }else{
             $this->request->data = array(
                 'Content'=>array(
@@ -85,7 +85,6 @@ class DiscussionsController extends ContentsAppController {
             );
         }
         
-        //$this->request->hasEditor = true;
         $this->set(compact('modelId', 'saved', 'ajaxMessage'));
     }
     

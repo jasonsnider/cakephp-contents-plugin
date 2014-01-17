@@ -42,7 +42,7 @@ var Discussion = (function(){
          * @returns {void}
          */
         sendToCreate: function(modelId, model){
-            
+  
             var $modelId = modelId,
                 $model = model,
                 $formFields = $("#NewCommentForm").serialize();
@@ -57,13 +57,17 @@ var Discussion = (function(){
                 data: $formFields,
 
                 beforeSend:function(){
-                    $('#NewComment' + $modelId).html('Loading...');
+                    //Just a spinner
+                    $('#NewCommentSubmitButton').html('Loading...');
                 },
 
                 success:function(html){
-                    $('#NewComment' + $modelId).html(html);
-                    var $modelId = $('#LoadIndex').attr('data-model-id');
-                    Discussion.fetchIndex($modelId);
+
+                    if(html === 'success'){
+                        Discussion.fetchIndex($modelId);
+                    }else{
+                        $('#NewComment' + $modelId).html(html);
+                    }
                 }
             });
         },
