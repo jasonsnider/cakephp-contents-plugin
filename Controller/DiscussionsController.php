@@ -65,7 +65,6 @@ class DiscussionsController extends ContentsAppController {
      */
     public function ajax_create($modelId, $model){
 
-        $saved = false;
         $this->layout = 'ajax';
 
         if(!empty($this->request->data)){
@@ -74,8 +73,10 @@ class DiscussionsController extends ContentsAppController {
                 //On success we just want to reload the stream, no point in prepping a view
                 $this->autoRender = false;
                 echo 'success';
+            }else{
+                $formError = __('Oh dear, the post seems to have failed!');
             }
-            //By doing nothing on fail it acts like a traditional form error.
+            
         }else{
             $this->request->data = array(
                 'Content'=>array(
@@ -85,7 +86,7 @@ class DiscussionsController extends ContentsAppController {
             );
         }
         
-        $this->set(compact('modelId', 'saved', 'ajaxMessage'));
+        $this->set(compact('modelId', 'formError'));
     }
     
     /**

@@ -62,10 +62,12 @@ var Discussion = (function(){
                 },
 
                 success:function(html){
-
+                    //On success we will echo the word success straight from the controller
                     if(html === 'success'){
+                        //The post request was successful, reload the stream
                         Discussion.fetchIndex($modelId);
                     }else{
+                        //The post request failed, reload the form with the appropriate errors.
                         $('#NewComment' + $modelId).html(html);
                     }
                 }

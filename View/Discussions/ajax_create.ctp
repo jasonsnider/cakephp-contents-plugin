@@ -19,6 +19,8 @@ echo $this->Form->create(
     )
 );
 
+echo !empty($formError)?$this->Html->div('text-danger', $formError):false;
+
 echo $this->Form->input(
     'body',
     array(
