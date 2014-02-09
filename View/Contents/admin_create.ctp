@@ -17,7 +17,7 @@
             )
         );
         echo $this->Form->input('title');
-        echo $this->Form->input('body');
+        echo $this->Form->input('body', array('class'=>'editor'));
     ?>
         
     <div id="MetaDataFormFields" style="display:none;">
