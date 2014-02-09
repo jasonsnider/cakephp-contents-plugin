@@ -31,3 +31,18 @@ Note: Adjust the JS path accordingly.
     </script>
 <?php endif; ?>
 ````
+
+## Using Discussions
+
+Discussions provides a native AJAX UI for allowing [for example] comments on blog posts or the ability to create a 
+discussion against any piece of data in the system. Usage is as follows. The variables $model and $modelId are used 
+to connect the discussion to a single piece of system data.
+
+````
+<h2>Discussion</h2>
+<div 
+    id="<?php echo "DiscussionStream{$modelId}"; ?>"
+    data-stream
+    data-url="<?php echo "/ajax/contents/discussions/index/{$modelId}/{$model}"; ?>"
+    data-target="#<?php echo "DiscussionStream{$modelId}"; ?>"></div>
+````
