@@ -86,7 +86,7 @@ class DiscussionsController extends ContentsAppController {
             );
         }
         
-        $this->set(compact('modelId', 'formError'));
+        $this->set(compact('formError', 'modelId', 'model'));
     }
     
     /**

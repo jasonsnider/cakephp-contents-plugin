@@ -2,24 +2,25 @@
 <?php 
 echo $this->Html->link(
     'Leave a comment',
-    "#NewComment{$modelId}",
+    "/ajax/contents/discussions/create/{$modelId}/{$model}/",
     array(
-        'data-load-comment-form',
-        'data-model'=>$model,
-        'data-model-id'=>$modelId,
-        'data-target'=>"NewComment{$modelId}",
+        'id'=>"NewCommentButton{$modelId}",
+        'data-ajax-link',
+        'data-target'=>"#NewComment{$modelId}",
         'class'=>'btn btn-default btn-sm',
     )  
 );
 ?>
 </div>
 <div>&nbsp;</div>
-<?php foreach($comments as $comment): ?>
-<div class="well well-sm">
-    <div class="text-muted">
-        <?php echo $comment['CreatedUser']['UserProfile']['display_name']; ?>,
-        <?php echo date('m/d/Y', strtotime($comment['Content']['created'])); ?>
+<div id="CommentStream<?php echo $modelId; ?>">
+    <?php foreach($comments as $comment): ?>
+    <div class="well well-sm">
+        <div class="text-muted">
+            <?php echo $comment['CreatedUser']['UserProfile']['display_name']; ?>,
+            <?php echo date('m/d/Y', strtotime($comment['Content']['created'])); ?>
+        </div>
+        <div><?php echo $comment['Content']['body']; ?></div>
     </div>
-    <div><?php echo $comment['Content']['body']; ?></div>
+    <?php endforeach; ?>
 </div>
-<?php endforeach; ?>

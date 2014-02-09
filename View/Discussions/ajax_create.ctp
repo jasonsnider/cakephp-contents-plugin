@@ -2,13 +2,16 @@
 echo $this->Form->create(
     'Content', 
     array(
+        'data-ajax-form',
         'id'=>'NewCommentForm',
-        'url'=>$this->here,
+        'url'=>"/ajax/contents/discussions/create/{$modelId}/{$model}/",
+        'data-form-target'=>"#NewComment{$modelId}",
+        'data-stream-target'=>"#CommentStream{$modelId}",
+        'data-spinner-target'=>"#NewCommentSubmitButton{$modelId}",
+        'data-stream-url'=>"/ajax/contents/discussions/index/{$modelId}/{$model}/",
         'role'=>'form',
         'class'=>'well well-sm',
         'method'=>'POST',
-        'data-ajax-form'=>"true",
-        'data-target'=>$modelId,
         'inputDefaults'=>array(
             'div'=>array(
                 'class'=>'form-group'
@@ -66,7 +69,7 @@ echo $this->Form->submit(
      array(
          'div'=>array(
             'class'=>'form-group',
-            'id'=>'NewCommentSubmitButton'
+            'id'=>"NewCommentSubmitButton{$modelId}"
          ),
          'class'=>'btn btn-primary'
      )
