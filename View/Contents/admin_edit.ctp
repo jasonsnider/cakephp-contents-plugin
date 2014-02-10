@@ -36,6 +36,7 @@
         
             echo $this->Form->input('description', array('type'=>'textarea', 'rows'=>4)); 
             echo $this->Form->input('keywords', array('type'=>'textarea', 'rows'=>4)); 
+            echo $this->Form->input('tags', array('label'=>'Tags (Comma Seperated)', 'type'=>'textarea', 'rows'=>4));
             echo $this->Form->input('content_type', array('onchange'=>'ContentForm.setDisplay()'));
 
             echo $this->Form->input('content_status');
