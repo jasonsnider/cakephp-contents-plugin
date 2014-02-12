@@ -95,10 +95,13 @@ class PagesController extends ContentsAppController {
                     'or'=>array(
                         'Content.id'=>$token,
                         'Content.slug'=>$token
-                    )
+                    ),
+                    'Content.content_type'=>'page',
                 ),
                 'contain'=>array(
-                    'CreatedUser'=>array(),
+                    'CreatedUser'=>array(
+                        'UserProfile'=>array()
+                    ),
                     'Tag'=>array(
                         'Tagged'=>array()
                     )

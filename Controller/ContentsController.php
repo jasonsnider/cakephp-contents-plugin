@@ -3,16 +3,16 @@
  * Provides controll logic for managing content
  *
  * Parbake (http://jasonsnider.com/parbake)
- * Copyright 2013, Jason D Snider. (http://jasonsnider.com)
+ * Copyright 2013-2014, Jason D Snider. (http://jasonsnider.com)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2013, Jason D Snider. (http://jasonsnider.com)
+ * @copyright Copyright 2013-2014, Jason D Snider. (http://jasonsnider.com)
  * @link http://jasonsnider.com
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  * @author Jason D Snider <jason@jasonsnider.com>
- * @package       Users
+ * @package Contents
  */
 App::uses('ContentsAppController', 'Contents.Controller');
 

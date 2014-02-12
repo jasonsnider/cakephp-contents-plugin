@@ -6,5 +6,24 @@
         <strong>On: </strong><?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>
 
         <div><?php echo $content['Content']['body']; ?></div>
+        <div>
+            <?php 
+            foreach($content['Tag'] as $tag):
+                echo $this->Html->link(
+                    $tag['name'], 
+                    array(
+                        'plugin'=>'tags',
+                        'controller'=>'tags',
+                        'action'=>'view',
+                        $tag['name']
+                    ), 
+                    array(
+                        'class'=>'label label-default'
+                    )
+                );
+                echo '&nbsp;';
+            endforeach; 
+            ?>
+        </div>
     </div>
 </div>

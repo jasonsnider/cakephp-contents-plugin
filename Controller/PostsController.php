@@ -98,17 +98,20 @@ class PostsController extends ContentsAppController {
                     'or'=>array(
                         'Content.id'=>$token,
                         'Content.slug'=>$token
-                    )
+                    ),
+                    'Content.content_type'=>'post',
                 ),
                 'contain'=>array(
                     'CreatedUser'=>array(
                         'UserProfile'=>array()
+                    ),
+                    'Tag'=>array(
+                        'Tagged'=>array()
                     )
-                    
                 )
             )
         );
-        
+
         //Send the id back to the view
         $id = $content['Content']['id'];
         
