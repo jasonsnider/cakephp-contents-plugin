@@ -25,6 +25,14 @@ App::uses('AppController', 'Controller');
 class ContentsAppController extends AppController {
     
     /**
+     * The Contents plugin useses the following helpers
+     * -TagCloud
+     */
+    public $helpers = array(
+        'Tags.TagCloud'
+    );
+    
+    /**
      * Called before action
      */
     public function beforeFilter() {

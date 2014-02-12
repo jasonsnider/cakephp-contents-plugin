@@ -25,17 +25,19 @@ class ContentsController extends ContentsAppController {
 
     /**
      * Holds the name of the controller
-     *
      * @var string
      */
     public $name = 'Contents';
 
     /**
-     * Call the components to be used by this controller
-     *
+     * Components used by this controller are
+     * -Prg
      * @var array
      */
-    //public $components = array();
+    public $components = array(
+        'Paginator',
+        'Search.Prg'
+    );
 
     /**
      * Called before action
@@ -49,13 +51,39 @@ class ContentsController extends ContentsAppController {
 
     /**
      * The models used by the controller
-     *
      * @var array
      */
     public $uses = array(
         'Contents.Content',
+        'Tags.Tag'
     );
+    
+    /**
+     * Presets the variables for search
+     * @var type 
+     */
+    public $presetVars = true; // using the model configuration
 
+    /**
+     * Provides basic search functionality
+     * @return void
+     */
+    public function search() {
+        $this->Prg->commonProcess();
+        $this->Paginator->settings['conditions'] = $this->Content->parseCriteria($this->Prg->parsedParams());
+        
+        //$contents = $this->Paginator->paginate();
+        
+        $this->paginate = array(
+            'conditions' => array(
+                'Content.content_type NOT'=>'meta_data'
+            ),
+            'contain'=>array(),
+            'limit' => 10
+        );
+        $contents = $this->paginate('Content');
+        $this->set(compact('contents'));
+    }
     /**
      * Displays an index of all content
      * @return void
@@ -74,7 +102,7 @@ class ContentsController extends ContentsAppController {
             'title_for_layout'
         ));
     }
-    
+
     /**
      * Displays an index of all content
      * @return void

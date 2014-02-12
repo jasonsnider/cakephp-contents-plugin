@@ -38,6 +38,8 @@ class Content extends ContentsAppModel {
      * @var array 
      */
     public $actsAs = array(
+        'Search.Searchable',
+        'Tags.Taggable',
         'Utilities.Loggable',
         'Utilities.Scrubable' => array(
             'Filters' => array(
@@ -64,7 +66,7 @@ class Content extends ContentsAppModel {
             )
         )
     );
-    
+
     /**
      * Defines belongs to relationships this model
      * @var array
@@ -83,6 +85,64 @@ class Content extends ContentsAppModel {
      */
     public $hasMany = array();
 
+    /**
+     * Content has and belongs to many 
+     * -Tag
+     * @var array
+     */
+    public $hasAndBelongsToMany = array(
+        'Tag' => array(
+            'with' => 'Tagged'
+        )
+    );
+    
+    /**
+     * Sets filtering rules for the Content model
+     * @var array
+     */
+    public $filterArgs = array(
+        'title' => array('type' => 'like'),
+        //'status' => array('type' => 'value'),
+        //'blog_id' => array('type' => 'value'),
+        'search' => array('type' => 'like', 'field' => 'Content.body'),
+        //'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Content.views BETWEEN ? AND ?'),
+        //'username' => array('type' => 'like', 'field' => array('User.username', 'UserInfo.first_name')),
+        'tags' => array('type' => 'subquery', 'method' => 'findByTags', 'field' => 'Content.id'),
+        'filter' => array('type' => 'query', 'method' => 'orConditions'),
+        'enhanced_search' => array('type' => 'like', 'encode' => true, 'before' => false, 'after' => false, 'field' => array('ThisModel.name', 'OtherModel.name')),
+    );
+
+    /**
+     * Provides logic for searching tags
+     * @param type $data
+     * @return type
+     */
+    public function findByTags($data = array()) {
+        $this->Tagged->Behaviors->attach('Containable', array('autoFields' => false));
+        $this->Tagged->Behaviors->attach('Search.Searchable');
+        $query = $this->Tagged->getQuery('all', array(
+            'conditions' => array('Tag.name'  => $data['tags']),
+            'fields' => array('foreign_key'),
+            'contain' => array('Tag')
+        ));
+        return $query;
+    }
+
+    /**
+     * Provides standard or search logic
+     * @param type $data
+     * @return array
+     */
+    public function orConditions($data = array()) {
+        $filter = $data['filter'];
+        $cond = array(
+            'OR' => array(
+                "{$this->alias}.title LIKE" => "%{$filter}%",
+                "{$this->alias}.body LIKE" => "%{$filter}%",
+            ));
+        return $cond;
+    }
+    
     /**
      * Defines the validation to be used by this model
      * @var array

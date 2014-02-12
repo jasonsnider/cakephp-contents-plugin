@@ -2,5 +2,24 @@
     <div class="col-md-12">
     <h2><?php echo $content['Content']['title']; ?></h2>
     <?php echo $content['Content']['body']; ?>
+    <div>
+        <?php 
+        foreach($content['Tag'] as $tag):
+            echo $this->Html->link(
+                $tag['name'], 
+                array(
+                    'plugin'=>'tags',
+                    'controller'=>'tags',
+                    'action'=>'view',
+                    $tag['name']
+                ), 
+                array(
+                    'class'=>'label label-default'
+                )
+            );
+            echo '&nbsp;';
+        endforeach; 
+        ?>
+    </div>
     </div>
 </div>

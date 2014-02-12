@@ -97,10 +97,15 @@ class PagesController extends ContentsAppController {
                         'Content.slug'=>$token
                     )
                 ),
-                'contain'=>array()
+                'contain'=>array(
+                    'CreatedUser'=>array(),
+                    'Tag'=>array(
+                        'Tagged'=>array()
+                    )
+                )
             )
         );
-        
+        //debug($content);
         //Send the id back to the view
         $id = $content['Content']['id'];
         $this->request->title = $content['Content']['title'];

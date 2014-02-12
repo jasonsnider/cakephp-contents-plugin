@@ -5,6 +5,6 @@
         <strong>By: </strong><?php echo $content['CreatedUser']['UserProfile']['display_name']; ?>
         <strong>On: </strong><?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>
 
-        <div><?php echo $content['Content']['body']; debug($content); ?></div>
+        <div><?php echo $content['Content']['body']; ?></div>
     </div>
 </div>
