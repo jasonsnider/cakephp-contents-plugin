@@ -11,10 +11,10 @@
                 echo $this->Html->link(
                     $tag['name'], 
                     array(
-                        'plugin'=>'tags',
-                        'controller'=>'tags',
-                        'action'=>'view',
-                        $tag['name']
+                        'plugin'=>'contents',
+                        'controller'=>'contents',
+                        'action'=>'search',
+                        'tags' => $tag['name']
                     ), 
                     array(
                         'class'=>'label label-default'
