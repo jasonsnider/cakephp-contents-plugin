@@ -102,11 +102,7 @@ class Content extends ContentsAppModel {
      */
     public $filterArgs = array(
         'title' => array('type' => 'like'),
-        //'status' => array('type' => 'value'),
-        //'blog_id' => array('type' => 'value'),
         'search' => array('type' => 'like', 'field' => 'Content.body'),
-        //'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Content.views BETWEEN ? AND ?'),
-        //'username' => array('type' => 'like', 'field' => array('User.username', 'UserInfo.first_name')),
         'tags' => array('type' => 'subquery', 'method' => 'findByTags', 'field' => 'Content.id'),
         'filter' => array('type' => 'query', 'method' => 'orConditions'),
         'enhanced_search' => array('type' => 'like', 'encode' => true, 'before' => false, 'after' => false, 'field' => array('ThisModel.name', 'OtherModel.name')),
@@ -157,7 +153,6 @@ class Content extends ContentsAppModel {
         ),
     );
     
-    
     /**
      * Execute prior to validation
      * - Creates a slug from a content title
@@ -165,7 +160,7 @@ class Content extends ContentsAppModel {
      * @return boolean
      */
     public function beforeValidate($options = array()) {
-        if (!empty($this->data[$this->alias]['title'])) {
+        if(!empty($this->data[$this->alias]['title']) && !isset($this->data[$this->alias]['id'])) {
             $this->data[$this->alias]['slug'] = $this->slug($this->data);
         }
         return true;
@@ -185,7 +180,6 @@ class Content extends ContentsAppModel {
             //'discussion'=>'Disscussion'
         );
     }
-    
 
     /**
      * Returns a list of content statuses
@@ -198,39 +192,5 @@ class Content extends ContentsAppModel {
             'draft'=>'Draft',
             'published'=>'Published'
         );
-    }
-    
-    /**
-     * A recursive function for creating unique slugs against user submited data (Content.title)
-     * @param array $data
-     * @param interger $counter
-     */
-    public function slug($data, $counter = 0){
-                    
-        //Create the slug from user created data
-        if(empty($counter)){
-            $slug = Inflector::slug(strtolower($data[$this->alias]['title']), '-');
-        }else{
-            $slug = Inflector::slug(strtolower("{$data[$this->alias]['title']} {$counter}"), '-');
-        }
-
-        //Does the slug already exists
-        $checkCollision = $this->find(
-            'first',
-            array(
-                'conditions'=>array(
-                    "{$this->alias}.slug"=>$slug
-                ),
-                'contain'=>array()
-            )
-        );
-             
-        if(!empty($checkCollision)){
-            //The slug already exists, recursivly pass the counter into the slug method
-            $counter = $counter + 1;
-            $slug = $this->slug($data, $counter);
-        }
-        
-        return $slug;          
     }
 }
