@@ -45,7 +45,10 @@ class ContentsController extends ContentsAppController {
      */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index');
+        $this->Auth->allow(
+            'index',
+            'search'
+        );
         $this->Authorize->allow();
     }
 
@@ -70,14 +73,12 @@ class ContentsController extends ContentsAppController {
      */
     public function search() {
         $this->Prg->commonProcess();
-        $this->Paginator->settings['conditions'] = $this->Content->parseCriteria($this->Prg->parsedParams());
         
-        //$contents = $this->Paginator->paginate();
+        $conditions = $this->Content->parseCriteria($this->Prg->parsedParams());
+        $conditions['Content.content_type NOT']='meta_data';
         
         $this->paginate = array(
-            'conditions' => array(
-                'Content.content_type NOT'=>'meta_data'
-            ),
+            'conditions' => $conditions,
             'contain'=>array(),
             'limit' => 10
         );
