@@ -28,9 +28,9 @@
              __d('contents', 'Submit'), 
              array(
                  'div'=>array(
-                     'class'=>'form-group'
+                     'class'=>'form-group clearfix'
                  ),
-                 'class'=>'btn btn-primary'
+                 'class'=>'btn btn-primary pull-right'
              )
          ); 
         echo $this->Form->end();
