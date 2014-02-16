@@ -1,4 +1,4 @@
-<h2>Posts</h2>
+<h2><?php echo $this->request->title; ?></h2>
 <div class="row">
     <div class="col-md-12">
         <table class="table table-bordered table-condensed table-striped table-hover">
