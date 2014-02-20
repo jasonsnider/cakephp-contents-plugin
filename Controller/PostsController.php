@@ -76,7 +76,7 @@ class PostsController extends ContentsAppController {
                 ),
             ),
             'order'=>'Content.created DESC',
-            'limit' => 30
+            'limit' => 10
         );
 
         $this->request->checkForMeta = true;

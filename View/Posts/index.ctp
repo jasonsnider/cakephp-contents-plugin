@@ -1,38 +1,50 @@
+<style>
+    
+    /* We don't want search results getting all whacky with different sizes of font */
+    .well-result *{
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    .well-trans{
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+    
+</style>
 <h2><?php echo $this->request->title; ?></h2>
-<div class="row">
-    <div class="col-md-12">
-        <table class="table table-bordered table-condensed table-striped table-hover">
-            <caption>
-                <?php
-                echo $this->Paginator->counter(array(
-                    'format' => 'Page {:page} of {:pages}, showing {:current} records out of
-                             {:count} total, starting on record {:start}, ending on {:end}'
-                ));
-                ?>
-            </caption>
-            <tr><th>Content</th></tr>
-            <?php foreach ($data as $content): ?>
-                <tr>
-                    <td>
-                        <strong>
-                        <?php 
-                            echo $this->Html->link(
-                                $content['Content']['title'], 
-                                "/contents/posts/view/{$content['Content']['slug']}"
-                            );
-                        ?>
-                        </strong>
-                        <div><?php echo $this->Text->truncate($content['Content']['body'], '300'); ?></div>
-                        <div>
-                            <strong>By:</strong>
-                            <?php echo $data[$i]['CreatedUser']['UserProfile']['display_name']; ?>
-                            <strong>On:</strong>
-                            <?php echo date('m/d/y', strtotime($data[$i]['Content']['created'])); ?>
-                        </div>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php echo $this->element('pager'); ?>
+<small class="text-muted well well-sm well-trans clearfix">
+<?php
+echo $this->Paginator->counter(array(
+    'format' => 'Page {:page} of {:pages}, showing {:current} records out of
+             {:count} total, starting on record {:start}, ending on {:end}'
+));
+?>
+</small>
+<?php foreach ($data as $content): ?>
+<div class="well well-sm well-result">
+    <strong>
+    <?php 
+        echo $this->Html->link(
+            $content['Content']['title'], 
+            array(
+                'plugin'=>'contents',
+                'controller'=>'posts',
+                'action'=>'view',
+                $content['Content']['slug']
+            )
+        );
+    ?>
+    </strong>
+    <div class="text-muted">
+        <em>
+            <strong>Posted On:</strong>
+            <?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>
+        </em>
     </div>
+    <div><?php echo $this->Text->truncate($content['Content']['body'], '300'); ?></div>
 </div>
+<?php endforeach; ?>
+
+<?php echo $this->element('pager'); ?>
