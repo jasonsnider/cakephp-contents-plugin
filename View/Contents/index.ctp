@@ -52,7 +52,18 @@ echo $this->Paginator->counter(array(
             <?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>
         </em>
     </div>
-    <div><?php echo $this->Text->truncate($content['Content']['body'], '300'); ?></div>
+    <div>
+		<?php 
+			echo $this->Text->truncate(
+				$content['Content']['body'], 
+				'300', 
+				array(
+					'html'=>true, 
+					'exact'=>false
+				)
+			); 
+		?>
+	</div>
 </div>
 <?php endforeach; ?>
 
