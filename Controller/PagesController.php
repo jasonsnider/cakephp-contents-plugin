@@ -76,6 +76,7 @@ class PagesController extends ContentsAppController {
             'limit' => 30
         );
 
+        $this->request->title = 'Pages';
         $this->request->checkForMeta = true;
         $data = $this->paginate('Content');
         $this->set(compact('data'));

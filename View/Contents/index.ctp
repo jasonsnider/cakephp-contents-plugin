@@ -1,34 +1,59 @@
-<h2>Contents</h2>
-<div class="row">
-    <div class="col-md-12">
-        <table class="table table-bordered table-condensed table-striped table-hover">
-            <caption>
-                <?php
-                echo $this->Paginator->counter(array(
-                    'format' => 'Page {:page} of {:pages}, showing {:current} records out of
-                             {:count} total, starting on record {:start}, ending on {:end}'
-                ));
-                ?>
-            </caption>
-            <tr>
-                <th>Content</th>
-            </tr>
-            <?php foreach ($data as $content): ?>
-                <tr>
-                    <td>
-                        <strong>
-                        <?php
-                            echo $this->Html->link(
-                                $content['Content']['title'], 
-                                "/contents/{$content['Content']['content_type']}s/view/{$content['Content']['slug']}"
-                            );
-                        ?>
-                        </strong>
-                        <div><?php echo $this->Text->truncate($content['Content']['body'], '300'); ?></div>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php echo $this->element('pager'); ?>
+<style>
+    
+    /* We don't want search results getting all whacky with different sizes of font */
+    .well-result *{
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    .well-trans{
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+    
+</style>
+<h2><?php echo $this->request->title; ?></h2>
+<small class="text-muted well well-sm well-trans clearfix">
+<?php
+echo $this->Paginator->counter(array(
+    'format' => 'Page {:page} of {:pages}, showing {:current} records out of
+             {:count} total, starting on record {:start}, ending on {:end}'
+));
+?>
+</small>
+<?php foreach ($data as $content): ?>
+<div class="well well-sm well-result">
+    <strong>
+        <?php 
+            echo $this->Html->link(
+                $content['Content']['title'], 
+                array(
+                    'plugin'=>'contents',
+                    'controller'=>"{$content['Content']['content_type']}s",
+                    'action'=>'view',
+                    $content['Content']['slug']
+                )
+            );
+        ?>
+    </strong>
+    <?php 
+        echo $this->Html->tag(
+            'strong',    
+            Inflector::humanize($content['Content']['content_type']),
+            array(
+                'class'=>'text-muted'
+            )
+        ); 
+    ?>
+    <div class="text-muted">
+        <em>
+            <strong>Posted On:</strong>
+            <?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>
+        </em>
     </div>
+    <div><?php echo $this->Text->truncate($content['Content']['body'], '300'); ?></div>
 </div>
+<?php endforeach; ?>
+
+<?php echo $this->element('pager'); ?>

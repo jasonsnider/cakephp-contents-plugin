@@ -82,6 +82,9 @@ class ContentsController extends ContentsAppController {
             'contain'=>array(),
             'limit' => 10
         );
+        
+        $this->request->title = 'Search';
+        $this->request->checkForMeta = true;
         $contents = $this->paginate('Content');
         $this->set(compact('contents'));
     }
@@ -97,10 +100,10 @@ class ContentsController extends ContentsAppController {
         );
 
         $data = $this->paginate('Content');
-        $title_for_layout = 'Site Map';
+        $this->request->title = 'Contents';
+        $this->request->checkForMeta = true;
         $this->set(compact(
-            'data',
-            'title_for_layout'
+            'data'
         ));
     }
 
