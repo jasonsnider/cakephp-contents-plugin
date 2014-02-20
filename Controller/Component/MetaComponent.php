@@ -1,27 +1,14 @@
 <?php
 /**
- * A class for determinig if a user is authorized for a particular actions.
- *
- * Parbake (http://jasonsnider.com/parbake)
- * Copyright 2012, Jason D Snider. (http://jasonsnider.com)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright Copyright 2012, Jason D Snider. (http://jasonsnider.com)
- * @link http://jasonsnider.com
- * @license MIT License (http://www.opensource.org/licenses/mit-licensephp)
+ * Returns meta data based on a controller action
+ * @package Contents
  */
 App::uses('AppController', 'Controller');
 
 /**
- * A class for determinig if a user is authorized for a particular actions.
- * 
- * Some parts adapted from
- * @link https://github.com/cakephp/cakephp/blob/master/lib/Cake/Controller/Component/AuthComponent.php
- * 
- * @author Jaso D Snider <jason@jasonsnider.com>
- * @package	Users
+ * Returns meta data based on a controller action
+ * @author Jason D Snider <jason@jasonsnider.com>
+ * @package Contents
  */
 class MetaComponent extends Component {
 
@@ -45,14 +32,30 @@ class MetaComponent extends Component {
      * @var object
      */
     public $controller;
-
+	
+	/**
+	 * Content model object
+	 * @var object
+	 */
+	public $Content;
+	
     /**
-     * Main execution method.  Handles redirecting of invalid users, and processing
-     * of login form data.
+     * Main execution method.
      *
      * @param Controller $controller A reference to the instantiating controller object
-     * @todo Decide the best course of action to take after a Authorization Fails
-     * @return mixed redirects a failed authorization attempt
+     */
+    public function initialize(Controller $controller) {
+        $this->request = $controller->request;
+        $this->response = $controller->response;
+
+        $this->controller = $controller;
+        $this->Content = ClassRegistry::init('Contents.Content');
+    }
+	
+    /**
+     * Main execution method.
+     *
+     * @param Controller $controller A reference to the instantiating controller object
      */
     public function startup(Controller $controller) {
 
@@ -60,7 +63,9 @@ class MetaComponent extends Component {
         $this->response = $controller->response;
 
         $this->controller = $controller;
-        $this->UserPrivilege = ClassRegistry::init('UserPrivilege');
+        $this->Content = ClassRegistry::init('Contents.Content');
+		
+		
     }
 
     /**
@@ -68,7 +73,7 @@ class MetaComponent extends Component {
      * @return void
      */
     public function data(){
-        
+
         // 1) If the action is requesting a check for meta data
         if(isset($this->request->checkForMeta)){
             
@@ -88,7 +93,7 @@ class MetaComponent extends Component {
                     'contain'=>array()
                 )
             );
-            
+
             // 3) Then set the variable accordingly
             if(!empty($metaData)){
                 $this->request->title = $metaData['Content']['title'];
@@ -96,7 +101,7 @@ class MetaComponent extends Component {
                 $this->request->description  = $metaData['Content']['description'];
             }
 
-        }
+		} 
     }
 
 }
