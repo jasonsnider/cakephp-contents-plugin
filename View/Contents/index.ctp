@@ -1,18 +1,3 @@
-<style>
-    
-    /* We don't want search results getting all whacky with different sizes of font */
-    .well-result *{
-        font-size: 14px;
-        line-height: 20px;
-    }
-    
-    .well-trans{
-        background: transparent;
-        border: none;
-        box-shadow: none;
-    }
-    
-</style>
 <h2><?php echo $this->request->title; ?></h2>
 <small class="text-muted well well-sm well-trans clearfix">
 <?php

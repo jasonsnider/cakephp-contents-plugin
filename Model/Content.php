@@ -95,17 +95,20 @@ class Content extends ContentsAppModel {
             'with' => 'Tagged'
         )
     );
-    
+
     /**
      * Sets filtering rules for the Content model
      * @var array
      */
     public $filterArgs = array(
-        'title' => array('type' => 'like'),
-        'search' => array('type' => 'like', 'field' => 'Content.body'),
+        //array('name' => 'q', 'type' => 'query', 'method' => 'orConditions'),
+        //'title' => array('type' => 'like'),
+        //'search' => array('type' => 'like', 'field' => 'Content.body'),
+        'q' => array('type' => 'query', 'method' => 'orConditions'),
         'tags' => array('type' => 'subquery', 'method' => 'findByTags', 'field' => 'Content.id'),
-        'filter' => array('type' => 'query', 'method' => 'orConditions'),
-        'enhanced_search' => array('type' => 'like', 'encode' => true, 'before' => false, 'after' => false, 'field' => array('ThisModel.name', 'OtherModel.name')),
+        //'enhanced_search' => array(
+            //'type' => 'like', 'encode' => true, 'before' => false, 'after' => false, 
+            //'field' => array('ThisModel.name', 'OtherModel.name')),
     );
 
     /**
@@ -130,15 +133,19 @@ class Content extends ContentsAppModel {
      * @return array
      */
     public function orConditions($data = array()) {
-        $filter = $data['filter'];
-        $cond = array(
+        if(empty($data['q'])) { // q is the name of my search field
+            return array();
+        }
+
+        $query = "%{$data['q']}%";
+        return array(
             'OR' => array(
-                "{$this->alias}.title LIKE" => "%{$filter}%",
-                "{$this->alias}.body LIKE" => "%{$filter}%",
-            ));
-        return $cond;
+                "{$this->alias}.title LIKE" => $query,
+                "{$this->alias}.body LIKE" => $query,
+            )
+        );
     }
-    
+        
     /**
      * Defines the validation to be used by this model
      * @var array

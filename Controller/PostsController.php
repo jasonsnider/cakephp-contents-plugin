@@ -111,7 +111,7 @@ class PostsController extends ContentsAppController {
                 )
             )
         );
-
+debug($content);
         //Send the id back to the view
         $id = $content['Content']['id'];
         
