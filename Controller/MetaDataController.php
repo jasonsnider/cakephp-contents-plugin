@@ -1,6 +1,6 @@
 <?php
 /**
- * Provides a controller for managing the meta data of static webpages
+ * MetaData controller
  *
  * Parbake (http://jasonsnider.com/parbake)
  * Copyright 2013, Jason D Snider. (http://jasonsnider.com)
@@ -17,25 +17,11 @@
 App::uses('ContentsAppController', 'Contents.Controller');
 
 /**
- * Provides a controller for managing the meta data of static webpages
+ * MetaData controller
  * @author Jason D Snider <jason@jasonsnider.com>
  * @package Contents
  */
 class MetaDataController extends ContentsAppController {
-
-    /**
-     * Holds the name of the controller
-     *
-     * @var string
-     */
-    public $name = 'MetaData';
-
-    /**
-     * Call the components to be used by this controller
-     *
-     * @var array
-     */
-    //public $components = array();
 
     /**
      * Called before action
@@ -47,7 +33,6 @@ class MetaDataController extends ContentsAppController {
 
     /**
      * The models used by the controller
-     *
      * @var array
      */
     public $uses = array(
@@ -55,7 +40,9 @@ class MetaDataController extends ContentsAppController {
     );
 
     /**
-     * Allows a user to create meta data about a page
+     * Allows a user to create MetaData against a controller and action
+     * @param string $controller
+     * @param string $action
      * @return void
      */
     public function admin_create($controller, $action) {
@@ -85,7 +72,9 @@ class MetaDataController extends ContentsAppController {
     }
     
     /**
-     * Displays an index of all content
+     * Allows a user to edit MetaData against a controller and action
+     * @param string $controller
+     * @param string $action
      * @return void
      */
     public function admin_edit($controller, $action) {

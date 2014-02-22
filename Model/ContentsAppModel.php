@@ -1,7 +1,13 @@
 <?php
-
+/**
+ * All models in the Contents plugin SHOULD inheirit from this model
+ */
 App::uses('AppModel', 'Model');
 
+/**
+ * All models in the Contents plugin SHOULD inheirit from this model
+ * @package Contents
+ */
 class ContentsAppModel extends AppModel {
 
     /**
