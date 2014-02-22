@@ -1,6 +1,6 @@
 <?php
 /**
- * Provides a model for mananging users
+ * Content Model
  *
  * Copyright 2013, Jason D Snider. (http://jasonsnider.com)
  *
@@ -15,7 +15,7 @@
 App::uses('ContentsAppModel', 'Contents.Model');
 
 /**
- * Provides a model for mananging users
+ * Content Model
  * @author Jason D Snider <jason@jasonsnider.com>
  * @package	Users
  */
@@ -113,8 +113,8 @@ class Content extends ContentsAppModel {
 
     /**
      * Provides logic for searching tags
-     * @param type $data
-     * @return type
+     * @param array $data
+     * @return array
      */
     public function findByTags($data = array()) {
         $this->Tagged->Behaviors->attach('Containable', array('autoFields' => false));
@@ -129,7 +129,7 @@ class Content extends ContentsAppModel {
 
     /**
      * Provides standard or search logic
-     * @param type $data
+     * @param array $data
      * @return array
      */
     public function orConditions($data = array()) {
