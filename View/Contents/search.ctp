@@ -1,5 +1,4 @@
 <?php
-
 echo $this->Form->create(
     'Content', 
     array(
@@ -10,6 +9,7 @@ echo $this->Form->create(
             'div'=>array(
                 'class'=>'form-group'
             ),
+            'class'=>'form-control',
             'required'=>false
         )
     )
