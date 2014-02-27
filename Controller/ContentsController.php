@@ -202,7 +202,11 @@ class ContentsController extends ContentsAppController {
                         'Content.slug'=>$token
                     )
                 ),
-                'contain'=>array()
+                'contain'=>array(
+                    'Tag'=>array(
+                        'Tagged'=>array()
+                    )
+                )
             )
         );
 
