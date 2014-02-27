@@ -39,6 +39,9 @@
             echo $this->Form->input('tags', array('label'=>'Tags (Comma Seperated)', 'type'=>'textarea', 'rows'=>4));
             echo $this->Form->input('content_type', array('onchange'=>'ContentForm.setDisplay()'));
 
+            echo $this->Form->input('created', array('type'=>'text'));
+            echo $this->Form->input('modified', array('type'=>'text'));
+            
             echo $this->Form->input('content_status');
             echo $this->Form->submit(
                  __d('contents', 'Submit'), 
