@@ -16,26 +16,21 @@
                 )
             )
         );
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', array('class'=>'editor'));
-    ?>
         
-    <div id="MetaDataFormFields" style="display:none;">
-    <?php
-        echo $this->Form->input('controller');
-        echo $this->Form->input('action');
+        echo $this->Form->input('title');
     ?>
-    </div>
-
     </div>
     <div class="col-md-3">
         <?php 
-        
-            echo $this->Form->input('description', array('type'=>'textarea', 'rows'=>4)); 
-            echo $this->Form->input('keywords', array('type'=>'textarea', 'rows'=>4)); 
             echo $this->Form->input('content_type', array('onchange'=>'ContentForm.setDisplay()'));
 
-            echo $this->Form->input('content_status');
+            echo $this->Form->input('content_status', array('type'=>'hidden', 'value'=>'draft'));
+            
+            echo "<div id=\"MetaDataFormFields\" style=\"display:none;\">";
+                echo $this->Form->input('controller');
+                echo $this->Form->input('action');
+            echo "</div>";
+            
             echo $this->Form->submit(
                  __d('contents', 'Submit'), 
                  array(

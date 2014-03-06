@@ -1,7 +1,14 @@
 <h2>Contents</h2>
-<ul class="nav nav-pills">
-    <li><?php echo $this->Html->link('Create', '/admin/contents/contents/create'); ?></li>
-</ul>
+<?php 
+    echo $this->Html->link(
+        'Create', 
+        '/admin/contents/contents/create',
+        array(
+            'class'=>'btn btn-default'
+        )
+    ); 
+    
+?>
 
 <div class="row">
     <div class="col-md-12">
