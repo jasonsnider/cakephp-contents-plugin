@@ -111,7 +111,7 @@ class PagesController extends ContentsAppController {
         );
         
         if(empty($content)){
-            throw new NotFoundException('Could not find that post');
+            throw new NotFoundException();
         }
         
         //Send the id back to the view
