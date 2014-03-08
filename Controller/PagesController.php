@@ -109,7 +109,11 @@ class PagesController extends ContentsAppController {
                 )
             )
         );
-        //debug($content);
+        
+        if(empty($content)){
+            throw new NotFoundException('Could not find that post');
+        }
+        
         //Send the id back to the view
         $id = $content['Content']['id'];
         $this->request->title = $content['Content']['title'];
