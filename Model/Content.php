@@ -101,14 +101,8 @@ class Content extends ContentsAppModel {
      * @var array
      */
     public $filterArgs = array(
-        //array('name' => 'q', 'type' => 'query', 'method' => 'orConditions'),
-        //'title' => array('type' => 'like'),
-        //'search' => array('type' => 'like', 'field' => 'Content.body'),
         'q' => array('type' => 'query', 'method' => 'orConditions'),
         'tags' => array('type' => 'subquery', 'method' => 'findByTags', 'field' => 'Content.id'),
-        //'enhanced_search' => array(
-            //'type' => 'like', 'encode' => true, 'before' => false, 'after' => false, 
-            //'field' => array('ThisModel.name', 'OtherModel.name')),
     );
 
     /**
@@ -117,27 +111,43 @@ class Content extends ContentsAppModel {
      * @return array
      */
     public function findByTags($data = array()) {
-        $this->Tagged->Behaviors->attach('Containable', array('autoFields' => false));
+		
+        $this->Tagged->Behaviors->attach(
+			'Containable', 
+			array(
+				'autoFields' => false
+			)
+		);
+		
         $this->Tagged->Behaviors->attach('Search.Searchable');
-        $query = $this->Tagged->getQuery('all', array(
-            'conditions' => array('Tag.name'  => $data['tags']),
-            'fields' => array('foreign_key'),
-            'contain' => array('Tag')
-        ));
+		
+        $query = $this->Tagged->getQuery(
+			'all', 
+			array(
+				'conditions' => array(
+					'Tag.name'  => $data['tags']
+				),
+				'fields' => array('foreign_key'),
+				'contain' => array('Tag')
+			)
+		);
+		
         return $query;
     }
-
+	
     /**
      * Provides standard or search logic
      * @param array $data
      * @return array
      */
     public function orConditions($data = array()) {
+		
         if(empty($data['q'])) { // q is the name of my search field
             return array();
         }
-
+		
         $query = "%{$data['q']}%";
+		
         return array(
             'OR' => array(
                 "{$this->alias}.title LIKE" => $query,
@@ -200,4 +210,29 @@ class Content extends ContentsAppModel {
             'published'=>'Published'
         );
     }
+
+    /**
+     * Returns the latest post with a status of published
+	 * @param string $field The field by which we want to sort (created, modified)
+     * @return array()
+     */
+    public function fetchLatestPost($field = 'modified'){
+		
+		if (!in_array($field, array('created', 'modified'))) {
+			throw new NotFoundException("Expecting created or modified recieved {$field}");
+		}
+		
+        return $this->find(
+			'first',
+			array(
+				'conditions'=>array(
+					'Content.content_type'=>'post',
+					'Content.content_status'=>'published'
+				),
+				'contain'=>array(),
+				'order'=>"Content.{$field} DESC"
+			)
+		);
+    }
+		
 }
