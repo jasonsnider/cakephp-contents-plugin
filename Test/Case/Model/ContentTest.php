@@ -75,6 +75,69 @@ class ContentTest extends CakeTestCase {
 	}
 	
 /**
+ * Passes if a known title can be saved with a disambiguated slug
+ * @covers Content::beforeValidate
+ * @return void
+ */
+	public function testTitleConvertsToSlugDisambiguatesTheSlug(){
+		$data = array(
+			'Content'=>array(
+				'title'=>'Latest Draft'
+			)
+		);
+		
+		//Latest draft is in the fixture, save it again and test the slug for *-1
+		$this->Content->save($data);
+		
+		$results = $this->Content->find(
+			'first',
+			array(
+				'conditions'=>array(
+					'Content.id' => $this->Content->id
+				),
+				'contain'=>array()
+			)
+		);
+
+		//Save the same data array again and test the slug for *-2
+		$this->Content->save($data);
+		
+		$results1 = $this->Content->find(
+			'first',
+			array(
+				'conditions'=>array(
+					'Content.id' => $this->Content->id
+				),
+				'contain'=>array()
+			)
+		);
+
+		$this->assertEqual($results['Content']['slug'], 'latest-draft-1');
+		$this->assertEqual($results1['Content']['slug'], 'latest-draft-2');
+	}
+	
+	/**
+	 * Passes if a known title can be saved with a disambiguated slug
+	 * @covers Content::beforeValidate
+	 * @return void
+	 */
+	public function testValidationDoesNotAllowAnEmptyBody(){
+		$data = array(
+			'Content'=>array(
+				'title'=>'Latest Draft',
+				'body'=>''
+			)
+		);
+		
+		$this->Content->save($data);
+		
+		$count = count($this->Content->invalidFields());
+		
+		$this->assertGreaterThan(0, $count);
+		
+	}
+	
+/**
  * testFindByTags method
  * @covers Content::findByTags
  * @return void

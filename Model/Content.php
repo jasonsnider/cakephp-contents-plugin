@@ -164,7 +164,7 @@ class Content extends ContentsAppModel {
         'body' => array(
             'notEmpty' => array(
                 'rule' => 'notEmpty',
-                'message' => "Say something!",
+                'message' => "The content's body cannot be empty.",
                 'last' => true
             )
         ),
