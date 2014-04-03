@@ -13,7 +13,7 @@ class ContentsAppModelTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'plugin.contents.contents_app_model'
+		'plugin.contents.content'
 	);
 
 /**
