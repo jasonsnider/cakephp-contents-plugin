@@ -37,7 +37,7 @@ class MetaComponent extends Component {
 	 * Content model object
 	 * @var object
 	 */
-	public $Content;
+	public $MetaData;
 	
     /**
      * Main execution method.
@@ -63,7 +63,7 @@ class MetaComponent extends Component {
         $this->response = $controller->response;
 
         $this->controller = $controller;
-        $this->Content = ClassRegistry::init('Contents.Content');
+        $this->MetaData = ClassRegistry::init('Contents.MetaData');
 		
 		
     }
@@ -78,27 +78,16 @@ class MetaComponent extends Component {
         if(isset($this->request->checkForMeta)){
             
             // 2) Try and find the meta data
-            $metaData = $this->Content->find(
-                'first',
-                array(
-                    'conditions'=>array(
-                        'Content.controller'=>$this->request->controller,
-                        'Content.action'=>$this->request->action
-                    ),
-                    'fields'=>array(
-                        'title',
-                        'description',
-                        'keywords'
-                    ),
-                    'contain'=>array()
-                )
-            );
+            $metaData = $this->ModelData->fetchMetaDataForControllerAction(
+				$this->request->controller,
+				$this->request->action
+			);
 
             // 3) Then set the variable accordingly
             if(!empty($metaData)){
-                $this->request->title = $metaData['Content']['title'];
-                $this->request->keywords  = $metaData['Content']['keywords'];
-                $this->request->description  = $metaData['Content']['description'];
+                $this->request->title = $metaData['MetaData']['title'];
+                $this->request->keywords  = $metaData['MetaData']['keywords'];
+                $this->request->description  = $metaData['MetaData']['description'];
             }
 
 		} 

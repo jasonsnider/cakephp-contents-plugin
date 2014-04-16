@@ -100,6 +100,25 @@ class ContentFixture extends CakeTestFixture {
 			'modified_user_id' => '',
 			'modified' => '2013-12-29 15:49:37'
 		),
+		array(
+			'id' => '52c098f1-6a5c-4dc3-8679-a30c7f0000164',
+			'title' => 'Home Page',
+			'slug' => '',
+			'body' => '',
+			'description' => 'I am the meta data for the home page',
+			'keywords' => 'meta data, home page',
+			'canonical' => null,
+			'content_type' => 'meta_data',
+			'content_status' => 'published',
+			'model' => null,
+			'model_id' => null,
+			'controller' => 'Pages',
+			'action' => 'home',
+			'created_user_id' => '52339615-7200-45d8-b115-acf77f00000a',
+			'created' => '2013-12-29 15:49:37',
+			'modified_user_id' => '',
+			'modified' => '2013-12-29 15:49:37'
+		),
 	);
 
 }

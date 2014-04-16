@@ -10,14 +10,13 @@
  * @copyright Copyright 2012, Jason D Snider
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  * @author Jason D Snider <jason@jasonsnider.com>
- * @package app/User
  */
 App::uses('ContentsAppModel', 'Contents.Model');
 
 /**
  * Content Model
  * @author Jason D Snider <jason@jasonsnider.com>
- * @package	Users
+ * @package	Contents
  */
 class Content extends ContentsAppModel {
 
