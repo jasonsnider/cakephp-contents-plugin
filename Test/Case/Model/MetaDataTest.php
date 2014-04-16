@@ -81,9 +81,7 @@ class MetaDataTest extends CakeTestCase {
  * @return void
  */
 	public function testFetchMetaDataForControllerAction(){
-		
 		$results = $this->MetaData->fetchMetaDataForControllerAction('Pages', 'home');
-		
 		$this->assertEqual($results['MetaData']['title'], 'Home Page');
 	}
 }
