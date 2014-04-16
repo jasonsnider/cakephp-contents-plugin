@@ -4,6 +4,7 @@
  * @package Contents
  */
 App::uses('AppController', 'Controller');
+App::uses('MetaData', 'Contents.Model');
 
 /**
  * Returns meta data based on a controller action
@@ -49,7 +50,7 @@ class MetaComponent extends Component {
         $this->response = $controller->response;
 
         $this->controller = $controller;
-        $this->Content = ClassRegistry::init('Contents.Content');
+        $this->MetaData = ClassRegistry::init('Contents.MetaData');
     }
 	
     /**
@@ -78,7 +79,7 @@ class MetaComponent extends Component {
         if(isset($this->request->checkForMeta)){
             
             // 2) Try and find the meta data
-            $metaData = $this->ModelData->fetchMetaDataForControllerAction(
+            $metaData = $this->MetaData->fetchMetaDataForControllerAction(
 				$this->request->controller,
 				$this->request->action
 			);
