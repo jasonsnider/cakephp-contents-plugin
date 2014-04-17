@@ -219,36 +219,4 @@ class ContentTest extends CakeTestCase {
 		//Test for the proper number of keys
 		$this->assertEqual(count($results), 2);
 	}
-
-/**
- * testFetchLatestPost method
- *
- * @covers Content::fetchLatestPost
- * @return void
- */
-	public function testFetchLatestPost() {
-		$results = $this->Content->fetchLatestPost();
-		$this->assertEqual($results['Content']['id'], '52c098f1-6a5c-4dc3-8679-a30c7f000063');
-	}
-	
-/**
- * testFetchLatestPost method
- *
- * @covers Content::fetchLatestPost
- * @return void
- */
-	public function testFetchLatestPostThrowsAnExceptionOnBadField() {
-		
-		$expected = false;
-		
-		try{            
-			$this->Content->fetchLatestPost('bob');        
-		}catch(Exception $expected) {
-			$expected = true;       
-		} 
-		
-		$this->assertTrue($expected);
-
-	}
-
 }

@@ -186,14 +186,14 @@ class Content extends ContentsAppModel {
      * Returns a list of content types
      * - page
      * - post
+	 * -meta_data
      * @return array()
      */
     public function contentTypes(){
         return array(
             'post'=>'Post',
             'page'=>'Page',
-            'meta_data'=>'MetaData',
-            //'discussion'=>'Disscussion'
+            'meta_data'=>'MetaData'
         );
     }
 
@@ -208,30 +208,5 @@ class Content extends ContentsAppModel {
             'draft'=>'Draft',
             'published'=>'Published'
         );
-    }
-
-    /**
-     * Returns the latest post with a status of published
-	 * @param string $field The field by which we want to sort (created, modified)
-     * @return array()
-     */
-    public function fetchLatestPost($field = 'modified'){
-		
-		if (!in_array($field, array('created', 'modified'))) {
-			throw new NotFoundException("Expecting created or modified recieved {$field}");
-		}
-		
-        return $this->find(
-			'first',
-			array(
-				'conditions'=>array(
-					'Content.content_type'=>'post',
-					'Content.content_status'=>'published'
-				),
-				'contain'=>array(),
-				'order'=>"Content.{$field} DESC"
-			)
-		);
-    }
-		
+    }		
 }
