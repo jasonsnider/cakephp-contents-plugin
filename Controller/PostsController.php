@@ -116,16 +116,10 @@ class PostsController extends ContentsAppController {
         if(!empty($this->request->data)){
 
             if($this->Post->save($this->request->data)){
-                $this->Session->setFlash(
-                    __('Post saved.'), 
-                    'success'
-                );
+                $this->Session->setFlash(__('Post saved.'), 'success');
                 $this->redirect("/admin/contents/posts/edit/{$this->Post->id}");
             }else{
-                $this->Session->setFlash(
-                    __('Please correct the errors below.'), 
-                    'error'
-                );
+                $this->Session->setFlash(__('Please correct the errors below.'), 'error');
             }
         }
         
@@ -148,9 +142,9 @@ class PostsController extends ContentsAppController {
 
         if(!empty($this->request->data)){
             if($this->Post->save($this->request->data['Post'])){
-                $this->Session->setFlash('Update saved!', 'success');
+                $this->Session->setFlash(__('Update saved!'), 'success');
             }else{
-                $this->Session->setFlash('Please correct the errors below!', 'error');
+                $this->Session->setFlash(__('Please correct the errors below!'), 'error');
             }
         }else{
             $this->request->data = $post;
@@ -161,8 +155,6 @@ class PostsController extends ContentsAppController {
         $this->request->hasEditor = true;
         
         $this->set(compact(
-            'post',
-            'contentTypes',
             'contentStatuses',
             'title_for_layout'
         ));

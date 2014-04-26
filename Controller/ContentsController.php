@@ -127,32 +127,6 @@ class ContentsController extends ContentsAppController {
             'title_for_layout'
         ));
     }
-
-    /**
-     * Displays content; a single page or post, etc.
-     * @param string $token
-     * @return void
-     */
-    public function admin_view($token) {
-        $content = $this->Content->find(
-            'first',
-            array(
-                'conditions'=>array(
-                    'or'=>array(
-                        'Content.id'=>$token,
-                        'Content.slug'=>$token
-                    )
-                ),
-                'contain'=>array()
-            )
-        );
-        
-        $title_for_layout = "{$content['Content']['title']} :: CMS Admin Panel";
-        $this->set(compact(
-            'content',
-            'title_for_layout'
-        ));
-    }
     
     /**
      * Removes content from the database

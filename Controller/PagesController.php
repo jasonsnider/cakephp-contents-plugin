@@ -139,7 +139,57 @@ class PagesController extends ContentsAppController {
     /**
      * An entry point for the admin portal.
      */
-    public function admin_admin(){
+    public function admin_admin(){}
+	
+    /**
+     * A method for creating a new content
+     * @return void
+     */
+    public function admin_create() {
+        if(!empty($this->request->data)){
+
+            if($this->Page->save($this->request->data)){
+                $this->Session->setFlash(__('Page saved.'), 'success');
+                $this->redirect("/admin/contents/posts/edit/{$this->Page->id}");
+            }else{
+                $this->Session->setFlash(__('Please correct the errors below.'), 'error');
+            }
+        }
         
+        $this->request->hasEditor = true;
+        $title_for_layout = 'Create a Page';
+        $this->set(compact(
+            'contentTypes',
+            'contentStatuses',
+            'title_for_layout'
+        ));
+    }
+	
+    /**
+     * Allows a content to be updated
+     * @param string $token
+     * @return void
+     */
+    public function admin_edit($token) {
+        $page = $this->Page->fetch($token);
+
+        if(!empty($this->request->data)){
+            if($this->Page->save($this->request->data['Page'])){
+                $this->Session->setFlash(__('Update saved!'), 'success');
+            }else{
+                $this->Session->setFlash(__('Please correct the errors below!'), 'error');
+            }
+        }else{
+            $this->request->data = $page;
+        }
+        
+        $title_for_layout = "Edit {$page['Page']['title']}";
+        
+        $this->request->hasEditor = true;
+        
+        $this->set(compact(
+            'contentStatuses',
+            'title_for_layout'
+        )); 
     }
 }

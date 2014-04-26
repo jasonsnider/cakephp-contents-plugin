@@ -12,14 +12,14 @@
  * @link http://jasonsnider.com
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  * @author Jason D Snider <jason@jasonsnider.com>
- * @package       Users
+ * @package Users
  */
 App::uses('ContentsAppController', 'Contents.Controller');
 
 /**
  * MetaData controller
  * @author Jason D Snider <jason@jasonsnider.com>
- * @package Contents
+ * @package MetaDatas
  */
 class MetaDataController extends ContentsAppController {
 
@@ -36,7 +36,7 @@ class MetaDataController extends ContentsAppController {
      * @var array
      */
     public $uses = array(
-        'Contents.Content',
+        'Contents.MetaData',
     );
 
     /**
@@ -49,88 +49,42 @@ class MetaDataController extends ContentsAppController {
 
         if(!empty($this->request->data)){
             
-            if($this->Content->save($this->request->data)){
-                $this->Session->setFlash(__('The meta data has been created'),'success');
-                $this->redirect(
-                    array(
-                        'admin'=>true,
-                        'controller'=>'meta_data',
-                        'action'=>'admin_edit',
-                        $controller,
-                        $action
-                    )
-                );
+            if($this->MetaData->save($this->request->data)){
+                $this->Session->setFlash(__('The meta data has been created'), 'success');
+                $this->redirect("/admin/contents/meta_data/create/{$this->MetaData->id}");
             }else{
-                $this->Session->setFlash(__('Please correct the errors below'),'error');
+                $this->Session->setFlash(__('Please correct the errors below'), 'error');
             }
         }
 
         $this->set(compact(
-            'controller',
-            'action'
+			'action',
+            'controller'
         ));
     }
     
     /**
      * Allows a user to edit MetaData against a controller and action
-     * @param string $controller
-     * @param string $action
+     * @param string $token
      * @return void
      */
-    public function admin_edit($controller, $action) {
+    public function admin_edit($token) {
 
-        //1. Look for the requested
-        $content = $this->Content->find(
-            'first',
-            array(
-                'conditions'=>array(
-                    'Content.controller'=>$controller,
-                    'Content.action'=>$action
-                ),
-                'contain'=>array()
-            )
-        );
-        
-        //2. If no meta data can be found for the requested controller action, redirect to admin_create
-        if(empty($content)){
-            $this->redirect(
-                array(
-                    'admin'=>true,
-                    'controller'=>'meta_data',
-                    'action'=>'admin_create',
-                    $controller,
-                    $action
-                )
-            );
-        }
-        
-        
+        //Look for the requested
+        $meta_data = $this->MetaData->fetch($token);
+                
+        //Save the user submitted data
         if(!empty($this->request->data)){
             
-            if($this->Content->save($this->request->data)){
-                $this->Session->setFlash(__('The meta data has been updated'),'success');
-                $this->redirect(
-                    array(
-                        'admin'=>true,
-                        'controller'=>'meta_data',
-                        'action'=>'admin_edit',
-                        $controller,
-                        $action
-                    )
-                );
+            if($this->MetaData->save($this->request->data)){
+                $this->Session->setFlash(__('The meta data has been updated'), 'success');
+                $this->redirect("/admin/contents/meta_data/edit/{$token}/");
             }else{
-                $this->Session->setFlash(__('Please correct the errors below'),'error');
+                $this->Session->setFlash(__('Please correct the errors below'), 'error');
             }
             
         }else{
-            $this->request->data = $content;
+            $this->request->data = $meta_data;
         }
-
-        $this->set(compact(
-            'controller',
-            'action'
-        ));
     }
-
-    
 }

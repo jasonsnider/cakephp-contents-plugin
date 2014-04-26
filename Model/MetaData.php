@@ -86,9 +86,36 @@ class MetaData extends ContentsAppModel {
      */
     public function beforeSave($options = array()) {
         $this->data[$this->alias]['content_type'] = 'meta_data';
+		$this->data[$this->alias]['content_status'] = 'published';
         return true;
 	}
 	
+	/**
+	 * Returns meta data by a given id or slug
+	 * @param string $token
+	 * @return array
+	 */
+	public function fetch($token){
+		return $this->find(
+            'first',
+            array(
+                'conditions'=>array(
+                    'or'=>array(
+                        "{$this->alias}.id"=>$token,
+                        "{$this->alias}.slug"=>$token
+                    )
+                ),
+                'contain'=>array(
+                    'CreatedUser'=>array(
+                        'UserProfile'=>array()
+                    ),
+                    'Tag'=>array(
+                        'Tagged'=>array()
+                    )
+                )
+            )
+        );						
+	}
 	/**
 	 * Returns meta data based on a given controller action
 	 * @param string $controller

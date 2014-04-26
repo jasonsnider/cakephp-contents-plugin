@@ -1,15 +1,4 @@
 <h2>Contents</h2>
-<?php 
-    echo $this->Html->link(
-        'Create', 
-        '/admin/contents/contents/create',
-        array(
-            'class'=>'btn btn-default'
-        )
-    ); 
-    
-?>
-
 <div class="row">
     <div class="col-md-12">
        <table class="table table-bordered table-condensed table-striped table-hover">
@@ -32,9 +21,10 @@
                     <td><?php echo $content['Content']['content_status']; ?></td>
                     <td>
                         <?php 
+							$controller = Inflector::pluralize($content['Content']['content_type']);
                             echo $this->Html->link(
                                 $content['Content']['title'], 
-                                "/admin/contents/contents/edit/{$content['Content']['id']}"
+                                "/admin/contents/{$controller}/edit/{$content['Content']['id']}"
                             );
                         ?>
                     </td>
