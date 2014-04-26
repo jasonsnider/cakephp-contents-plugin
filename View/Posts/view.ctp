@@ -1,14 +1,14 @@
 <div class="row">
     <div class="col-md-12">
-        <h2><?php echo $content['Content']['title']; ?></h2>
+        <h2><?php echo $post['Post']['title']; ?></h2>
 
-        <strong>By: </strong><?php echo $content['CreatedUser']['UserProfile']['display_name']; ?>
-        <strong>On: </strong><?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>
+        <strong>By: </strong><?php echo $post['CreatedUser']['UserProfile']['display_name']; ?>
+        <strong>On: </strong><?php echo date('m/d/y', strtotime($post['Post']['created'])); ?>
 
-        <div><?php echo $content['Content']['body']; ?></div>
+        <div><?php echo $post['Post']['body']; ?></div>
         <div>
             <?php 
-            foreach($content['Tag'] as $tag):
+            foreach($post['Tag'] as $tag):
                 echo $this->Html->link(
                     $tag['name'], 
                     array(

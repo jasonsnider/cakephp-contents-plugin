@@ -89,6 +89,33 @@ class Post extends ContentsAppModel {
         return true;
 	}
 	
+	/**
+	 * Returns a post by a given id or slug
+	 * @param string $token
+	 * @return array
+	 */
+	public function fetch($token){
+		return $this->find(
+            'first',
+            array(
+                'conditions'=>array(
+                    'or'=>array(
+                        "{$this->alias}.id"=>$token,
+                        "{$this->alias}.slug"=>$token
+                    )
+                ),
+                'contain'=>array(
+                    'CreatedUser'=>array(
+                        'UserProfile'=>array()
+                    ),
+                    'Tag'=>array(
+                        'Tagged'=>array()
+                    )
+                )
+            )
+        );						
+	}
+	
     /**
      * Returns the latest post with a status of published
 	 * @param string $field The field by which we want to sort (created, modified)

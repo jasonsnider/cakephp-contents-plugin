@@ -19,7 +19,7 @@ App::uses('ContentsAppController', 'Contents.Controller');
 /**
  * Provides a post-centric controler for contents
  * @author Jason D Snider <jason@jasonsnider.com>
- * @package Contents
+ * @package Posts
  */
 class PostsController extends ContentsAppController {
 
@@ -56,7 +56,7 @@ class PostsController extends ContentsAppController {
      * @var array
      */
     public $uses = array(
-        'Contents.Content',
+        'Contents.Post',
     );
 
     /**
@@ -67,20 +67,20 @@ class PostsController extends ContentsAppController {
 
         $this->paginate = array(
             'conditions' => array(
-                'Content.content_type'=>'post',
-                'Content.content_status'=>'published',
+                'Post.content_type'=>'post',
+                'Post.content_status'=>'published',
             ),
             'contain'=>array(
                 'CreatedUser'=>array(
                     'UserProfile'=>array()
                 ),
             ),
-            'order'=>'Content.created DESC',
+            'order'=>'Post.created DESC',
             'limit' => 10
         );
 
         $this->request->checkForMeta = true;
-        $data = $this->paginate('Content');
+        $data = $this->paginate('Post');
         $this->set(compact('data'));
     }
     
@@ -91,40 +91,81 @@ class PostsController extends ContentsAppController {
      */
     public function view($token) {
         
-        $content = $this->Content->find(
-            'first',
-            array(
-                'conditions'=>array(
-                    'or'=>array(
-                        'Content.id'=>$token,
-                        'Content.slug'=>$token
-                    ),
-                    'Content.content_type'=>'post',
-                ),
-                'contain'=>array(
-                    'CreatedUser'=>array(
-                        'UserProfile'=>array()
-                    ),
-                    'Tag'=>array(
-                        'Tagged'=>array()
-                    )
-                )
-            )
-        );
+        $post = $this->Post->fetch($token);
         
-        if(empty($content)){
+        if(empty($post)){
             throw new NotFoundException();
         }
 
         //Send the id back to the view
-        $id = $content['Content']['id'];
+        $id = $post['Post']['id'];
         
-        $this->request->title = $content['Content']['title'];
+        $this->request->title = $post['Post']['title'];
         
         $this->set(compact(
-            'content',
+            'post',
             'id'
         ));
     }
+    
+    /**
+     * A method for creating a new content
+     * @return void
+     */
+    public function admin_create() {
+        if(!empty($this->request->data)){
 
+            if($this->Post->save($this->request->data)){
+                $this->Session->setFlash(
+                    __('Post saved.'), 
+                    'success'
+                );
+                $this->redirect("/admin/contents/posts/edit/{$this->Post->id}");
+            }else{
+                $this->Session->setFlash(
+                    __('Please correct the errors below.'), 
+                    'error'
+                );
+            }
+        }
+        
+        $this->request->hasEditor = true;
+        $title_for_layout = 'Create a Post';
+        $this->set(compact(
+            'contentTypes',
+            'contentStatuses',
+            'title_for_layout'
+        ));
+    }
+	
+    /**
+     * Allows a content to be updated
+     * @param string $token
+     * @return void
+     */
+    public function admin_edit($token) {
+        $post = $this->Post->fetch($token);
+
+        if(!empty($this->request->data)){
+            if($this->Post->save($this->request->data['Post'])){
+                $this->Session->setFlash('Update saved!', 'success');
+            }else{
+                $this->Session->setFlash('Please correct the errors below!', 'error');
+            }
+        }else{
+            $this->request->data = $post;
+        }
+        
+        $title_for_layout = "Edit {$post['Post']['title']}";
+        
+        $this->request->hasEditor = true;
+        
+        $this->set(compact(
+            'post',
+            'contentTypes',
+            'contentStatuses',
+            'title_for_layout'
+        ));
+        
+    }
 }

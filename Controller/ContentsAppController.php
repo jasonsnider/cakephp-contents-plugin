@@ -31,7 +31,16 @@ class ContentsAppController extends AppController {
     public $helpers = array(
         'Tags.TagCloud'
     );
-    
+	
+	/**
+     * Components used by this controller are
+     * -Meta
+     * @var array
+     */
+    public $components = array(
+        'Contents.Meta'
+    );
+	
     /**
      * Called before action
      */
@@ -46,44 +55,6 @@ class ContentsAppController extends AppController {
      */
     public function beforerender() {
         parent::beforeRender();
-        $this->metaData();
+        $this->Meta->data();
     }
-    
-    /**
-     * Retrives and set's the meta data for the current controller/action
-     * @return void
-     */
-    public function metaData(){
-        
-        // 1) If the action is requesting a check for meta data
-        if(isset($this->request->checkForMeta)){
-            
-            // 2) Try and find the meta data
-            $metaData = $this->Content->find(
-                'first',
-                array(
-                    'conditions'=>array(
-                        'Content.controller'=>$this->request->controller,
-                        'Content.action'=>$this->request->action
-                    ),
-                    'fields'=>array(
-                        'title',
-                        'description',
-                        'keywords'
-                    ),
-                    'contain'=>array()
-                )
-            );
-            
-            // 3) Then set the variable accordingly
-            if(!empty($metaData)){
-                $this->request->title = $metaData['Content']['title'];
-                $this->request->keywords  = $metaData['Content']['keywords'];
-                $this->request->description  = $metaData['Content']['description'];
-            }
-
-        }
-    }
-        
-
 }

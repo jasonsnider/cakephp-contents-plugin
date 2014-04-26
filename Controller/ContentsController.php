@@ -127,39 +127,6 @@ class ContentsController extends ContentsAppController {
             'title_for_layout'
         ));
     }
-    
-    /**
-     * A method for creating a new content
-     * @return void
-     */
-    public function admin_create() {
-        if(!empty($this->request->data)){
-
-            if($this->Content->save($this->request->data)){
-                $this->Session->setFlash(
-                    __('Content saved.'), 
-                    'success'
-                );
-                $this->redirect("/admin/contents/contents/edit/{$this->Content->id}");
-            }else{
-                $this->Session->setFlash(
-                    __('Please correct the errors below.'), 
-                    'error'
-                );
-            }
-        }
-        
-        $contentTypes = $this->Content->contentTypes();
-        $contentStatuses = $this->Content->contentStatuses();
-        
-        $this->request->hasEditor = true;
-        $title_for_layout = 'Create Content :: CMS Admin Panel';
-        $this->set(compact(
-            'contentTypes',
-            'contentStatuses',
-            'title_for_layout'
-        ));
-    }
 
     /**
      * Displays content; a single page or post, etc.
@@ -185,54 +152,6 @@ class ContentsController extends ContentsAppController {
             'content',
             'title_for_layout'
         ));
-    }
-
-    /**
-     * Allows a content to be updated
-     * @param string $token
-     * @return void
-     */
-    public function admin_edit($token) {
-        $content = $this->Content->find(
-            'first',
-            array(
-                'conditions'=>array(
-                    'or'=>array(
-                        'Content.id'=>$token,
-                        'Content.slug'=>$token
-                    )
-                ),
-                'contain'=>array(
-                    'Tag'=>array(
-                        'Tagged'=>array()
-                    )
-                )
-            )
-        );
-
-        if(!empty($this->request->data)){
-            if($this->Content->save($this->request->data['Content'])){
-                $this->Session->setFlash('Update saved!', 'success');
-            }else{
-                $this->Session->setFlash('Please correct the errors below!', 'error');
-            }
-        }else{
-            $this->request->data = $content;
-        }
-        
-        $contentTypes = $this->Content->contentTypes();
-        $contentStatuses = $this->Content->contentStatuses();
-        $title_for_layout = "{$content['Content']['title']} :: CMS Admin Panel";
-        
-        $this->request->hasEditor = true;
-        
-        $this->set(compact(
-            'content',
-            'contentTypes',
-            'contentStatuses',
-            'title_for_layout'
-        ));
-        
     }
     
     /**
