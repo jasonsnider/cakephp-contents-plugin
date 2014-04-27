@@ -1,5 +1,4 @@
 <?php
-echo $this->Html->tag('h1', __('Edit Meta Data'));
 echo $this->Form->create(
 	'MetaData', 
 	array(

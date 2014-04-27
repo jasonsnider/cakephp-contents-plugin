@@ -19,7 +19,7 @@ App::uses('ContentsAppController', 'Contents.Controller');
 /**
  * Provides a page-centric controler for contents
  * @author Jason D Snider <jason@jasonsnider.com>
- * @package Contents
+ * @package Pages
  */
 class PagesController extends ContentsAppController {
 
@@ -57,7 +57,7 @@ class PagesController extends ContentsAppController {
      * @var array
      */
     public $uses = array(
-        'Contents.Content',
+        'Contents.Page',
     );
 
     /**
@@ -68,55 +68,36 @@ class PagesController extends ContentsAppController {
 
         $this->paginate = array(
             'conditions' => array(
-                'Content.content_type'=>'page',
-                'Content.content_status'=>'published',
+                'Page.content_type'=>'page',
+                'Page.content_status'=>'published',
             ),
             'contain'=>array(),
-            'order'=>'Content.created DESC',
+            'order'=>'Page.created DESC',
             'limit' => 30
         );
 
         $this->request->title = 'Pages';
         $this->request->checkForMeta = true;
-        $data = $this->paginate('Content');
+        $data = $this->paginate('Page');
         $this->set(compact('data'));
     }
     
     /**
-     * Displays content; a single page or post, etc.
+     * Displays content; a single page or page, etc.
      * @param string $token
      * @return void
      */
     public function view($token) {
         
-        $content = $this->Content->find(
-            'first',
-            array(
-                'conditions'=>array(
-                    'or'=>array(
-                        'Content.id'=>$token,
-                        'Content.slug'=>$token
-                    ),
-                    'Content.content_type'=>'page',
-                ),
-                'contain'=>array(
-                    'CreatedUser'=>array(
-                        'UserProfile'=>array()
-                    ),
-                    'Tag'=>array(
-                        'Tagged'=>array()
-                    )
-                )
-            )
-        );
+        $page = $this->Page->fetch($token);
         
-        if(empty($content)){
+        if(empty($page)){
             throw new NotFoundException();
         }
         
         //Send the id back to the view
-        $id = $content['Content']['id'];
-        $this->request->title = $content['Content']['title'];
+        $id = $page['Page']['id'];
+        $this->request->title = $page['Page']['title'];
         
         $this->set(compact(
             'content',
@@ -150,7 +131,7 @@ class PagesController extends ContentsAppController {
 
             if($this->Page->save($this->request->data)){
                 $this->Session->setFlash(__('Page saved.'), 'success');
-                $this->redirect("/admin/contents/posts/edit/{$this->Page->id}");
+                $this->redirect("/admin/contents/pages/edit/{$this->Page->id}");
             }else{
                 $this->Session->setFlash(__('Please correct the errors below.'), 'error');
             }
@@ -159,8 +140,6 @@ class PagesController extends ContentsAppController {
         $this->request->hasEditor = true;
         $title_for_layout = 'Create a Page';
         $this->set(compact(
-            'contentTypes',
-            'contentStatuses',
             'title_for_layout'
         ));
     }
@@ -171,6 +150,7 @@ class PagesController extends ContentsAppController {
      * @return void
      */
     public function admin_edit($token) {
+		
         $page = $this->Page->fetch($token);
 
         if(!empty($this->request->data)){
@@ -188,7 +168,6 @@ class PagesController extends ContentsAppController {
         $this->request->hasEditor = true;
         
         $this->set(compact(
-            'contentStatuses',
             'title_for_layout'
         )); 
     }

@@ -1,5 +1,4 @@
 <?php
-echo $this->Html->tag('h1', __("New Page"));
 echo $this->Form->create(
 	'Page', 
 	array(

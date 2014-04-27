@@ -1,5 +1,4 @@
 <?php
-echo $this->Form->tag('h1', __("Create Meta Data for") . "{$controller}::{$action}())");
 echo $this->Form->create(
 	'MetaData', 
 	array(

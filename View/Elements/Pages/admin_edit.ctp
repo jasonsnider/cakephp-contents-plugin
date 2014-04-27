@@ -9,4 +9,7 @@
 	<li><a href="#PageKeywordsAnchor">Keywords</a></li>
 	<li><a href="#PageTagsAnchor">Tags</a></li>
 	<li><a href="#PageTimeStampsAnchor">Time Stamps</a></li>
+	
+	<li class="divider"></li>
+	<li><a href="#Top">Top</a></li>
 </ul>

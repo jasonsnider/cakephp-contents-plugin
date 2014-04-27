@@ -1,27 +1,3 @@
-<style>
-    
-    /* We don't want search results getting all whacky with different sizes of font */
-    .well-result *{
-        font-size: 14px;
-        line-height: 20px;
-    }
-    
-    .well-trans{
-        background: transparent;
-        border: none;
-        box-shadow: none;
-    }
-    
-</style>
-<h2><?php echo $this->request->title; ?></h2>
-<small class="text-muted well well-sm well-trans clearfix">
-<?php
-echo $this->Paginator->counter(array(
-    'format' => 'Page {:page} of {:pages}, showing {:current} records out of
-             {:count} total, starting on record {:start}, ending on {:end}'
-));
-?>
-</small>
 <?php foreach ($data as $content): ?>
 <div class="well well-sm well-result">
     <strong>

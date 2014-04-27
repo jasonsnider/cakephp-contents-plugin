@@ -9,4 +9,7 @@
 	<li><a href="#PostKeywordsAnchor">Keywords</a></li>
 	<li><a href="#PostTagsAnchor">Tags</a></li>
 	<li><a href="#PostTimeStampsAnchor">Time Stamps</a></li>
+	
+	<li class="divider"></li>
+	<li><a href="#Top">Top</a></li>
 </ul>

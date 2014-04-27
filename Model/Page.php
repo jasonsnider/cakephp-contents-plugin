@@ -89,4 +89,31 @@ class Page extends ContentsAppModel {
 		$this->data[$this->alias]['content_status'] = 'published';
         return true;
 	}
+	
+	/**
+	 * Returns a post by a given id or slug
+	 * @param string $token
+	 * @return array
+	 */
+	public function fetch($token){
+		return $this->find(
+            'first',
+            array(
+                'conditions'=>array(
+                    'or'=>array(
+                        "{$this->alias}.id"=>$token,
+                        "{$this->alias}.slug"=>$token
+                    )
+                ),
+                'contain'=>array(
+                    'CreatedUser'=>array(
+                        'UserProfile'=>array()
+                    ),
+                    'Tag'=>array(
+                        'Tagged'=>array()
+                    )
+                )
+            )
+        );						
+	}
 }

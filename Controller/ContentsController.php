@@ -121,7 +121,7 @@ class ContentsController extends ContentsAppController {
         );
 
         $data = $this->paginate('Content');
-        $title_for_layout = 'Site Map :: CMS Admin Panel';
+        $title_for_layout = 'Content';
         $this->set(compact(
             'data',
             'title_for_layout'
