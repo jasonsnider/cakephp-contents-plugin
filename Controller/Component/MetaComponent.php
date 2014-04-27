@@ -87,6 +87,7 @@ class MetaComponent extends Component {
             // 3) Then set the variable accordingly
             if(!empty($metaData)){
                 $this->request->title = $metaData['MetaData']['title'];
+				$this->request->showTitle  = true;
                 $this->request->keywords  = $metaData['MetaData']['keywords'];
                 $this->request->description  = $metaData['MetaData']['description'];
             }
