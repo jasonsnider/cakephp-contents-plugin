@@ -31,9 +31,8 @@ echo $this->Form->input('keywords', array('type'=>'textarea', 'rows'=>4));
 echo $this->Html->tag('a', '', array('id'=>'PostTagsAnchor', 'class'=>'anchor'));
 echo $this->Form->input('tags', array('label'=>'Tags (Comma Seperated)', 'type'=>'textarea', 'rows'=>4));
 
-echo $this->Html->tag('a', '', array('id'=>'PostTimeStampsAnchor', 'class'=>'anchor'));
-echo $this->Form->input('created', array('type'=>'text'));
-echo $this->Form->input('modified', array('type'=>'text'));
+echo $this->Html->tag('a', '', array('id'=>'PostCategoriesAnchor', 'class'=>'anchor'));
+echo $this->Form->input('Category', array('size'=>count($categories), 'empty'=>true));
 
 echo $this->Form->submit(
 	 __d('contents', 'Submit'), 

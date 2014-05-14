@@ -114,7 +114,7 @@ class PostsController extends ContentsAppController {
      */
     public function admin_create() {
         if(!empty($this->request->data)){
-
+			$this->request->data['Post']['slug'] = $this->Post->slug($this->request->data);
             if($this->Post->save($this->request->data)){
                 $this->Session->setFlash(__('Post saved.'), 'success');
                 $this->redirect("/admin/contents/posts/edit/{$this->Post->id}");

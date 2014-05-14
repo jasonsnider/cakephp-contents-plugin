@@ -1,7 +1,6 @@
 <ul class="nav nav-sidebar">
-	<li><a href="/admin/contents">Content</a></li>
-	<li class="divider"></li>
-	<li><a href="/admin/contents/posts/create">New Blog Post</a></li>
+	<li><?php echo $this->Html->link(__('Content'), "/admin/contents/"); ?></li>
+	<li><?php echo $this->Html->link(__('Categories'), "/admin/categories/"); ?></li>
 	<li class="divider"></li>
 	<li><a href="#Top">Top</a></li>
 </ul>

@@ -17,7 +17,7 @@ class ContentsAppModel extends AppModel {
     public $actsAs = array(
         'Containable'
     );
-    
+	
     /**
      * A recursive function for creating unique slugs against user submited data (Content.title)
      * @param array $data

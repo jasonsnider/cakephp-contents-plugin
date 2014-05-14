@@ -128,7 +128,7 @@ class PagesController extends ContentsAppController {
      */
     public function admin_create() {
         if(!empty($this->request->data)){
-
+				$this->request->data['Page']['slug'] = $this->Page->slug($this->request->data);
             if($this->Page->save($this->request->data)){
                 $this->Session->setFlash(__('Page saved.'), 'success');
                 $this->redirect("/admin/contents/pages/edit/{$this->Page->id}");
@@ -151,24 +151,29 @@ class PagesController extends ContentsAppController {
      */
     public function admin_edit($token) {
 		
-        $page = $this->Page->fetch($token);
-
-        if(!empty($this->request->data)){
-            if($this->Page->save($this->request->data['Page'])){
-                $this->Session->setFlash(__('Update saved!'), 'success');
-            }else{
-                $this->Session->setFlash(__('Please correct the errors below!'), 'error');
-            }
-        }else{
-            $this->request->data = $page;
-        }
-        
-        $title_for_layout = "Edit {$page['Page']['title']}";
-        
-        $this->request->hasEditor = true;
-        
+		
+		
+		if (!$this->Page->exists($token)) {
+			throw new NotFoundException(__('Invalid category'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->Page->saveAll($this->request->data)) {
+				$this->Session->setFlash(__('The page has been saved.'), 'success');
+				//return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The page could not be saved. Please, try again.'), 'error');
+			}
+		} else {
+			$this->request->data = $this->Page->fetch($token);
+		}
+		
+		$categories = $this->Page->Category->find('list');
         $this->set(compact(
+			'categories',
             'title_for_layout'
         )); 
+		
+        $this->request->title = $this->request->data['Page']['title'];
+        $this->request->hasEditor = true;
     }
 }

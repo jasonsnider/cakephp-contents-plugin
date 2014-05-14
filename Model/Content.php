@@ -84,12 +84,24 @@ class Content extends ContentsAppModel {
      */
     public $hasMany = array();
 
-    /**
-     * Content has and belongs to many 
-     * -Tag
-     * @var array
-     */
+/**
+ * hasAndBelongsToMany associations
+ * @var array
+ */
     public $hasAndBelongsToMany = array(
+		'Category' => array(
+			'className' => 'Category',
+			'joinTable' => 'categories_contents',
+			'foreignKey' => 'content_id',
+			'associationForeignKey' => 'category_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+		),
         'Tag' => array(
             'with' => 'Tagged'
         )

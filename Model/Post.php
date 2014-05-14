@@ -78,6 +78,29 @@ class Post extends ContentsAppModel {
         )
     );
 	
+/**
+ * hasAndBelongsToMany associations
+ * @var array
+ */
+    public $hasAndBelongsToMany = array(
+		'Category' => array(
+			'className' => 'Category',
+			'joinTable' => 'categories_contents',
+			'foreignKey' => 'content_id',
+			'associationForeignKey' => 'category_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+		),
+        'Tag' => array(
+            'with' => 'Tagged'
+        )
+    );
+	
     /**
      * Execute prior to validation
      * - Forces all saves from this model to save with a post content_type
