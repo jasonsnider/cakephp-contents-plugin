@@ -54,7 +54,7 @@ class CategoriesController extends ContentsAppController {
 		$category = $this->Category->find('first', $options);
 		$this->set('category', $category);
 		
-		$this->request->title = $category['Category']['name'];
+		$this->request->title = $category['Category']['title'];
 		$this->request->showTitle = true;
 	}
 	
@@ -86,7 +86,7 @@ class CategoriesController extends ContentsAppController {
 		$category = $this->Category->find('first', $options);
 		$this->set('category', $category);
 		
-		$this->request->title = $category['Category']['name'];
+		$this->request->title = $category['Category']['title'];
 		$this->request->showTitle = true;
 	}
 
@@ -98,6 +98,7 @@ class CategoriesController extends ContentsAppController {
 	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Category->create();
+			$this->request->data['Category']['slug'] = $this->Category->slug($this->request->data);
 			if ($this->Category->save($this->request->data)) {
 				$this->Session->setFlash(__('The category has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -137,7 +138,7 @@ class CategoriesController extends ContentsAppController {
 		$contents = $this->Category->Content->find('list');
 		$this->set(compact('contents'));
 		
-		$this->request->title = $this->request->data['Category']['name'];
+		$this->request->title = $this->request->data['Category']['title'];
 		$this->request->showTitle = true;
 	}
 

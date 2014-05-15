@@ -12,7 +12,7 @@ class Category extends ContentsAppModel {
  *
  * @var string
  */
-	public $displayField = 'name';
+	public $displayField = 'title';
 
 /**
  * Validation rules
@@ -20,7 +20,7 @@ class Category extends ContentsAppModel {
  * @var array
  */
 	public $validate = array(
-		'name' => array(
+		'title' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
