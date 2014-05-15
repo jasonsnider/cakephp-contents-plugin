@@ -22,6 +22,8 @@ echo $this->Html->tag('a', '', array('id'=>'MetaDataKeywordsAnchor', 'class'=>'a
 echo $this->Form->input('keywords', array('type'=>'textarea', 'rows'=>4));
 echo $this->Html->tag('a', '', array('id'=>'MetaDataTagsAnchor', 'class'=>'anchor'));
 echo $this->Form->input('tags', array('type'=>'textarea', 'rows'=>4));
+echo $this->Html->tag('a', '', array('id'=>'MetaDataCategoriesAnchor', 'class'=>'anchor'));
+echo $this->Form->input('category_id', array('empty'=>true));
 echo $this->Form->submit(
 	 __d('contents', 'Submit'), 
 	 array(

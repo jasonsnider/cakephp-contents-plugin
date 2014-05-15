@@ -6,7 +6,7 @@
 		<?php 
 			echo $this->Html->link(
 				$category['Category']['name'], 
-				"/contents/categories/view/{$category['Category']['id']}"); 
+				"/admin/contents/categories/view/{$category['Category']['id']}"); 
 		?>
 		</td>
 	</tr>

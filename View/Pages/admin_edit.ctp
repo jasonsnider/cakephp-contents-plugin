@@ -32,7 +32,7 @@ echo $this->Html->tag('a', '', array('id'=>'PageTagsAnchor', 'class'=>'anchor'))
 echo $this->Form->input('tags', array('label'=>'Tags (Comma Seperated)', 'type'=>'textarea', 'rows'=>4));
 
 echo $this->Html->tag('a', '', array('id'=>'PageCategoriesAnchor', 'class'=>'anchor'));
-echo $this->Form->input('Category', array('size'=>count($categories), 'empty'=>true));
+echo $this->Form->input('category_id', array('empty'=>true));
 
 echo $this->Form->submit(
 	 __d('contents', 'Submit'), 

@@ -1,6 +1,6 @@
 <?php
 echo $this->Form->create(
-	'Page', 
+	'Post', 
 	array(
 		'url'=>$this->here,
 		'role'=>'form',

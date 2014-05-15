@@ -45,23 +45,23 @@ class Category extends ContentsAppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * hasAndBelongsToMany associations
+ * hasMany associations
  *
  * @var array
  */
-	public $hasAndBelongsToMany = array(
+	public $hasMany = array(
 		'Content' => array(
 			'className' => 'Content',
-			'joinTable' => 'categories_contents',
 			'foreignKey' => 'category_id',
-			'associationForeignKey' => 'content_id',
-			'unique' => 'keepExisting',
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
+			'exclusive' => '',
 			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 

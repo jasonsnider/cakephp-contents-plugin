@@ -114,7 +114,9 @@ class PostsController extends ContentsAppController {
      */
     public function admin_create() {
         if(!empty($this->request->data)){
+			debug($this->request->data);
 			$this->request->data['Post']['slug'] = $this->Post->slug($this->request->data);
+			
             if($this->Post->save($this->request->data)){
                 $this->Session->setFlash(__('Post saved.'), 'success');
                 $this->redirect("/admin/contents/posts/edit/{$this->Post->id}");
@@ -122,14 +124,13 @@ class PostsController extends ContentsAppController {
                 $this->Session->setFlash(__('Please correct the errors below.'), 'error');
             }
         }
-        
-        $this->request->hasEditor = true;
-        $title_for_layout = 'Create a Post';
+		
         $this->set(compact(
-            'contentTypes',
-            'contentStatuses',
             'title_for_layout'
         ));
+		
+        $this->request->hasEditor = true;
+        $this->request->title = 'Create a Post';
     }
 	
     /**
@@ -138,6 +139,7 @@ class PostsController extends ContentsAppController {
      * @return void
      */
     public function admin_edit($token) {
+		
         $post = $this->Post->fetch($token);
 
         if(!empty($this->request->data)){
@@ -150,14 +152,13 @@ class PostsController extends ContentsAppController {
             $this->request->data = $post;
         }
         
-        $title_for_layout = "Edit {$post['Post']['title']}";
-        
-        $this->request->hasEditor = true;
-        
+		$categories = $this->Post->Category->find('list');
         $this->set(compact(
-            'contentStatuses',
+            'categories',
             'title_for_layout'
         ));
-        
+		
+        $this->request->hasEditor = true;
+        $this->request->title = $post['Post']['title'];
     }
 }

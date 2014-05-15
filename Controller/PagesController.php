@@ -157,7 +157,7 @@ class PagesController extends ContentsAppController {
 			throw new NotFoundException(__('Invalid category'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Page->saveAll($this->request->data)) {
+			if ($this->Page->save($this->request->data)) {
 				$this->Session->setFlash(__('The page has been saved.'), 'success');
 				//return $this->redirect(array('action' => 'index'));
 			} else {

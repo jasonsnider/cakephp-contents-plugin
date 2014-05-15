@@ -71,6 +71,11 @@ class Post extends ContentsAppModel {
      * @var array
      */
     public $belongsTo = array(
+        'Category' => array(
+            'className' => 'Contents.Category',
+            'foreignKey' => 'category_id',
+            'dependent' => true
+        ),
         'CreatedUser' => array(
             'className' => 'Users.User',
             'foreignKey' => 'created_user_id',
@@ -83,19 +88,6 @@ class Post extends ContentsAppModel {
  * @var array
  */
     public $hasAndBelongsToMany = array(
-		'Category' => array(
-			'className' => 'Category',
-			'joinTable' => 'categories_contents',
-			'foreignKey' => 'content_id',
-			'associationForeignKey' => 'category_id',
-			'unique' => 'keepExisting',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-		),
         'Tag' => array(
             'with' => 'Tagged'
         )
