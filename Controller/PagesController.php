@@ -57,7 +57,8 @@ class PagesController extends ContentsAppController {
      * @var array
      */
     public $uses = array(
-        'Contents.Page',
+		'Contents.Content',
+        'Contents.Page'
     );
 
     /**
@@ -99,8 +100,11 @@ class PagesController extends ContentsAppController {
         $id = $page['Page']['id'];
         $this->request->title = $page['Page']['title'];
         
+		$relatedContent = $this->Content->listContentsByCategory($page['Page']['category_id']);
+		
         $this->set(compact(
-            'content',
+            'page',
+			'relatedContent',
             'id'
         ));
     }

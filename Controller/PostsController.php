@@ -56,7 +56,8 @@ class PostsController extends ContentsAppController {
      * @var array
      */
     public $uses = array(
-        'Contents.Post',
+		'Contents.Content',
+        'Contents.Post'
     );
 
     /**
@@ -102,8 +103,11 @@ class PostsController extends ContentsAppController {
         
         $this->request->title = $post['Post']['title'];
         
+		$relatedContent = $this->Content->listContentsByCategory($post['Post']['category_id']);
+		
         $this->set(compact(
             'post',
+			'relatedContent',
             'id'
         ));
     }

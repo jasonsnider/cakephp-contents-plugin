@@ -64,5 +64,4 @@ class Category extends ContentsAppModel {
 			'counterQuery' => ''
 		)
 	);
-
 }

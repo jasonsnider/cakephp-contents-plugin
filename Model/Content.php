@@ -212,5 +212,27 @@ class Content extends ContentsAppModel {
             'draft'=>'Draft',
             'published'=>'Published'
         );
-    }		
+    }	
+	
+	public function listContentsByCategory($categoryId){
+		if(empty($categoryId)){
+			return false;
+		}
+		
+		return $this->find(
+			'all',
+			array(
+				'conditions'=>array(
+					'Content.category_id'=>$categoryId
+				),
+				'fields'=>array(
+					'Content.content_type',
+					'Content.slug',
+					'Content.title'
+				),
+				'contain'=>array()
+			)
+		);
+	}
+	
 }
