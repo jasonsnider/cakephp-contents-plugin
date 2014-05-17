@@ -214,7 +214,7 @@ class Content extends ContentsAppModel {
         );
     }	
 	
-	public function listContentsByCategory($categoryId){
+	public function listContentsByCategory($categoryId, $contentType = 'post'){
 		if(empty($categoryId)){
 			return false;
 		}
@@ -223,7 +223,8 @@ class Content extends ContentsAppModel {
 			'all',
 			array(
 				'conditions'=>array(
-					'Content.category_id'=>$categoryId
+					'Content.category_id'=>$categoryId,
+					'Content.content_type'=>$contentType
 				),
 				'fields'=>array(
 					'Content.content_type',
