@@ -92,21 +92,21 @@ class PostsController extends ContentsAppController {
      */
     public function view($token) {
         
-        $post = $this->Post->fetch($token);
+        $content = $this->Post->fetch($token);
         
-        if(empty($post)){
+        if(empty($content)){
             throw new NotFoundException();
         }
 
         //Send the id back to the view
-        $id = $post['Post']['id'];
+        $id = $content['Post']['id'];
         
-        $this->request->title = $post['Post']['title'];
+        $this->request->title = $content['Post']['title'];
         
-		$relatedContent = $this->Content->listContentsByCategory($post['Post']['category_id']);
+		$relatedContent = $this->Content->listContentsByCategory($content['Post']['category_id']);
 		
         $this->set(compact(
-            'post',
+            'content',
 			'relatedContent',
             'id'
         ));

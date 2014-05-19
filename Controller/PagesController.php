@@ -90,20 +90,20 @@ class PagesController extends ContentsAppController {
      */
     public function view($token) {
         
-        $page = $this->Page->fetch($token);
+        $content = $this->Page->fetch($token);
         
-        if(empty($page)){
+        if(empty($content)){
             throw new NotFoundException();
         }
         
         //Send the id back to the view
-        $id = $page['Page']['id'];
-        $this->request->title = $page['Page']['title'];
+        $id = $content['Page']['id'];
+        $this->request->title = $content['Page']['title'];
         
-		$relatedContent = $this->Content->listContentsByCategory($page['Page']['category_id']);
+		$relatedContent = $this->Content->listContentsByCategory($content['Page']['category_id']);
 		
         $this->set(compact(
-            'page',
+            'content',
 			'relatedContent',
             'id'
         ));
