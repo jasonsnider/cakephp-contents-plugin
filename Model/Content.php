@@ -231,7 +231,13 @@ class Content extends ContentsAppModel {
 					'Content.slug',
 					'Content.title'
 				),
-				'contain'=>array()
+				'contain'=>array(
+					'Category'=>array(
+						'fields'=>array(
+							'Category.title'
+						)
+					)
+				)
 			)
 		);
 	}
