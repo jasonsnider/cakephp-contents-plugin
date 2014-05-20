@@ -214,7 +214,7 @@ class Content extends ContentsAppModel {
         );
     }	
 	
-	public function listContentsByCategory($categoryId, $contentType = 'post'){
+	public function listContentsByCategory($categoryId, $limit=10, $contentType = 'post'){
 		if(empty($categoryId)){
 			return false;
 		}
@@ -237,7 +237,11 @@ class Content extends ContentsAppModel {
 							'Category.title'
 						)
 					)
-				)
+				),
+				'order'=>array(
+					'Content.created DESC'
+				),
+				'limit'=>$limit
 			)
 		);
 	}
