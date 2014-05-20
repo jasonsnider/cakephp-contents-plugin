@@ -55,7 +55,7 @@ class CategoriesController extends ContentsAppController {
 			'contain'=>array(
 				'Content'=>array()
 			),
-			'order'=>array('Category.created DESC')
+			'order'=>array('Content.created DESC')
 		);
 		$category = $this->Category->find('first', $options);
 		$this->set('category', $category);
