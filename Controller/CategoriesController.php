@@ -52,7 +52,9 @@ class CategoriesController extends ContentsAppController {
 		}
 		$options = array(
 			'conditions' => array('Category.' . $this->Category->primaryKey => $id),
-			'contain'=>array(),
+			'contain'=>array(
+				'Content'=>array()
+			),
 			'order'=>array('Category.created DESC')
 		);
 		$category = $this->Category->find('first', $options);
