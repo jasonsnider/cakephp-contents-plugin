@@ -47,15 +47,20 @@ class CategoriesController extends ContentsAppController {
  * @return void
  */
 	public function view($id = null) {
+		
 		if (!$this->Category->exists($id)) {
 			throw new NotFoundException(__('Invalid category'));
 		}
+		
 		$options = array(
 			'conditions' => array('Category.' . $this->Category->primaryKey => $id),
 			'contain'=>array(
-				'Content'=>array('order'=>array('Content.created DESC'))
+				'Content'=>array(
+					'order'=>array('Content.created DESC')
+				)
 			)
 		);
+		
 		$category = $this->Category->find('first', $options);
 		$this->set('category', $category);
 		
