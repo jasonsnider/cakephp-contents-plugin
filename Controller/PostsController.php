@@ -103,7 +103,11 @@ class PostsController extends ContentsAppController {
         
         $this->request->title = $content['Post']['title'];
         
-		$relatedContent = $this->Content->listContentsByCategory($content['Post']['category_id']);
+		$relatedContent = $this->Content->listContentsByCategory(
+			$content['Post']['category_id'],
+			Configure::read('JSC.Posts.Related.limit'),
+			Configure::read('JSC.Posts.Related.model')
+		);
 		
         $this->set(compact(
             'content',
