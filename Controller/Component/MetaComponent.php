@@ -74,7 +74,7 @@ class MetaComponent extends Component {
      * @return void
      */
     public function data(){
-
+		$this->request->hasMeta = false;
         // 1) If the action is requesting a check for meta data
         if(isset($this->request->checkForMeta)){
             
@@ -90,6 +90,7 @@ class MetaComponent extends Component {
 				$this->request->showTitle  = true;
                 $this->request->keywords  = $metaData['MetaData']['keywords'];
                 $this->request->description  = $metaData['MetaData']['description'];
+				$this->request->hasMeta = true;
             }
 
 		} 
