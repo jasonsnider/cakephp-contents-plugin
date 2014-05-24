@@ -137,7 +137,7 @@ class Post extends ContentsAppModel {
 	 * @param string $field The field by which we want to sort (created, modified)
      * @return array()
      */
-    public function fetchLatest($field = 'modified'){
+    public function fetchLatest($field = 'created'){
 		
 		if (!in_array($field, array('created', 'modified'))) {
 			throw new NotFoundException("Expecting created or modified recieved {$field}");
