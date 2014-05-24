@@ -94,8 +94,7 @@ class Post extends ContentsAppModel {
     );
 	
     /**
-     * Execute prior to validation
-     * - Forces all saves from this model to save with a post content_type
+     * Forces all saves from this model to save with a post content_type
      * @param array $options
      * @return boolean
      */
@@ -104,6 +103,20 @@ class Post extends ContentsAppModel {
 		$this->data[$this->alias]['content_status'] = 'published';
         return true;
 	}
+	
+	/**
+	 * Forces all finds against the Post model to look for a content_type of post
+     * @param array $queryData
+     * @return boolean
+	 */
+	public function beforeFind($queryData) {
+		if (!isset($queryData['conditions'][$this->alias.'.content_type'])) {
+			// Force all finds to only find stuff which is live
+			$queryData['conditions'][$this->alias.'.content_type'] = 'post';
+		}
+		return $queryData;
+	}
+	
 	
 	/**
 	 * Returns a post by a given id or slug

@@ -106,6 +106,19 @@ class Page extends ContentsAppModel {
 	}
 	
 	/**
+	 * Forces all finds against the Page model to look for a content_type of page
+     * @param array $queryData
+     * @return boolean
+	 */
+	public function beforeFind($queryData) {
+		if (!isset($queryData['conditions'][$this->alias.'.content_type'])) {
+			// Force all finds to only find stuff which is live
+			$queryData['conditions'][$this->alias.'.content_type'] = 'page';
+		}
+		return $queryData;
+	}
+	
+	/**
 	 * Returns a post by a given id or slug
 	 * @param string $token
 	 * @return array
