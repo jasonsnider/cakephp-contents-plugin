@@ -45,13 +45,13 @@ class MetaDataController extends ContentsAppController {
      * @param string $action
      * @return void
      */
-    public function admin_create($controller, $action) {
-
+    public function admin_add($controller, $action) {
+		
         if(!empty($this->request->data)){
             
             if($this->MetaData->save($this->request->data)){
                 $this->Session->setFlash(__('The meta data has been created'), 'success');
-                $this->redirect("/admin/contents/meta_data/create/{$this->MetaData->id}");
+                $this->redirect("/admin/contents/meta_data/edit/{$this->MetaData->id}");
             }else{
                 $this->Session->setFlash(__('Please correct the errors below'), 'error');
             }

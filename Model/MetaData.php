@@ -130,6 +130,7 @@ class MetaData extends ContentsAppModel {
 					"{$this->alias}.action"=>$action
 				),
 				'fields'=>array(
+					'id',
 					'title',
 					'description',
 					'keywords'
