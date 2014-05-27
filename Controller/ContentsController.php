@@ -76,6 +76,7 @@ class ContentsController extends ContentsAppController {
         
         $conditions = $this->Content->parseCriteria($this->Prg->parsedParams());
         $conditions['Content.content_type NOT']='meta_data';
+		$conditions['Content.content_status']='published';
         
         $this->paginate = array(
             'conditions' => $conditions,
