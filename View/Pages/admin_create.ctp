@@ -16,6 +16,8 @@ echo $this->Form->create(
 
 echo $this->Form->input('title');
 
+echo $this->Form->input('content_status', array('value'=>'draft', 'type'=>'hidden'));
+
 echo $this->Form->submit(
 	 __('Submit'), 
 	 array(

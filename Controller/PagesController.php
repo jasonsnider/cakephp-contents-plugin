@@ -108,8 +108,8 @@ class PagesController extends ContentsAppController {
 		
         $this->set(compact(
             'content',
-			'relatedContent',
-            'id'
+            'id',
+			'relatedContent'
         ));
     }
     
@@ -175,9 +175,12 @@ class PagesController extends ContentsAppController {
 			$this->request->data = $this->Page->fetch($token);
 		}
 		
+		$contentsStatuses = $this->Page->contentStatuses();
+		
 		$categories = $this->Page->Category->find('list');
         $this->set(compact(
 			'categories',
+			'contentsStatuses',
             'title_for_layout'
         )); 
 		

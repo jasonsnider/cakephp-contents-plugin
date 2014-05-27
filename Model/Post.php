@@ -100,7 +100,6 @@ class Post extends ContentsAppModel {
      */
     public function beforeSave($options = array()) {
         $this->data[$this->alias]['content_type'] = 'post';
-		$this->data[$this->alias]['content_status'] = 'published';
         return true;
 	}
 	

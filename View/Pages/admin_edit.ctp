@@ -34,6 +34,9 @@ echo $this->Form->input('tags', array('label'=>'Tags (Comma Seperated)', 'type'=
 echo $this->Html->tag('a', '', array('id'=>'PageCategoriesAnchor', 'class'=>'anchor'));
 echo $this->Form->input('category_id', array('empty'=>true));
 
+echo $this->Html->tag('a', '', array('id'=>'PageContentStatusAnchor', 'class'=>'anchor'));
+echo $this->Form->input('content_status', array('empty'=>true, 'options'=>$contentStatuses));
+
 echo $this->Form->submit(
 	 __d('contents', 'Submit'), 
 	 array(

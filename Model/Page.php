@@ -101,7 +101,6 @@ class Page extends ContentsAppModel {
      */
     public function beforeSave($options = array()) {
         $this->data[$this->alias]['content_type'] = 'page';
-		$this->data[$this->alias]['content_status'] = 'published';
         return true;
 	}
 	

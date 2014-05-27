@@ -160,8 +160,12 @@ class PostsController extends ContentsAppController {
         }
         
 		$categories = $this->Post->Category->find('list');
+		
+		$contentsStatuses = $this->Page->contentStatuses();
+		
         $this->set(compact(
             'categories',
+			'contentsStatuses',
             'title_for_layout'
         ));
 		

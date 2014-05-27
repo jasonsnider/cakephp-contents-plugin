@@ -185,34 +185,10 @@ class Content extends ContentsAppModel {
         }
         return true;
     }
-    
-    /**
-     * Returns a list of content types
-     * - page
-     * - post
-	 * -meta_data
-     * @return array()
-     */
-    public function contentTypes(){
-        return array(
-            'post'=>'Post',
-            'page'=>'Page',
-            'meta_data'=>'MetaData'
-        );
-    }
-
-    /**
-     * Returns a list of content statuses
-     * - draft
-     * - published
-     * @return array()
-     */
-    public function contentStatuses(){
-        return array(
-            'draft'=>'Draft',
-            'published'=>'Published'
-        );
-    }	
+	
+	public function listContentStatuses(){
+		return $this->contentStatuses();
+	}
 	
 	public function listContentsByCategory($categoryId, $limit=10, $contentType = 'post'){
 		if(empty($categoryId)){
