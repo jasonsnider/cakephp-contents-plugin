@@ -186,10 +186,6 @@ class Content extends ContentsAppModel {
         return true;
     }
 	
-	public function listContentStatuses(){
-		return $this->contentStatuses();
-	}
-	
 	public function listContentsByCategory($categoryId, $limit=10, $contentType = 'post'){
 		if(empty($categoryId)){
 			return false;

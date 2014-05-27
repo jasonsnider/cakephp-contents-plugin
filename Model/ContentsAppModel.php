@@ -19,32 +19,23 @@ class ContentsAppModel extends AppModel {
     );
 	
     /**
-     * Returns a list of content types
-     * - page
-     * - post
-	 * -meta_data
+     * A list of content types
      * @return array()
      */
-    public function contentTypes(){
-        return array(
-            'post'=>'Post',
-            'page'=>'Page',
-            'meta_data'=>'MetaData'
-        );
-    }
+    public $contentTypes = array(
+		'post'=>'Post',
+		'page'=>'Page',
+		'meta_data'=>'MetaData'
+	);
 
     /**
-     * Returns a list of content statuses
-     * - draft
-     * - published
+     * A list of content statuses
      * @return array()
      */
-    public function contentStatuses(){
-        return array(
-            'draft'=>'Draft',
-            'published'=>'Published'
-        );
-    }
+    public $contentStatuses = array(
+		'draft'=>'Draft',
+		'published'=>'Published'
+	);
 	
     /**
      * A recursive function for creating unique slugs against user submited data (Content.title)

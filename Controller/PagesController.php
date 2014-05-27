@@ -175,12 +175,12 @@ class PagesController extends ContentsAppController {
 			$this->request->data = $this->Page->fetch($token);
 		}
 		
-		$contentsStatuses = $this->Page->contentStatuses();
+		$contentStatuses = $this->Page->contentStatuses;
 		
 		$categories = $this->Page->Category->find('list');
         $this->set(compact(
 			'categories',
-			'contentsStatuses',
+			'contentStatuses',
             'title_for_layout'
         )); 
 		
