@@ -9,8 +9,8 @@
 			<?php foreach($relatedContent as $related): ?>
 			<li>
 				<?php echo $this->Html->link(
-					$related['Content']['title'], 
-					"/{$related['Content']['content_type']}/{$related['Content']['slug']}"); 
+					$related[$model]['title'], 
+					"/{$related[$model]['content_type']}/{$related[$model]['slug']}"); 
 				?>
 			</li>
 			<?php endforeach; ?>

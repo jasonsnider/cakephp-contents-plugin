@@ -56,7 +56,6 @@ class PostsController extends ContentsAppController {
      * @var array
      */
     public $uses = array(
-		'Contents.Content',
         'Contents.Post'
     );
 
@@ -103,7 +102,7 @@ class PostsController extends ContentsAppController {
         
         $this->request->title = $content['Post']['title'];
         
-		$relatedContent = $this->Content->listContentsByCategory(
+		$relatedContent = $this->Post->listContentsByCategory(
 			$content['Post']['category_id'],
 			Configure::read('JSC.Posts.Related.limit'),
 			Configure::read('JSC.Posts.Related.model')
