@@ -38,7 +38,7 @@ class ContentsAppModel extends AppModel {
 	);
 	
     /**
-     * A recursive function for creating unique slugs against user submited data ({$this->alias}title)
+     * A recursive function for creating unique slugs against user submited data ({$this->alias}.title)
      * @param array $data
      * @param interger $counter
      * @return string
