@@ -186,36 +186,4 @@ class Content extends ContentsAppModel {
         return true;
     }
 	
-	public function listContentsByCategory($categoryId, $limit=10, $contentType = 'post'){
-		if(empty($categoryId)){
-			return false;
-		}
-		
-		return $this->find(
-			'all',
-			array(
-				'conditions'=>array(
-					'Content.category_id'=>$categoryId,
-					'Content.content_type'=>$contentType
-				),
-				'fields'=>array(
-					'Content.content_type',
-					'Content.slug',
-					'Content.title'
-				),
-				'contain'=>array(
-					'Category'=>array(
-						'fields'=>array(
-							'Category.title'
-						)
-					)
-				),
-				'order'=>array(
-					'Content.created DESC'
-				),
-				'limit'=>$limit
-			)
-		);
-	}
-	
 }

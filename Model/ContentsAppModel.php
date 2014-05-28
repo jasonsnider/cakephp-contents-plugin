@@ -38,7 +38,7 @@ class ContentsAppModel extends AppModel {
 	);
 	
     /**
-     * A recursive function for creating unique slugs against user submited data (Content.title)
+     * A recursive function for creating unique slugs against user submited data ({$this->alias}title)
      * @param array $data
      * @param interger $counter
      * @return string
@@ -71,4 +71,44 @@ class ContentsAppModel extends AppModel {
         
         return $slug;          
     }
+	
+	/**
+	 * Pulls a list of content categories
+	 * @param string $categoryId
+	 * @param integer $limit
+	 * @param string $contentType
+	 * @return boolean
+	 */
+	public function listContentsByCategory($categoryId, $limit=10, $contentType = 'post'){
+		
+		if(empty($categoryId)){
+			return false;
+		}
+		
+		return $this->find(
+			'all',
+			array(
+				'conditions'=>array(
+					"{$this->alias}.category_id"=>$categoryId,
+					"{$this->alias}.content_type"=>$contentType
+				),
+				'fields'=>array(
+					"{$this->alias}.content_type",
+					"{$this->alias}.slug",
+					"{$this->alias}.title"
+				),
+				'contain'=>array(
+					'Category'=>array(
+						'fields'=>array(
+							'Category.title'
+						)
+					)
+				),
+				'order'=>array(
+					"{$this->alias}.created DESC"
+				),
+				'limit'=>$limit
+			)
+		);
+	}
 }
