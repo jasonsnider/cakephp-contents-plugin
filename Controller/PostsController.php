@@ -63,13 +63,14 @@ class PostsController extends ContentsAppController {
      * Displays an index of all content
      * @return void
      */
-    public function index() {
+    public function index($category=null) {
+
+		$conditions = array();
+		$conditions['Post.category_id'] = $category;
+		$conditions['Post.content_status'] = 'published';
 
         $this->paginate = array(
-            'conditions' => array(
-                'Post.content_type'=>'post',
-                'Post.content_status'=>'published',
-            ),
+			'conditions' => $conditions,
             'contain'=>array(
                 'CreatedUser'=>array(
                     'UserProfile'=>array()

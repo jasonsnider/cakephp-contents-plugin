@@ -5,7 +5,7 @@
 	<?php foreach ($categories as $category): ?>
 	<tr>
 		<td><?php echo $this->Html->link(
-			$category['Category']['title'], "/contents/categories/view/{$category['Category']['id']}"); ?></td>
+			$category['Category']['title'], "/contents/contents/index/{$category['Category']['id']}"); ?></td>
 	</tr>
 <?php endforeach; ?>
 </table>

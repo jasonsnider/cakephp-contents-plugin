@@ -91,12 +91,16 @@ class ContentsController extends ContentsAppController {
     }
     /**
      * Displays an index of all content
+	 * @param string $category
      * @return void
      */
-    public function index() {
+    public function index($category=null) {
 
+		$conditions = array();
+		$conditions['Content.category_id'] = $category;
+		
         $this->paginate = array(
-            'conditions' => array(),
+            'conditions' => $conditions,
             'limit' => 30
         );
 

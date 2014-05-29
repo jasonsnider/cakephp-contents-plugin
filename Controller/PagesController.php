@@ -65,13 +65,14 @@ class PagesController extends ContentsAppController {
      * Displays an index of all content
      * @return void
      */
-    public function index() {
+    public function index($category=null) {
+
+		$conditions = array();
+		$conditions['Page.category_id'] = $category;
+		$conditions['Page.content_status'] = 'published';
 
         $this->paginate = array(
-            'conditions' => array(
-                'Page.content_type'=>'page',
-                'Page.content_status'=>'published',
-            ),
+			'conditions' => $conditions,
             'contain'=>array(),
             'order'=>'Page.created DESC',
             'limit' => 30
