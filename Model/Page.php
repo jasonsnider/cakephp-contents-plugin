@@ -20,22 +20,22 @@ App::uses('ContentsAppModel', 'Contents.Model');
  */
 class Page extends ContentsAppModel {
 
-    /**
-     * The static name this model
-     * @var string
-     */
+/**
+ * The static name this model
+ * @var string
+ */
     public $name = 'Page';
 
-    /**
-     * The table to be used by this model
-     * @var string
-     */
+/**
+ * The table to be used by this model
+ * @var string
+ */
     public $useTable = 'contents';
 
-    /**
-     * Specifies the behaviors invoked by the model
-     * @var array 
-     */
+/**
+ * Specifies the behaviors invoked by the model
+ * @var array 
+ */
     public $actsAs = array(
         'Search.Searchable',
         'Tags.Taggable',
@@ -66,10 +66,10 @@ class Page extends ContentsAppModel {
         )
     );
 
-    /**
-     * Defines belongs to relationships this model
-     * @var array
-     */
+/**
+ * Defines belongs to relationships this model
+ * @var array
+ */
     public $belongsTo = array(
         'Category' => array(
             'className' => 'Contents.Category',
@@ -93,22 +93,36 @@ class Page extends ContentsAppModel {
         )
     );
 	
-    /**
-     * Execute prior to validation
-     * - Forces all saves from this model to save with a page content_type
-     * @param array $options
-     * @return boolean
-     */
+/**
+ * Define the validation rules for user input
+ * @var array
+ */
+    public $validate = array(
+        'title' => array(
+            'notEmpty' => array(
+                'rule' => 'notEmpty',
+                'message' => "Please enter a title",
+                'last' => true
+            )
+        ),
+    );
+	
+/**
+ * Execute prior to validation
+ * Forces all saves from this model to save with a page content_type
+ * @param array $options
+ * @return boolean
+ */
     public function beforeSave($options = array()) {
         $this->data[$this->alias]['content_type'] = 'page';
         return true;
 	}
 	
-	/**
-	 * Forces all finds against the Page model to look for a content_type of page
-     * @param array $queryData
-     * @return boolean
-	 */
+/**
+ * Forces all finds against the Page model to look for a content_type of page
+ * @param array $queryData
+ * @return boolean
+ */
 	public function beforeFind($queryData) {
 		if (!isset($queryData['conditions'][$this->alias.'.content_type'])) {
 			// Force all finds to only find stuff which is live
@@ -117,11 +131,11 @@ class Page extends ContentsAppModel {
 		return $queryData;
 	}
 	
-	/**
-	 * Returns a post by a given id or slug
-	 * @param string $token
-	 * @return array
-	 */
+/**
+ * Returns a post by a given id or slug
+ * @param string $token
+ * @return array
+ */
 	public function fetch($token){
 		return $this->find(
             'first',

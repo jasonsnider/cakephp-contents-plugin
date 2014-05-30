@@ -40,35 +40,6 @@ class CategoriesController extends ContentsAppController {
 	}
 
 /**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		
-		if (!$this->Category->exists($id)) {
-			throw new NotFoundException(__('Invalid category'));
-		}
-		
-		$options = array(
-			'conditions' => array('Category.' . $this->Category->primaryKey => $id),
-			'contain'=>array(
-				'Content'=>array(
-					'order'=>array('Content.created DESC')
-				)
-			)
-		);
-		
-		$category = $this->Category->find('first', $options);
-		$this->set('category', $category);
-		
-		$this->request->title = $category['Category']['title'];
-		$this->request->showTitle = true;
-	}
-	
-/**
  * admin_index method
  *
  * @return void
