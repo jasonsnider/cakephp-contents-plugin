@@ -20,22 +20,22 @@ App::uses('ContentsAppModel', 'Contents.Model');
  */
 class MetaData extends ContentsAppModel {
 
-    /**
-     * The static name this model
-     * @var string
-     */
+/**
+ * The static name this model
+ * @var string
+ */
     public $name = 'MetaData';
 
-    /**
-     * The table to be used by this model
-     * @var string
-     */
+/**
+ * The table to be used by this model
+ * @var string
+ */
     public $useTable = 'contents';
 
-    /**
-     * Specifies the behaviors invoked by the model
-     * @var array 
-     */
+/**
+ * Specifies the behaviors invoked by the model
+ * @var array 
+ */
     public $actsAs = array(
         'Search.Searchable',
         'Tags.Taggable',
@@ -66,10 +66,10 @@ class MetaData extends ContentsAppModel {
         )
     );
 
-    /**
-     * Defines belongs to relationships this model
-     * @var array
-     */
+/**
+ * Defines belongs to relationships this model
+ * @var array
+ */
     public $belongsTo = array(
         'CreatedUser' => array(
             'className' => 'Users.User',
@@ -78,23 +78,37 @@ class MetaData extends ContentsAppModel {
         )
     );
 	
-    /**
-     * Execute prior to validation
-     * - Forces all saves from this model to save with a meta_data content_type
-     * @param array $options
-     * @return boolean
-     */
+/**
+ * Defines the validation rules for user input
+ * @var array
+ */
+    public $validate = array(
+        'title' => array(
+            'notEmpty' => array(
+                'rule' => 'notEmpty',
+                'message' => "Please enter a title",
+                'last' => true
+            )
+        ),
+    );
+	
+/**
+ * Execute prior to validation
+ * - Forces all saves from this model to save with a meta_data content_type
+ * @param array $options
+ * @return boolean
+ */
     public function beforeSave($options = array()) {
         $this->data[$this->alias]['content_type'] = 'meta_data';
 		$this->data[$this->alias]['content_status'] = 'published';
         return true;
 	}
 	
-	/**
-	 * Returns meta data by a given id or slug
-	 * @param string $token
-	 * @return array
-	 */
+/**
+ * Returns meta data by a given id or slug
+ * @param string $token
+ * @return array
+ */
 	public function fetch($token){
 		return $this->find(
             'first',
@@ -116,11 +130,12 @@ class MetaData extends ContentsAppModel {
             )
         );						
 	}
-	/**
-	 * Returns meta data based on a given controller action
-	 * @param string $controller
-	 * @param string $action
-	 */
+	
+/**
+ * Returns meta data based on a given controller action
+ * @param string $controller
+ * @param string $action
+ */
 	public function fetchMetaDataForControllerAction($controller, $action){
 		return $this->find(
 			'first',

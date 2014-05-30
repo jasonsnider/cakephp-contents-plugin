@@ -94,7 +94,7 @@ class Page extends ContentsAppModel {
     );
 	
 /**
- * Define the validation rules for user input
+ * Defines the validation rules for user input
  * @var array
  */
     public $validate = array(
