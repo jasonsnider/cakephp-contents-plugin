@@ -50,7 +50,7 @@ class MetaDataController extends ContentsAppController {
         if(!empty($this->request->data)){
             
             if($this->MetaData->save($this->request->data)){
-				$this->request->data['MetaData']['slug'] = $this->Post->slug($this->request->data);
+				$this->request->data['MetaData']['slug'] = $this->MetaData->slug($this->request->data);
 			
                 $this->Session->setFlash(__('The meta data has been created'), 'success');
                 $this->redirect("/admin/contents/meta_data/edit/{$this->MetaData->id}");
@@ -58,7 +58,7 @@ class MetaDataController extends ContentsAppController {
                 $this->Session->setFlash(__('Please correct the errors below'), 'error');
             }
         }
-
+		
         $this->set(compact(
 			'action',
             'controller',
@@ -90,5 +90,7 @@ class MetaDataController extends ContentsAppController {
         }else{
             $this->request->data = $meta_data;
         }
+		
+		$this->request->hasEditor = true;
     }
 }

@@ -18,6 +18,15 @@ echo $this->Html->tag('a', '', array('id'=>'MetaDataTitleAnchor', 'class'=>'anch
 echo $this->Form->input('title');
 echo $this->Html->tag('a', '', array('id'=>'MetaDataDescriptionAnchor', 'class'=>'anchor'));
 echo $this->Form->input('description', array('type'=>'textarea', 'rows'=>4));
+echo $this->Html->tag('a', '', array('id'=>'MetaDataDescriptionAnchor', 'class'=>'anchor'));
+echo $this->Form->input(
+	'body', 
+	array(
+		'type'=>'textarea', 
+		'rows'=>4, 'class'=>'editor', 
+		'label'=>'Body* (Must be set in code to appear on the desired page.)'
+	)
+);
 echo $this->Html->tag('a', '', array('id'=>'MetaDataKeywordsAnchor', 'class'=>'anchor'));
 echo $this->Form->input('keywords', array('type'=>'textarea', 'rows'=>4));
 echo $this->Html->tag('a', '', array('id'=>'MetaDataTagsAnchor', 'class'=>'anchor'));
