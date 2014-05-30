@@ -7,7 +7,7 @@
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  * 
- * @copyright Copyright 2012, Jason D Snider
+ * @copyright Copyright 2014, Jason D Snider
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  * @author Jason D Snider <jason@jasonsnider.com>
  */

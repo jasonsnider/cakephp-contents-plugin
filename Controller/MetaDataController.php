@@ -45,11 +45,13 @@ class MetaDataController extends ContentsAppController {
      * @param string $action
      * @return void
      */
-    public function admin_add($controller, $action) {
+    public function admin_add($controller, $action, $plugin=null, $token=null) {
 		
         if(!empty($this->request->data)){
             
             if($this->MetaData->save($this->request->data)){
+				$this->request->data['MetaData']['slug'] = $this->Post->slug($this->request->data);
+			
                 $this->Session->setFlash(__('The meta data has been created'), 'success');
                 $this->redirect("/admin/contents/meta_data/edit/{$this->MetaData->id}");
             }else{
@@ -59,7 +61,9 @@ class MetaDataController extends ContentsAppController {
 
         $this->set(compact(
 			'action',
-            'controller'
+            'controller',
+			'plugin',
+			'token'
         ));
     }
     
