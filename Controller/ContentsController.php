@@ -85,7 +85,6 @@ class ContentsController extends ContentsAppController {
         );
         
         $this->request->title = 'Search';
-        $this->request->checkForMeta = true;
         $contents = $this->paginate('Content');
         $this->set(compact('contents'));
     }

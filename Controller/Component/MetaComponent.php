@@ -73,10 +73,10 @@ class MetaComponent extends Component {
      * Retrives and set's the meta data for the current controller/action
      * @return void
      */
-    public function data(){
+    public function data(){ 
 		$this->request->MetaData = array();
         // 1) If the action is requesting a check for meta data
-        if(isset($this->request->checkForMeta)){
+        //if(isset($this->request->checkForMeta)){
             
             // 2) Try and find the meta data
             $metaData = $this->MetaData->fetchMetaDataForControllerAction(
@@ -93,7 +93,7 @@ class MetaComponent extends Component {
 				$this->request->MetaData = $metaData['MetaData'];
             }
 
-		} 
+		//} 
     }
 
 }

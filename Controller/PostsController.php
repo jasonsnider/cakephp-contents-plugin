@@ -80,7 +80,6 @@ class PostsController extends ContentsAppController {
             'limit' => 10
         );
 
-        $this->request->checkForMeta = true;
         $data = $this->paginate('Post');
         $this->set(compact('data'));
     }

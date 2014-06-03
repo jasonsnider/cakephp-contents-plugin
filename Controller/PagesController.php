@@ -31,6 +31,16 @@ class PagesController extends ContentsAppController {
     public $name = 'Pages';
 
     /**
+     * The models used by the controller
+     *
+     * @var array
+     */
+    public $uses = array(
+		'Contents.Content',
+        'Contents.Page'
+    );
+	
+    /**
      * Call the components to be used by this controller
      *
      * @var array
@@ -52,16 +62,6 @@ class PagesController extends ContentsAppController {
     }
 
     /**
-     * The models used by the controller
-     *
-     * @var array
-     */
-    public $uses = array(
-		'Contents.Content',
-        'Contents.Page'
-    );
-
-    /**
      * Displays an index of all content
      * @return void
      */
@@ -79,7 +79,6 @@ class PagesController extends ContentsAppController {
         );
 
         $this->request->title = 'Pages';
-        $this->request->checkForMeta = true;
         $data = $this->paginate('Page');
         $this->set(compact('data'));
     }
@@ -120,7 +119,6 @@ class PagesController extends ContentsAppController {
      * @return void
      */
     public function home() {
-        $this->request->checkForMeta = true;
         $this->set(compact(
             'content'
         ));
@@ -128,6 +126,7 @@ class PagesController extends ContentsAppController {
     
     /**
      * An entry point for the admin portal.
+     * @return void
      */
     public function admin_admin(){}
 	

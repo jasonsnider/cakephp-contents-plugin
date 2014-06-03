@@ -3,7 +3,7 @@
 		<div class="panel-heading">
 			<?php echo $this->Html->link(
 				$relatedContent[0]['Category']['title'], 
-				"/category/{$relatedContent[0]['Category']['id']}"); ?>
+				"/contents/contents/index/{$relatedContent[0]['Category']['id']}"); ?>
 		</div>
 		<ul class="nav nav-list">
 			<?php foreach($relatedContent as $related): ?>
