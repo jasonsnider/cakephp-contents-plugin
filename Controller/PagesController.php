@@ -68,7 +68,9 @@ class PagesController extends ContentsAppController {
     public function index($category=null) {
 
 		$conditions = array();
-		$conditions['Page.category_id'] = $category;
+		if(!empty($category)){
+			$conditions['Page.category_id'] = $category;
+		}
 		$conditions['Page.content_status'] = 'published';
 
         $this->paginate = array(
