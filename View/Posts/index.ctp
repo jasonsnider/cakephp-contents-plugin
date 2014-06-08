@@ -1,18 +1,19 @@
 <?php foreach ($data as $post): ?>
-<div class="well well-sm well-result">
-    <strong>
+<div>
     <?php 
-        echo $this->Html->link(
-            $post['Post']['title'], 
-            array(
-                'plugin'=>'contents',
-                'controller'=>'posts',
-                'action'=>'view',
-                $post['Post']['slug']
-            )
+        echo $this->Html->tag(
+			'h2',
+			$this->Html->link(
+				$post['Post']['title'], 
+				array(
+					'plugin'=>'contents',
+					'controller'=>'posts',
+					'action'=>'view',
+					$post['Post']['slug']
+				)
+			)
         );
     ?>
-    </strong>
     <div class="text-muted">
         <em>
             <strong>Posted On:</strong>
