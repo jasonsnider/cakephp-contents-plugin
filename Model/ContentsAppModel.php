@@ -33,6 +33,7 @@ class ContentsAppModel extends AppModel {
      * @return array()
      */
     public $contentStatuses = array(
+		'archive'=>'Archive',
 		'draft'=>'Draft',
 		'published'=>'Published'
 	);
