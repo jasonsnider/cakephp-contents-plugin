@@ -14,21 +14,6 @@
             );
         ?>
     </strong>
-    <?php 
-        echo $this->Html->tag(
-            'strong',    
-            Inflector::humanize($content['Content']['content_type']),
-            array(
-                'class'=>'text-muted'
-            )
-        ); 
-    ?>
-    <div class="text-muted">
-        <em>
-            <strong>Posted On:</strong>
-            <?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>
-        </em>
-    </div>
     <div>
 		<?php 
 			echo $this->Text->truncate(

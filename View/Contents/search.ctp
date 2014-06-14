@@ -25,7 +25,7 @@ echo $this->Form->end();
 
 <?php foreach ($contents as $content): ?>
 <div class="well well-sm well-result">
-    <strong>
+    <h2>
         <?php 
             echo $this->Html->link(
                 $content['Content']['title'], 
@@ -37,22 +37,7 @@ echo $this->Form->end();
                 )
             );
         ?>
-    </strong>
-    <?php 
-        echo $this->Html->tag(
-            'strong',    
-            Inflector::humanize($content['Content']['content_type']),
-            array(
-                'class'=>'text-muted'
-            )
-        ); 
-    ?>
-    <div class="text-muted">
-        <em>
-            <strong>Posted On:</strong>
-            <?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>
-        </em>
-    </div>
+    </h2>
     <div>
 		<?php 
 			echo $this->Text->truncate(

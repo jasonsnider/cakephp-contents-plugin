@@ -14,12 +14,6 @@
 			)
         );
     ?>
-    <div class="text-muted">
-        <em>
-            <strong>Posted On:</strong>
-            <?php echo date('m/d/y', strtotime($content['Page']['created'])); ?>
-        </em>
-    </div>
     <div>
 		<?php 
 			echo $this->Text->truncate(
