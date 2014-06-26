@@ -80,9 +80,14 @@ class Page extends ContentsAppModel {
             'className' => 'Users.User',
             'foreignKey' => 'created_user_id',
             'dependent' => true
+        ),
+	    'JscForm' => array(
+            'className' => 'Contents.JscForm',
+            'foreignKey' => 'jsc_form_id',
+            'dependent' => true
         )
     );
-	
+
 /**
  * hasAndBelongsToMany associations
  * @var array
@@ -153,7 +158,8 @@ class Page extends ContentsAppModel {
                     ),
                     'Tag'=>array(
                         'Tagged'=>array()
-                    )
+                    ),
+					'JscForm'=>array()
                 )
             )
         );						

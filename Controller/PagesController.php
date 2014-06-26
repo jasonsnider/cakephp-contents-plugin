@@ -15,7 +15,7 @@
  * @package       Users
  */
 App::uses('ContentsAppController', 'Contents.Controller');
-
+App::uses('CakeEmail', 'Network/Email');
 /**
  * Provides a page-centric controler for contents
  * @author Jason D Snider <jason@jasonsnider.com>
@@ -39,13 +39,6 @@ class PagesController extends ContentsAppController {
 		'Contents.Content',
         'Contents.Page'
     );
-	
-    /**
-     * Call the components to be used by this controller
-     *
-     * @var array
-     */
-    //public $components = array();
 
     /**
      * Called before action
@@ -96,12 +89,50 @@ class PagesController extends ContentsAppController {
      */
     public function view($token) {
         
-        $content = $this->Page->fetch($token);
-        
+		$content = $this->Page->fetch($token);
+		//Extract the form data
+		$form = json_decode($content['JscForm']['form'], true);
+		
+		//Set the validation rules
+		if(isset($form['Validate'])){
+			$this->Page->JscForm->validate = $form['Validate'];
+		}
+
+        if(!empty($this->request->data)){
+			
+			//Validate the fomr submission
+            if($this->Page->JscForm->saveAll($this->request->data, array('validate' => 'only'))){
+				
+				//Build the email's content by writing each key=>value pair as a line
+				$content = null;
+				foreach($this->request->data['Sarah'] as $key => $value){
+					$key = Inflector::humanize($key);
+					$content .= "{$key}: {$value}\n";
+				}
+				
+				//Build and send the email
+				$email = new CakeEmail('contact');
+				$email->from($this->request->data['Sarah']['email'])
+					->replyTo($this->request->data['Sarah']['email'])
+					->viewVars(
+						array(
+							'content' => $content
+						)
+					)
+					->send();
+
+				$this->Session->setFlash(
+					__("Sent"),
+					'success'
+				);
+            }
+
+        }
+		
         if(empty($content)){
             throw new NotFoundException();
         }
-        
+
         //Send the id back to the view
         $id = $content['Page']['id'];
         $this->request->title = $content['Page']['title'];
@@ -111,11 +142,12 @@ class PagesController extends ContentsAppController {
 			Configure::read('JSC.Pages.Related.limit'),
 			Configure::read('JSC.Pages.Related.model')
 		);
-		
+
         $this->set(compact(
             'content',
             'id',
-			'relatedContent'
+			'relatedContent',
+			'form'
         ));
     }
     

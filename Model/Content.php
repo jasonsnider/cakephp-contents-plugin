@@ -82,12 +82,6 @@ class Content extends ContentsAppModel {
             'dependent' => true
         )
     );
-    
-    /**
-     * Defines has many relationships this model
-     * @var array
-     */
-    public $hasMany = array();
 
 /**
  * hasAndBelongsToMany associations
