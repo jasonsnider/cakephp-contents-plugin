@@ -90,14 +90,19 @@ class PagesController extends ContentsAppController {
     public function view($token) {
         
 		$content = $this->Page->fetch($token);
+		
 		//Extract the form data
+		
+		if(!empty($content['JscForm'])){
 		$form = json_decode($content['JscForm']['form'], true);
+		}
 		
 		//Set the validation rules
 		if(isset($form['Validate'])){
 			$this->Page->JscForm->validate = $form['Validate'];
 		}
 
+		//Check for a form submission
         if(!empty($this->request->data)){
 			
 			//Validate the fomr submission
@@ -105,15 +110,18 @@ class PagesController extends ContentsAppController {
 				
 				//Build the email's content by writing each key=>value pair as a line
 				$content = null;
-				foreach($this->request->data['Sarah'] as $key => $value){
-					$key = Inflector::humanize($key);
-					$content .= "{$key}: {$value}\n";
-				}
 				
+				foreach($this->request->data['JscForm'] as $key => $value){
+					if($key != 'redirect'){
+						$key = Inflector::humanize($key);
+						$content .= "{$key}: {$value}\n";
+					}
+				}
+				/*
 				//Build and send the email
 				$email = new CakeEmail('contact');
-				$email->from($this->request->data['Sarah']['email'])
-					->replyTo($this->request->data['Sarah']['email'])
+				$email->from($this->request->data['JscForm']['email'])
+					->replyTo($this->request->data['JscForm']['email'])
 					->viewVars(
 						array(
 							'content' => $content
@@ -124,7 +132,11 @@ class PagesController extends ContentsAppController {
 				$this->Session->setFlash(
 					__("Sent"),
 					'success'
-				);
+				); */
+				
+				if(isset($this->request->data['JscForm']['redirect'])){
+					$this->redirect($this->request->data['JscForm']['redirect']);
+				}
             }
 
         }

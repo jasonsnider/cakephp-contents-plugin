@@ -61,6 +61,10 @@ echo $this->Html->tag('pre',
 							)
 						)
 					),
+					'redirect'=>array(
+						'type'=>'hidden',
+						'value'=>'/page/thank-you'
+					),
 					'name'=>array(
 						'type'=>'text',
 					),
@@ -82,16 +86,25 @@ echo $this->Html->tag('pre',
 				),
 				'Validate'=>array(
 					'name' => array(
-						'rule' => 'email',
-						'message' => 'Please enter your name.'
+						'notEmpty' => array(
+							'rule' => 'notEmpty',
+							'message' => "Please enter your name",
+							'last' => true
+						)
 					),
 					'email' => array(
-						'rule' => 'email',
-						'message' => 'Please enter a valid email.'
+						'notEmpty' => array(
+							'rule' => 'email',
+							'message' => "Please enter a valid email",
+							'last' => true
+						)
 					),
 					'message' => array(
-						'rule' => 'notEmpty',
-						'message' => 'Please enter a message'
+						'notEmpty' => array(
+							'rule' => 'notEmpty',
+							'message' => "Please enter a message",
+							'last' => true
+						)
 					)
 				)
 			)
