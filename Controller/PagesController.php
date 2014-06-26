@@ -94,7 +94,7 @@ class PagesController extends ContentsAppController {
 		//Extract the form data
 		
 		if(!empty($content['JscForm'])){
-		$form = json_decode($content['JscForm']['form'], true);
+			$form = json_decode($content['JscForm']['form'], true);
 		}
 		
 		//Set the validation rules
