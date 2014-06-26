@@ -7,7 +7,7 @@ Provides management for
 
 Dependencies 
 
-* [CakePHP Utilities Plugin](https://github.com/jasonsnider/cakephp-utilities-plugin)
+* [CakePHP Jsc Plugin](https://github.com/jasonsnider/cakephp-utilities-plugin)
 * [HTML Purifier](http://htmlpurifier.org/)
 
 Request Object Variables

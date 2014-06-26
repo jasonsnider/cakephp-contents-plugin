@@ -39,8 +39,8 @@ class Content extends ContentsAppModel {
     public $actsAs = array(
         'Search.Searchable',
         'Tags.Taggable',
-        'Utilities.Loggable',
-        'Utilities.Scrubable' => array(
+        'Jsc.Loggable',
+        'Jsc.Scrubable' => array(
             'Filters' => array(
                 'trim' => '*',
                 'noHtml' => array(

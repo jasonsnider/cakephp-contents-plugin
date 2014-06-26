@@ -3,7 +3,7 @@
  * Returns meta data based on a controller action
  * @package Contents
  */
-App::uses('AppController', 'Controller');
+App::uses('JscAppController', 'Jsc.Controller');
 App::uses('MetaData', 'Contents.Model');
 
 /**

@@ -13,7 +13,7 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  * @package	Contents
  */
-App::uses('AppController', 'Controller');
+App::uses('JscAppController', 'Jsc.Controller');
 
 /**
  * Contents Controller
@@ -21,7 +21,7 @@ App::uses('AppController', 'Controller');
  * @author Jason D Snider <jason@jasonsnider.com>
  * @package app
  */
-class ContentsAppController extends AppController {
+class ContentsAppController extends JscAppController {
     
     /**
      * The Contents plugin useses the following helpers
@@ -29,15 +29,6 @@ class ContentsAppController extends AppController {
      */
     public $helpers = array(
         'Tags.TagCloud'
-    );
-	
-	/**
-     * Components used by this controller are
-     * -Meta
-     * @var array
-     */
-    public $components = array(
-        'Contents.Meta'
     );
 	
     /**
