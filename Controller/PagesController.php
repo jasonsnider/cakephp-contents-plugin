@@ -117,7 +117,7 @@ class PagesController extends ContentsAppController {
 						$content .= "{$key}: {$value}\n";
 					}
 				}
-				/*
+				
 				//Build and send the email
 				$email = new CakeEmail('contact');
 				$email->from($this->request->data['JscForm']['email'])
@@ -128,11 +128,6 @@ class PagesController extends ContentsAppController {
 						)
 					)
 					->send();
-
-				$this->Session->setFlash(
-					__("Sent"),
-					'success'
-				); */
 				
 				if(isset($this->request->data['JscForm']['redirect'])){
 					$this->redirect($this->request->data['JscForm']['redirect']);

@@ -1,4 +1,3 @@
-<div class="jscForms form">
 <?php
 echo $this->Form->create(
 	'JscForm', 
