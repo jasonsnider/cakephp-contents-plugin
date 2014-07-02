@@ -37,6 +37,9 @@ echo $this->Form->input('category_id', array('empty'=>true));
 echo $this->Html->tag('a', '', array('id'=>'PageContentStatusAnchor', 'class'=>'anchor'));
 echo $this->Form->input('content_status');
 
+echo $this->Html->tag('a', '', array('id'=>'PageJscFormAnchor', 'class'=>'anchor'));
+echo $this->Form->input('jsc_form_id', array('empty'=>true));
+
 echo $this->Form->submit(
 	 __d('contents', 'Submit'), 
 	 array(

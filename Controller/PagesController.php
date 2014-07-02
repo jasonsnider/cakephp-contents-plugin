@@ -149,12 +149,12 @@ class PagesController extends ContentsAppController {
 			Configure::read('JSC.Pages.Related.limit'),
 			Configure::read('JSC.Pages.Related.model')
 		);
-
+		
         $this->set(compact(
             'content',
             'id',
-			'relatedContent',
-			'form'
+			'jscForms',
+			'relatedContent'
         ));
     }
     
@@ -224,9 +224,12 @@ class PagesController extends ContentsAppController {
 		
 		$categories = $this->Page->Category->find('list');
 		
+		$jscForms = $this->Page->JscForm->find('list');
+		
         $this->set(compact(
 			'categories',
 			'contentStatuses',
+			'jscForms',
             'title_for_layout'
         )); 
 		
