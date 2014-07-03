@@ -16,6 +16,7 @@ echo $this->Form->create(
 
 echo $this->Form->input('id');
 echo $this->Form->input('title');
+echo $this->Form->input('active');
 
 echo $this->Form->submit(
 	 __('Submit'), 
