@@ -152,8 +152,8 @@ class PagesController extends ContentsAppController {
 		
         $this->set(compact(
             'content',
+			'form',
             'id',
-			'jscForms',
 			'relatedContent'
         ));
     }
