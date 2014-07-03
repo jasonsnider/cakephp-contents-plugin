@@ -23,24 +23,17 @@ App::uses('ContentsAppController', 'Contents.Controller');
  */
 class PostsController extends ContentsAppController {
 
-    /**
-     * Holds the name of the controller
-     *
-     * @var string
-     */
+/**
+ * Holds the name of the controller
+ *
+ * @var string
+ */
     public $name = 'Posts';
 
-    /**
-     * Call the components to be used by this controller
-     *
-     * @var array
-     */
-    //public $components = array();
-
-    /**
-     * Called before action
-     * @return void
-     */
+/**
+ * Called before action
+ * @return void
+ */
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow(
@@ -50,19 +43,19 @@ class PostsController extends ContentsAppController {
         $this->Authorize->allow();
     }
     
-    /**
-     * The models used by the controller
-     *
-     * @var array
-     */
+/**
+ * The models used by the controller
+ *
+ * @var array
+ */
     public $uses = array(
         'Contents.Post'
     );
 
-    /**
-     * Displays an index of all content
-     * @return void
-     */
+/**
+ * Displays an index of all content
+ * @return void
+ */
     public function index($category=null) {
 
 		$conditions = array();
@@ -90,11 +83,11 @@ class PostsController extends ContentsAppController {
         $this->set(compact('data'));
     }
     
-    /**
-     * Displays content; a single page or post, etc.
-     * @param string $token
-     * @return void
-     */
+/**
+ * Displays content; a single page or post, etc.
+ * @param string $token
+ * @return void
+ */
     public function view($token) {
         
         $content = $this->Post->fetch($token);
@@ -114,17 +107,33 @@ class PostsController extends ContentsAppController {
 			Configure::read('JSC.Posts.Related.model')
 		);
 		
+		$recentContent = $this->Post->find(
+			'all',
+			array(
+				'conditions'=>array(
+					'Post.content_status'=>'published'
+				),
+				'order'=>'Post.created DESC',
+				'limit'=>Configure::read('JSC.Posts.Related.limit'),
+				'contain'=>array()
+			)
+		);
+		
+		$categories = $this->Post->Category->find('list');
+		
         $this->set(compact(
+			'categories',
             'content',
-			'relatedContent',
-            'id'
+			'id',
+			'recentContent',
+			'relatedContent'
         ));
     }
     
-    /**
-     * A method for creating a new content
-     * @return void
-     */
+/**
+ * A method for creating a new content
+ * @return void
+ */
     public function admin_create() {
         if(!empty($this->request->data)){
 			$this->request->data['Post']['slug'] = $this->Post->slug($this->request->data);
@@ -145,11 +154,11 @@ class PostsController extends ContentsAppController {
         $this->request->title = 'Create a Post';
     }
 	
-    /**
-     * Allows a content to be updated
-     * @param string $token
-     * @return void
-     */
+/**
+ * Allows a content to be updated
+ * @param string $token
+ * @return void
+ */
     public function admin_edit($token) {
 		
         $post = $this->Post->fetch($token);

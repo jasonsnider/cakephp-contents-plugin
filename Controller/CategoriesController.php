@@ -31,19 +31,6 @@ class CategoriesController extends ContentsAppController {
  *
  * @return void
  */
-	public function index() {
-		$this->Category->recursive = 0;
-		$this->set('categories', $this->Paginator->paginate());
-		
-		$this->request->title = __('Categories');
-		$this->request->showTitle = true;
-	}
-
-/**
- * admin_index method
- *
- * @return void
- */
 	public function admin_index() {
 		$this->Category->recursive = 0;
 		$this->set('categories', $this->Paginator->paginate());
