@@ -22,7 +22,13 @@
 	</table>
 <?php else: ?>
 	<div class="well well-sm">
-		No forms have been created. <?php echo $this->Html->link(__('Create one now.'), "/admin/jsc_forms/add"); ?>
+		No forms have been created. 
+		<?php 
+			echo $this->Html->link(
+				__('Create one now.'), 
+				"/admin/contents/jsc_forms/add"
+			); 
+		?>
 	</div>
 <?php endif; ?>
 
