@@ -100,11 +100,24 @@ class ContentsController extends ContentsAppController {
 		
         $this->paginate = array(
             'conditions' => $conditions,
-            'limit' => 30
+            'limit' => 10,
+			'contain'=>array(
+				'Category'=>array(
+					'fields'=>array(
+						'Category.title'
+					)
+				)
+			)
         );
 
         $data = $this->paginate('Content');
-        $this->request->title = 'Contents';
+        
+		if(!empty($category)){
+			$this->request->title = $data[0]['Category']['title'];
+		}else{
+			$this->request->title = 'Contents';
+		}
+		
         $this->request->checkForMeta = true;
         $this->set(compact(
             'data'

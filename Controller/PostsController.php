@@ -119,7 +119,13 @@ class PostsController extends ContentsAppController {
 			)
 		);
 		
-		$categories = $this->Post->Category->find('list');
+		$categories = $this->Post->Category->find(
+			'list', 
+			array(
+				'conditions'=>array('Category.active'=>1
+				)
+			)
+		);
 		
         $this->set(compact(
 			'categories',
