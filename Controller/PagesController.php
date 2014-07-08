@@ -142,19 +142,13 @@ class PagesController extends ContentsAppController {
 
         //Send the id back to the view
         $id = $content['Page']['id'];
-        $this->request->title = $content['Page']['title'];
         
-		$relatedContent = $this->Page->listContentsByCategory(
-			$content['Page']['category_id'],
-			Configure::read('JSC.Pages.Related.limit'),
-			Configure::read('JSC.Pages.Related.model')
-		);
+        $this->request->title = $content['Page']['title'];
+		$this->request->categoryId = $content['Page']['category_id'];
 		
         $this->set(compact(
             'content',
-			'form',
-            'id',
-			'relatedContent'
+			'id'
         ));
     }
     
