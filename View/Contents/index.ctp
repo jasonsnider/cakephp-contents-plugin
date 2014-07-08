@@ -1,32 +1,30 @@
-<h2><?php echo $this->request->title; ?></h2>
 <?php foreach ($data as $content): ?>
-<div class="well well-sm well-result">
-    <strong>
-        <?php 
-            echo $this->Html->link(
-                $content['Content']['title'], 
-                array(
-                    'plugin'=>'contents',
-                    'controller'=>"{$content['Content']['content_type']}s",
-                    'action'=>'view',
-                    $content['Content']['slug']
-                )
-            );
-        ?>
-    </strong>
-    <div>
+<article>
+	<header>
 		<?php 
-			echo $this->Text->truncate(
-				$content['Content']['body'], 
-				'300', 
-				array(
-					'html'=>true, 
-					'exact'=>false
+			echo $this->Html->tag(
+				'h1',
+				$this->Html->link(
+					$content['Content']['title'], 
+					array(
+						'plugin'=>'contents',
+						'controller'=>"{$content['Content']['content_type']}s",
+						'action'=>'view',
+						$content['Content']['slug']
+					)
 				)
-			); 
+			);
 		?>
-	</div>
-</div>
+		<div class="meta-data">
+			Pageed On <time 
+				class="meta-data"
+				datetime="<?php echo date('m/d/y', strtotime($content['Content']['created'])); ?>">
+				<?php echo date('l, F jS, Y \a\t H:i', strtotime($content['Content']['created'])); ?></time>
+				By Jason D Snider
+		</div>
+	</header>
+	<?php echo $content['Content']['body']; ?>
+</article>
 <?php endforeach; ?>
 
 <?php echo $this->element('pager'); ?>
