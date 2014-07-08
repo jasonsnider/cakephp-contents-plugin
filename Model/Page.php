@@ -61,7 +61,7 @@ class Page extends ContentsAppModel {
                     'modified_user_id',	
                     'modified'
                 ),
-                'html'=>array('body')
+                'htmlMedia'=>array('body')
             )
         )
     );
