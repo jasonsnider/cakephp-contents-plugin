@@ -1,8 +1,8 @@
 <aside>
-	<?php if(!empty($relatedContent)): ?>
+	<?php if(!empty($widgetRelatedContent)): ?>
 		<header>Related</header>
 		<ul>
-			<?php foreach($relatedContent as $related): ?>
+			<?php foreach($widgetRelatedContent as $related): ?>
 			<li>
 				<?php echo $this->Html->link(
 					$related['Content']['title'], 
@@ -16,10 +16,10 @@
 </aside>
 
 <aside>
-	<?php if(!empty($recentContent)): ?>
+	<?php if(!empty($widgetRecentContent)): ?>
 		<header>Recent</header>
 		<ul>
-			<?php foreach($recentContent as $recent): ?>
+			<?php foreach($widgetRecentContent as $recent): ?>
 			<li>
 				<?php echo $this->Html->link(
 					$recent['Content']['title'], 
@@ -33,10 +33,10 @@
 </aside>
 
 <aside>
-	<?php if(!empty($categories)): ?>
+	<?php if(!empty($widgetCategories)): ?>
 		<header>Categories</header>
 		<ul>
-			<?php foreach($categories as $key=>$value): ?>
+			<?php foreach($widgetCategories as $key=>$value): ?>
 				<li><?php echo $this->Html->link($value, "/contents/contents/index/{$key}"); ?></li>
 			<?php endforeach; ?>
 		</ul>
