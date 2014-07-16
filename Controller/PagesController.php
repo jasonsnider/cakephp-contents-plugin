@@ -90,12 +90,12 @@ class PagesController extends ContentsAppController {
     public function view($token) {
         
 		$content = $this->Page->fetch($token);
-		
+        
 		//Extract the form data
 		
 		if(!empty($content['JscForm'])){
 			$form = json_decode($content['JscForm']['form'], true);
-		}
+		}        
 		
 		//Set the validation rules
 		if(isset($form['Validate'])){
@@ -112,22 +112,42 @@ class PagesController extends ContentsAppController {
 				$content = null;
 				
 				foreach($this->request->data['JscForm'] as $key => $value){
-					if($key != 'redirect'){
+					if($key != 'redirect' && $key != 'attachment'){
 						$key = Inflector::humanize($key);
 						$content .= "{$key}: {$value}\n";
 					}
-				}
-				
+				}                
+                
 				//Build and send the email
-				$email = new CakeEmail('contact');
-				$email->from($this->request->data['JscForm']['email'])
-					->replyTo($this->request->data['JscForm']['email'])
-					->viewVars(
-						array(
-							'content' => $content
-						)
-					)
-					->send();
+                $email = new CakeEmail('contact');
+                
+				//Build and send the email
+                if(!empty($this->request->data['JscForm']['attachment']['name'])){
+                    
+                    $email->from($this->request->data['JscForm']['email'])
+                        ->replyTo($this->request->data['JscForm']['email'])
+                        ->viewVars(
+                            array(
+                                'content' => $content
+                            )
+                        )
+                        ->attachments(array(
+                            $this->data['JscForm']['attachment']['name'] => array(
+                                'file' => $this->data['JscForm']['attachment']['tmp_name'],
+                                'mimetype' => $this->data['JscForm']['attachment']['type']
+                            )
+                        ))
+                    ->send();
+                }else{
+                    $email->from($this->request->data['JscForm']['email'])
+                        ->replyTo($this->request->data['JscForm']['email'])
+                        ->viewVars(
+                            array(
+                                'content' => $content
+                            )
+                        )
+                    ->send();
+                }
 				
 				if(isset($this->request->data['JscForm']['redirect'])){
 					$this->redirect($this->request->data['JscForm']['redirect']);
@@ -148,6 +168,7 @@ class PagesController extends ContentsAppController {
 		
         $this->set(compact(
             'content',
+            'form',
 			'id'
         ));
     }
