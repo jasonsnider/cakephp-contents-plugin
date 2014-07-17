@@ -112,17 +112,27 @@ class PagesController extends ContentsAppController {
 				$content = null;
 				
 				foreach($this->request->data['JscForm'] as $key => $value){
-					if($key != 'redirect' && $key != 'attachment'){
+					if($key != 'redirect' && !is_array($this->request->data['JscForm'][$key])){
 						$key = Inflector::humanize($key);
 						$content .= "{$key}: {$value}\n";
-					}
-				}                
+					}elseif(is_array($this->request->data['JscForm'][$key]) 
+                                && !empty($this->data['JscForm'][$key]['tmp_name'])){
+                        
+                        //Build the attachment array
+                        $attachment = array(
+                            $this->data['JscForm'][$key]['name'] => array(
+                                'file' => $this->data['JscForm'][$key]['tmp_name'],
+                                'mimetype' => $this->data['JscForm'][$key]['type']
+                            )
+                        );
+                    }
+				}
                 
 				//Build and send the email
                 $email = new CakeEmail('contact');
                 
 				//Build and send the email
-                if(!empty($this->request->data['JscForm']['attachment']['name'])){
+                if(!empty($attachment)){
                     
                     $email->from($this->request->data['JscForm']['email'])
                         ->replyTo($this->request->data['JscForm']['email'])
@@ -131,12 +141,7 @@ class PagesController extends ContentsAppController {
                                 'content' => $content
                             )
                         )
-                        ->attachments(array(
-                            $this->data['JscForm']['attachment']['name'] => array(
-                                'file' => $this->data['JscForm']['attachment']['tmp_name'],
-                                'mimetype' => $this->data['JscForm']['attachment']['type']
-                            )
-                        ))
+                        ->attachments($attachment)
                     ->send();
                 }else{
                     $email->from($this->request->data['JscForm']['email'])
