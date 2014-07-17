@@ -186,37 +186,4 @@ class ContentTest extends CakeTestCase {
 		$this->assertEmpty($results);
 
 	}
-	
-/**
- * testContentTypes method
- * @covers Content::contentTypes
- * @return void
- */
-	public function testContentTypes() {
-		$results = $this->Content->contentTypes();
-		
-		//Test for proper keys
-		$this->assertArrayHasKey('post', $results);
-		$this->assertArrayHasKey('page', $results);
-		$this->assertArrayHasKey('meta_data', $results);
-		
-		//Test for the proper number of keys
-		$this->assertEqual(count($results), 3);
-	}
-
-/**
- * testContentStatuses method
- * @covers Content::contentStatuses
- * @return void
- */
-	public function testContentStatuses() {
-		$results = $this->Content->contentStatuses();
-		
-		//Test for proper keys
-		$this->assertArrayHasKey('draft', $results);
-		$this->assertArrayHasKey('published', $results);
-		
-		//Test for the proper number of keys
-		$this->assertEqual(count($results), 2);
-	}
 }
