@@ -20,6 +20,7 @@
 		</tbody>
 		<?php endforeach; ?>
 	</table>
+    <?php echo $this->element('pager'); ?>
 <?php else: ?>
 	<div class="well well-sm">
 		No forms have been created. 
