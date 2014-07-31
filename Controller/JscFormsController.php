@@ -50,7 +50,6 @@ class JscFormsController extends ContentsAppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->JscForm->save($this->request->data)) {
 				$this->Session->setFlash(__('The jsc form has been saved.'));
-				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The jsc form could not be saved. Please, try again.'));
 			}
