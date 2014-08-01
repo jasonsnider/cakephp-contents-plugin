@@ -223,12 +223,11 @@ class PagesController extends ContentsAppController {
      * @return void
      */
     public function admin_edit($token) {
-		
-		
-		
+
 		if (!$this->Page->exists($token)) {
 			throw new NotFoundException(__('Invalid category'));
 		}
+        
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Page->save($this->request->data)) {
 				$this->Session->setFlash(__('The page has been saved.'), 'success');

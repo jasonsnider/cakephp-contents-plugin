@@ -49,17 +49,20 @@ class JscFormsController extends ContentsAppController {
 			throw new NotFoundException(__('Invalid jsc form'));
 		}
         
-		if (!empty($this->request->data)) {
+		if ($this->request->is(array('post', 'put'))) {
+            
 			if ($this->JscForm->save($this->request->data)) {
 				$this->Session->setFlash(__('The jsc form has been saved.'));
 			} else {
 				$this->Session->setFlash(__('The jsc form could not be saved. Please, try again.'));
 			}
+            
 		} else {
-			$options = array('conditions' => array('JscForm.' . $this->JscForm->primaryKey => $id));
+            
+			$options = array('conditions' => array('JscForm.id'=>$id));
 			$this->request->data = $this->JscForm->find('first', $options);
+            
 		}
-        
 	}
 
 /**
