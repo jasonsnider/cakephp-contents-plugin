@@ -30,7 +30,7 @@ echo $this->Form->submit(
 
 echo $this->Form->end();
 ?>
-
+<hr>
 <h2>Preview</h2>
 <?php
 
