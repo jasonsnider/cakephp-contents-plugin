@@ -107,7 +107,9 @@ class PagesController extends ContentsAppController {
 			
 			//Validate the fomr submission
             if($this->Page->JscForm->saveAll($this->request->data, array('validate' => 'only'))){
-				
+                
+                //Set the subjectline to the title of the current page.
+				$subjectLine = $content['Page']['title'];
 				//Build the email's content by writing each key=>value pair as a line
 				$content = null;
 				
@@ -130,12 +132,14 @@ class PagesController extends ContentsAppController {
                 
 				//Build and send the email
                 $email = new CakeEmail('contact');
-                
+
 				//Build and send the email
                 if(!empty($attachment)){
                     
                     $email->from($this->request->data['JscForm']['email'])
                         ->replyTo($this->request->data['JscForm']['email'])
+                        ->cc($this->request->data['JscForm']['email'])
+                        ->subject($subjectLine)
                         ->viewVars(
                             array(
                                 'content' => $content
@@ -146,6 +150,8 @@ class PagesController extends ContentsAppController {
                 }else{
                     $email->from($this->request->data['JscForm']['email'])
                         ->replyTo($this->request->data['JscForm']['email'])
+                        ->cc($this->request->data['JscForm']['email'])
+                        ->subject($subjectLine)
                         ->viewVars(
                             array(
                                 'content' => $content

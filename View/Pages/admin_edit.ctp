@@ -1,4 +1,10 @@
 <?php
+
+echo $this->Html->div(
+    'well well-sm',
+    $this->Html->link("{$this->request->data['Page']['slug']}", "/page/{$this->request->data['Page']['slug']}")
+);
+
 echo $this->Form->create(
 	'Page', 
 	array(
