@@ -4,9 +4,15 @@
 		<ul>
 			<?php foreach($widgetRelatedContent as $related): ?>
 			<li>
-				<?php echo $this->Html->link(
-					$related['Content']['title'], 
-					"/{$related['Content']['content_type']}/{$related['Content']['slug']}");
+				<?php 
+				
+					$uri = "/{$related['Content']['content_type']}/{$related['Content']['slug']}";
+					if($related['Content']['content_type'] === 'meta_data'){
+						$uri = "/{$related['Content']['plugin']}/{$related['Content']['controller']}/"
+							. $related['Content']['action'];
+					}
+					
+					echo $this->Html->link($related['Content']['title'], $uri);
 				?>
 			</li>
 			<?php endforeach; ?>
@@ -21,9 +27,14 @@
 		<ul>
 			<?php foreach($widgetRecentContent as $recent): ?>
 			<li>
-				<?php echo $this->Html->link(
-					$recent['Content']['title'], 
-					"/{$recent['Content']['content_type']}/{$recent['Content']['slug']}");
+				<?php 
+					$uri = "/{$recent['Content']['content_type']}/{$recent['Content']['slug']}";
+					if($recent['Content']['content_type'] === 'meta_data'){
+						$uri = "/{$recent['Content']['plugin']}/{$recent['Content']['controller']}/"
+							. $recent['Content']['action'];
+					}
+					
+					echo $this->Html->link($recent['Content']['title'], $uri);
 				?>
 			</li>
 			<?php endforeach; ?>

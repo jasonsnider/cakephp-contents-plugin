@@ -41,11 +41,17 @@ class MetaDataController extends ContentsAppController {
 
     /**
      * Allows a user to create MetaData against a controller and action
+	 * @param string $plugin If the plugin is empty set this to 0 when passing it into the url
      * @param string $controller
      * @param string $action
+	 * @param string $token
      * @return void
      */
-    public function admin_add($controller, $action, $plugin=null, $token=null) {
+    public function admin_add($plugin, $controller, $action, $token=null) {
+		
+		if(empty($plugin)){
+			$plugin = null;
+		}
 		
         if(!empty($this->request->data)){
             
@@ -57,7 +63,11 @@ class MetaDataController extends ContentsAppController {
             }else{
                 $this->Session->setFlash(__('Please correct the errors below'), 'error');
             }
-        }
+        }else{
+			$this->request->data['MetaData']['title'] = Inflector::humanize($action);
+		}
+		
+
 		
         $this->set(compact(
 			'action',
