@@ -30,8 +30,14 @@
 				<?php 
 					$uri = "/{$recent['Content']['content_type']}/{$recent['Content']['slug']}";
 					if($recent['Content']['content_type'] === 'meta_data'){
-						$uri = "/{$recent['Content']['plugin']}/{$recent['Content']['controller']}/"
-							. $recent['Content']['action'];
+
+						$uri = null;
+						if(!empty($recent['Content']['plugin'])){
+							$uri .= "/{$recent['Content']['plugin']}";
+						}
+
+						$uri .= "/{$recent['Content']['controller']}/{$recent['Content']['action']}";
+
 					}
 					
 					echo $this->Html->link($recent['Content']['title'], $uri);
