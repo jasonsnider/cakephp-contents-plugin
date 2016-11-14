@@ -1,0 +1,17 @@
+"repositories": [
+    {
+        "type":"package",
+        "package": {
+          "name": "parbake/parbake-contents-plugin",
+          "version":"master",
+          "source": {
+              "url": "https://github.com/parbake/parbake-contents-plugin.git",
+              "type": "git",
+              "reference":"master"
+            }
+        }
+    }
+],
+"require": {
+    "parbake/parbake-contents-plugin": "master"
+}
