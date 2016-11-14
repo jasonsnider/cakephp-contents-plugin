@@ -1,1 +1,0 @@
-<?php echo $this->element('Contents._shared/sidebar');
